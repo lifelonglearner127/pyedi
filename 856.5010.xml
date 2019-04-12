@@ -1,287 +1,44 @@
-<?xml version="1.0"?>
-<transaction xid="856">
-  <name>Advance Ship Notice</name>
-  <loop xid="ISA_LOOP" type="explicit">
-    <name>Interchange Control Header</name>
-    <usage>R</usage>
-    <pos>0010</pos>
-    <repeat>&gt;1</repeat>
-    <segment xid="ISA">
-      <name>Interchange Control Header</name>
-      <usage>R</usage>
-      <pos>0100</pos>
-      <max_use>1</max_use>
-      <element xid="ISA01">
-        <data_ele>I01</data_ele>
-        <name>Authorization Information Qualifier</name>
-        <usage>R</usage>
-        <seq>01</seq>
-        <valid_codes>
-          <code>00</code>
-        </valid_codes>
-      </element>
-      <element xid="ISA02">
-        <data_ele>I02</data_ele>
-        <name>Authorization Information</name>
-        <usage>R</usage>
-        <seq>02</seq>
-      </element>
-      <element xid="ISA03">
-        <data_ele>I03</data_ele>
-        <name>Security Information Qualifier</name>
-        <usage>R</usage>
-        <seq>03</seq>
-        <valid_codes>
-          <code>00</code>
-        </valid_codes>
-      </element>
-      <element xid="ISA04">
-        <data_ele>I04</data_ele>
-        <name>Security Information</name>
-        <usage>R</usage>
-        <seq>04</seq>
-      </element>
-      <element xid="ISA05">
-        <data_ele>I05</data_ele>
-        <name>Interchange ID Qualifier</name>
-        <usage>R</usage>
-        <seq>05</seq>
-        <valid_codes>
-          <code>01</code>
-          <code>08</code>
-          <code>12</code>
-          <code>ZZ</code>
-        </valid_codes>
-      </element>
-      <element xid="ISA06">
-        <data_ele>I06</data_ele>
-        <name>Interchange Sender ID</name>
-        <usage>R</usage>
-        <seq>06</seq>
-      </element>
-      <element xid="ISA07">
-        <data_ele>I05</data_ele>
-        <name>Interchange ID Qualifier</name>
-        <usage>R</usage>
-        <seq>07</seq>
-        <valid_codes>
-          <code>01</code>
-          <code>08</code>
-          <code>12</code>
-          <code>ZZ</code>
-        </valid_codes>
-      </element>
-      <element xid="ISA08">
-        <data_ele>I07</data_ele>
-        <name>Interchange Receiver ID</name>
-        <usage>R</usage>
-        <seq>08</seq>
-      </element>
-      <element xid="ISA09">
-        <data_ele>I08</data_ele>
-        <name>Interchange Date</name>
-        <usage>R</usage>
-        <seq>09</seq>
-        <valid_codes/>
-      </element>
-      <element xid="ISA10">
-        <data_ele>I09</data_ele>
-        <name>Interchange Time</name>
-        <usage>R</usage>
-        <seq>10</seq>
-        <valid_codes/>
-      </element>
-      <element xid="ISA11">
-        <data_ele>I65</data_ele>
-        <name>Repetition Separator</name>
-        <usage>R</usage>
-        <seq>11</seq>>
-      </element>
-      <element xid="ISA12">
-        <data_ele>I11</data_ele>
-        <name>Interchange Control Version Number</name>
-        <usage>R</usage>
-        <seq>12</seq>
-        <valid_codes>
-          <code>00501</code>
-        </valid_codes>
-      </element>
-      <element xid="ISA13">
-        <data_ele>I12</data_ele>
-        <name>Interchange Control Number</name>
-        <usage>R</usage>
-        <seq>13</seq>
-      </element>
-      <element xid="ISA14">
-        <data_ele>I13</data_ele>
-        <name>Acknowledgment Requested</name>
-        <usage>R</usage>
-        <seq>14</seq>
-        <valid_codes>
-          <code>0</code>
-        </valid_codes>
-      </element>
-      <element xid="ISA15">
-        <data_ele>I14</data_ele>
-        <name>Interchange Usage Indicator</name>
-        <usage>R</usage>
-        <seq>15</seq>
-        <valid_codes>
-          <code>P</code>
-          <code>T</code>
-        </valid_codes>
-      </element>
-      <element xid="ISA16">
-        <data_ele>I15</data_ele>
-        <name>Component Element Separator</name>
-        <usage>R</usage>
-        <seq>16</seq>
-      </element>
+<?xml version="1.0" encoding="utf-8"?>
+<transaction ref="856" name="Advance Ship Notice">
+  <loop ref="ISA_LOOP" repeat="1" name="Interchange Control Header Loop">
+    <segment ref="ISA" usage="R" repeat="1" name="Interchange Control Header">
+      <element ref="ISA01" id="I01" usage="R" name="Authorization Information Qualifier" values="00">
+      <element ref="ISA02" id="I02" usage="R" name="Authorization Information">
+      <element ref="ISA03" id="I03" usage="R" name="Security Information Qualifier" values="00">
+      <element ref="ISA04" id="I04" usage="R" name="Security Information">
+      <element ref="ISA05" id="I05" usage="R" name="Interchange ID Qualifier" values="01,08,12,ZZ">
+      <element ref="ISA06" id="I06" usage="R" name="Interchange Sender ID">
+      <element ref="ISA07" id="I05" usage="R" name="Interchange ID Qualifier" values="01,08,12,ZZ">
+      <element ref="ISA08" id="I07" usage="R" name="Interchange Receiver ID">
+      <element ref="ISA09" id="I08" usage="R" name="Interchange Date">
+      <element ref="ISA10" id="I09" usage="R" name="Interchange Time">
+      <element ref="ISA11" id="I65" usage="R" name="Repetition Separator">
+      <element ref="ISA12" id="I11" usage="R" name="Interchange Control Version Number" values="00501">
+      <element ref="ISA13" id="I12" usage="R" name="Interchange Control Number">
+      <element ref="ISA14" id="I13" usage="R" name="Acknowledgment Requested" values="0">
+      <element ref="ISA15" id="I14" usage="R" name="Interchange Usage Indicator" values="P,T">
+      <element ref="ISA16" id="I15" usage="R" name="Component Element Separator">
     </segment>
-    <!--End of ISA segment-->
-    <loop xid="GS_LOOP" type="explicit">
-      <name>Functional Group Header</name>
-      <usage>R</usage>
-      <pos>0200</pos>
-      <repeat>&gt;1</repeat>
-      <segment xid="GS">
-        <name>Functional Group Header</name>
-        <usage>R</usage>
-        <pos>0100</pos>
-        <max_use>1</max_use>
-        <element xid="GS01">
-          <data_ele>479</data_ele>
-          <name>Functional Identifier Code</name>
-          <usage>R</usage>
-          <seq>01</seq>
-          <valid_codes>
-            <code>AG</code>
-            <code>AQ</code>
-            <code>AS</code>
-            <code>AZ</code>
-            <code>BE</code>
-            <code>CD</code>
-            <code>CI</code>
-            <code>CT</code>
-            <code>FA</code>
-            <code>HP</code>
-            <code>GF</code>
-            <code>IM</code>
-            <code>IN</code>
-            <code>OG</code>
-            <code>OR</code>
-            <code>PD</code>
-            <code>PO</code>
-            <code>PR</code>
-            <code>PS</code>
-            <code>PV</code>
-            <code>QG</code>
-            <code>QM</code>
-            <code>QO</code>
-            <code>RA</code>
-            <code>RC</code>
-            <code>RF</code>
-            <code>RG</code>
-            <code>SC</code>
-            <code>SH</code>
-            <code>SM</code>
-            <code>TM</code>
-            <code>TU</code>
-            <code>TX</code>
-          </valid_codes>
-        </element>
-        <element xid="GS02">
-          <data_ele>142</data_ele>
-          <name>Application Sender's Code</name>
-          <usage>R</usage>
-          <seq>02</seq>
-        </element>
-        <element xid="GS03">
-          <data_ele>124</data_ele>
-          <name>Application Receiver's Code</name>
-          <usage>R</usage>
-          <seq>03</seq>
-        </element>
-        <element xid="GS04">
-          <data_ele>373</data_ele>
-          <name>Date</name>
-          <usage>R</usage>
-          <seq>04</seq>
-          <valid_codes/>
-        </element>
-        <element xid="GS05">
-          <data_ele>337</data_ele>
-          <name>Time</name>
-          <usage>R</usage>
-          <seq>05</seq>
-          <valid_codes/>
-        </element>
-        <element xid="GS06">
-          <data_ele>28</data_ele>
-          <name>Group Control Number</name>
-          <usage>R</usage>
-          <seq>06</seq>
-        </element>
-        <element xid="GS07">
-          <data_ele>455</data_ele>
-          <name>Responsible Agency Code</name>
-          <usage>R</usage>
-          <seq>07</seq>
-          <valid_codes>
-            <code>X</code>
-          </valid_codes>
-        </element>
-        <element xid="GS08">
-          <data_ele>480</data_ele>
-          <name>Version / Release / Industry Identifier Code</name>
-          <usage>R</usage>
-          <seq>08</seq>
-          <valid_codes>
-            <code>005010</code>
-          </valid_codes>
-        </element>
+    <loop ref="GS_LOOP" repeat="1" name="Functional Group Header Loop">
+      <segment ref="GS" usage="R" repeat="1" name="Functional Group Header">
+        <element ref="GS01" id="479" usage="R" name="Functional Identifier Code" values="AG,AQ,AS,AZ,BE,CD,CI,CT,FA,HP,GF,IM,IN,OG,OR,PD,PO,PR,PS,PV,QG,QM,QO,RA,RC,RF,RG,SC,SH,SM,TM,TU,TX">
+        <element ref="GS02" id="142" usage="R" name="Application Sender's Code">
+        <element ref="GS03" id="124" usage="R" name="Application Receiver's Code">
+        <element ref="GS04" id="373" usage="R" name="Date">
+        <element ref="GS05" id="337" usage="R" name="Time">
+        <element ref="GS06" id="28"  usage="R" name="Group Control Number">
+        <element ref="GS07" id="455" usage="R" name="Responsible Agency Code">
+        <element ref="GS08" id="480" usage="R" name="Version / Release / Industry Identifier Code">
       </segment>
-      <!--End of GS segment-->
-      <segment xid="GE">
-        <name>Functional Group Trailer</name>
-        <usage>R</usage>
-        <pos>0300</pos>
-        <max_use>1</max_use>
-        <element xid="GE01">
-          <data_ele>97</data_ele>
-          <name>Number of Transaction Sets Included</name>
-          <usage>R</usage>
-          <seq>01</seq>
-        </element>
-        <element xid="GE02">
-          <data_ele>28</data_ele>
-          <name>Group Control Number</name>
-          <usage>R</usage>
-          <seq>02</seq>
-        </element>
+
+      <segment ref="GE" usage="R" repeat="1" name="Functional Group Trailer">
+        <element ref="GE01" id="97" usage="R" name="Number of Transaction Sets Included">
+        <element ref="GE02" id="28" usage="R" name="Group Control Number">
       </segment>
-      <!--End of GE segment-->
     </loop>
-    <!--End of GS loop-->
-    <segment xid="IEA">
-      <name>Interchange Control Trailer</name>
-      <usage>R</usage>
-      <pos>0300</pos>
-      <max_use>1</max_use>
-      <element xid="IEA01">
-        <data_ele>I16</data_ele>
-        <name>Number of Included Functional Groups</name>
-        <usage>R</usage>
-        <seq>01</seq>
-      </element>
-      <element xid="IEA02">
-        <data_ele>I12</data_ele>
-        <name>Interchange Control Number</name>
-        <usage>R</usage>
-        <seq>02</seq>
-      </element>
+    <segment ref="IEA" usage="R" repeat="1" name="Interchange Control Trailer">
+      <element ref="IEA01" id="I16" usage="R" name="Number of Included Functional Groups">
+      <element ref="IEA02" id="I12" usage="R" name="Interchange Control Number">
     </segment>
-    <!--End of IEA segment-->
   </loop>
-  <!--End of ISA loop-->
 </transaction>
