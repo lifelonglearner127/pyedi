@@ -6,7 +6,7 @@ class EDIReader:
     buf_size = 8 * 1024
     isa_len = 106
 
-    def __init__(self, file_name, map_file):
+    def __init__(self, file_name, map_file, element_file):
         """
         Initialize the EDIReader
 
@@ -39,7 +39,7 @@ class EDIReader:
         self.repetition_term = line[82]
         self.buffer = line
         self.buffer += self.file.read(self.buf_size)
-        self.validator = EDIValidator(map_file)
+        self.validator = EDIValidator(map_file, element_file)
 
     def __iter__(self):
         while True:

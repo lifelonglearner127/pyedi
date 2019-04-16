@@ -3,9 +3,10 @@ from xml.dom.minidom import getDOMImplementation
 
 
 class EDIValidator:
-    def __init__(self, file_name):
-        self.file_name = file_name
-        self.spec = xml.dom.minidom.parse(file_name)
+    def __init__(self, map_file, element_file):
+        self.map_file = map_file
+        self.element_file = element_file
+        self.spec = xml.dom.minidom.parse(map_file)
         self.remove_whitespace_nodes(self.spec, True)
 
     def remove_whitespace_nodes(self,  node, unlink=False):
