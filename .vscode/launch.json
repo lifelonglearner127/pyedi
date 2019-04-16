@@ -11,8 +11,8 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "args": [
-                "-f",
-                "/home/dev/Downloads/856Sample.txt"
+                "-f", "/home/dev/Downloads/856Sample.txt",
+                "-m", "856.5010.xml"
             ]
         }
         

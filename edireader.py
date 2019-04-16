@@ -1,19 +1,23 @@
+from edivalidator import EDIValidator
+from edisegment import EDISegment
+
+
 class EDIReader:
     buf_size = 8 * 1024
     isa_len = 106
 
-    def __init__(self, filename):
+    def __init__(self, file_name, map_file):
         """
         Initialize the EDIReader
 
         @param file_path: absolute path of source file
         @type file_path: string
         """
-        self.filename = filename
+        self.file_name = file_name
 
         # read the edi file
-        f = open(self.filename, 'r')
-        line = f.read(self.isa_len)
+        self.file = open(self.file_name, 'r')
+        line = self.file.read(self.isa_len)
 
         # check if edi file has correct interchange envelope format
         if line[:3] != 'ISA':
@@ -34,7 +38,24 @@ class EDIReader:
         self.subele_term = line[-2]
         self.repetition_term = line[82]
         self.buffer = line
-        self.buffer += f.read(self.buf_size)
+        self.buffer += self.file.read(self.buf_size)
+        self.validator = EDIValidator(map_file)
+
+    def __iter__(self):
+        while True:
+            if self.buffer.find(self.seg_term) == -1:
+                self.buffer += self.file.read(self.buf_size)
+            if self.buffer.find(self.seg_term) == -1:
+                break
+
+            (line, self.buffer) = self.buffer.split(self.seg_term, 1)
+            line = line.lstrip('\n\r')
+
+            if line == '':
+                break
+
+            yield(EDISegment(line, self.ele_term))
 
     def validate(self):
-        return True
+        for segement in self:
+            print(segement.toString())

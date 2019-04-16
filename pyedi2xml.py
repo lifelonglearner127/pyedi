@@ -6,6 +6,7 @@ from edireader import EDIReader
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument("-f", "--file", required=True, help="path to the edi file")
+    ap.add_argument("-m", "--map", required=True, help="path to map file")
     ap.add_argument("-d", "--debug", action="store_true")
     args = vars(ap.parse_args())
 
@@ -21,9 +22,9 @@ if __name__ == '__main__':
         logger.setLevel(logging.DEBUG)
 
     try:
-        edi = EDIReader(args['file'])
+        edi = EDIReader(args['file'], args['map'])
     except Exception as e:
         logger.error(e.args)
         exit()
 
-    print(edi.validate())
+    edi.validate()
