@@ -1,3 +1,4 @@
+import logging
 from xml.dom.minidom import parse
 from .ediexceptions import EDIFileNotFoundError
 
@@ -6,7 +7,7 @@ class EDIValidator:
     """
     EDI Validator validates edi segment against xml based map file
     """
-    
+
     def __init__(self, map_file, element_file):
         """
         Initialize the edi reader
@@ -23,12 +24,12 @@ class EDIValidator:
             with open(map_file, 'r') as fd:
                 self.spec = parse(fd)
                 self.remove_whitespace_nodes(self.spec, True)
-                
+
             # Load data elements from xml files
             with open(element_file, 'r') as fd:
                 self.element_spec = parse(fd)
                 self.remove_whitespace_nodes(self.element_spec, True)
-                
+
                 for element in self.element_spec.documentElement.childNodes:
                     self.dataele[element.getAttribute('id')] = {
                         'type': element.getAttribute('type'),
@@ -37,6 +38,10 @@ class EDIValidator:
                     }
 
         except OSError:
+            logger = logging.getLogger('pyedi')
+            logger.error(
+                'File Not Found: {} or {}'.format(map_file, element_file)
+            )
             raise EDIFileNotFoundError(
                 'Cannot find {} or {}'.format(map_file, element_file)
             )

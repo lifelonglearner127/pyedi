@@ -1,5 +1,6 @@
 import argparse
-from  pyedi.edireader import EDIReader
+from pyedi.edireader import EDIReader
+
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
@@ -24,5 +25,3 @@ if __name__ == '__main__':
         )
     except Exception as err:
         print('{}'.format(err))
-
-    

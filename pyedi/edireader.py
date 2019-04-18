@@ -22,34 +22,28 @@ class EDIReader:
         @param element_file: path to element file
         @type element_file: string
         """
-        
+        self.fd = None
         try:
             self.fd = open(file_name, 'r')
             line = self.fd.read(self.isa_len)
 
             # TODO: ISA/FG Validation
-            
+
             self.validator = EDIValidator(map_file, element_file)
 
-        except OSError as err:
+        except OSError:
             logger = logging.getLogger('pyedi')
             logger.error('File Not Found: {}'.format(file_name))
-        
-        except EDIFileNotFoundError as err:
-            logger = logging.getLogger('pyedi')
-            logger.error('EDIFileNotFoundError: {}'.format(err))
+            raise EDIFileNotFoundError(
+                'Cannot find {}'.format(file_name)
+            )
 
     def __del__(self):
-        self.fd.close
+        if self.fd is not None:
+            self.fd.close()
 
-    def validate_transaction(self):
+    def validate(self):
         """
         Validate transaction
-        """
-        pass
-
-    def validate_envelope(self, envelop):
-        """
-        Validate Interchange Envelope and Functional Group
         """
         pass
