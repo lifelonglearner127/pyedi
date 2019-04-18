@@ -37,7 +37,10 @@ class EDIReader:
         
         except EDIFileNotFoundError as err:
             logger = logging.getLogger('pyedi')
-            logger.error('File Not Found: {}'.format(err))
+            logger.error('EDIFileNotFoundError: {}'.format(err))
+
+    def __del__(self):
+        self.fd.close
 
     def validate_transaction(self):
         """

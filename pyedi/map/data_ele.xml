@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<elements>
+<element id="100" type="ID" min_length="3" max_length="3" name="Currency Code"/>
+<element id="1004" type="ID" min_length="1" max_length="2" name="Percent Qualifier"/>
+<element id="1005" type="ID" min_length="4" max_length="4" name="Hierarchical Structure Code"/>
+<element id="1018" type="R" min_length="1" max_length="15" name="Exponent"/>
+<element id="102" type="ID" min_length="1" max_length="1" name="Ownership Code"/>
+<element id="1028" type="AN" min_length="1" max_length="38" name="Claim Submitter's Identifier"/>
+<element id="1029" type="ID" min_length="1" max_length="2" name="Claim Status Code"/>
+<element id="103" type="AN" min_length="3" max_length="5" name="Packaging Code"/>
+<element id="1032" type="ID" min_length="1" max_length="2" name="Claim Filing Indicator Code"/>
+<element id="1033" type="ID" min_length="1" max_length="2" name="Claim Adjustment Group Code"/>
+<element id="1034" type="ID" min_length="1" max_length="5" name="Claim Adjustment Reason Code"/>
+<element id="1035" type="AN" min_length="1" max_length="60" name="Name Last or Organization Name"/>
+<element id="1036" type="AN" min_length="1" max_length="35" name="Name First"/>
+<element id="1037" type="AN" min_length="1" max_length="25" name="Name Middle"/>
+<element id="1038" type="AN" min_length="1" max_length="10" name="Name Prefix"/>
+<element id="1039" type="AN" min_length="1" max_length="10" name="Name Suffix"/>
+<element id="1048" type="ID" min_length="1" max_length="3" name="Business Function Code"/>
+<element id="1065" type="ID" min_length="1" max_length="1" name="Entity Type Qualifier"/>
+<element id="1066" type="ID" min_length="1" max_length="2" name="Citizenship Status Code"/>
+<element id="1067" type="ID" min_length="1" max_length="1" name="Marital Status Code"/>
+<element id="1068" type="ID" min_length="1" max_length="1" name="Gender Code"/>
+<element id="1069" type="ID" min_length="2" max_length="2" name="Individual Relationship Code"/>
+<element id="107" type="ID" min_length="1" max_length="2" name="Payment Method Type Code"/>
+<element id="1073" type="ID" min_length="1" max_length="1" name="Yes/No Condition or Response Code"/>
+<element id="1074" type="ID" min_length="2" max_length="2" name="Type of Real Estate Asset Code"/>
+<element id="1095" type="N0" min_length="4" max_length="4" name="Year"/>
+<element id="1109" type="ID" min_length="1" max_length="1" name="Race or Ethnicity Code"/>
+<element id="1129" type="ID" min_length="1" max_length="2" name="Adjustment Reason Code Characteristic"/>
+<element id="1130" type="ID" min_length="1" max_length="1" name="Primary or Contingent Code"/>
+<element id="1136" type="ID" min_length="2" max_length="2" name="Code Category"/>
+<element id="1137" type="AN" min_length="1" max_length="15" name="Medical Code Value"/>
+<element id="1138" type="ID" min_length="1" max_length="1" name="Payer Responsibility Sequence idber Code"/>
+<element id="1143" type="ID" min_length="1" max_length="1" name="Coordination of Benefits Code"/>
+<element id="1146" type="ID" min_length="1" max_length="1" name="Disability Type Code"/>
+<element id="1149" type="ID" min_length="4" max_length="6" name="Occupation Code"/>
+<element id="1154" type="ID" min_length="1" max_length="1" name="Work Intensity Code"/>
+<element id="116" type="ID" min_length="3" max_length="15" name="Postal Code"/>
+<element id="1161" type="ID" min_length="1" max_length="2" name="Product Option Code"/>
+<element id="1165" type="ID" min_length="1" max_length="1" name="Confidentiality Code"/>
+<element id="1166" type="ID" min_length="2" max_length="2" name="Contract Type Code"/>
+<element id="1167" type="R" min_length="1" max_length="6" name="Sample Selection Modulus"/>
+<element id="1176" type="ID" min_length="2" max_length="3" name="Employment Class Code"/>
+<element id="118" type="R" min_length="1" max_length="9" name="Rate"/>
+<element id="1186" type="ID" min_length="2" max_length="2" name="Type of Income Code"/>
+<element id="1187" type="ID" min_length="2" max_length="2" name="Type of Account Code"/>
+<element id="1188" type="ID" min_length="2" max_length="2" name="Type of Personal or Business Asset Code"/>
+<element id="1201" type="ID" min_length="1" max_length="1" name="Information Status Code"/>
+<element id="1202" type="ID" min_length="1" max_length="1" name="Flexible Spending Account Selection Code"/>
+<element id="1203" type="ID" min_length="2" max_length="3" name="Maintenance Reason Code"/>
+<element id="1204" type="AN" min_length="1" max_length="50" name="Plan Coverage Description"/>
+<element id="1205" type="ID" min_length="2" max_length="3" name="Insurance Line Code"/>
+<element id="1207" type="ID" min_length="3" max_length="3" name="Coverage Level Code"/>
+<element id="1209" type="ID" min_length="1" max_length="1" name="Underwriting Decision Code"/>
+<element id="1211" type="ID" min_length="2" max_length="3" name="Drug House Code"/>
+<element id="1212" type="ID" min_length="1" max_length="1" name="Health-Related Code"/>
+<element id="1213" type="ID" min_length="1" max_length="1" name="Current Health Condition Code"/>
+<element id="1214" type="AN" min_length="1" max_length="5" name="Salary Grade"/>
+<element id="1215" type="ID" min_length="1" max_length="1" name="Identification Card Type Code"/>
+<element id="1216" type="ID" min_length="1" max_length="1" name="Benefit Status Code"/>
+<element id="1218" type="ID" min_length="1" max_length="1" name="Medicare Plan Code"/>
+<element id="1219" type="ID" min_length="1" max_length="2" name="Consolidated Omnibus Budget Reconciliation Act (COBRA) Qualifying"/>
+<element id="1220" type="ID" min_length="1" max_length="1" name="Student Status Code"/>
+<element id="1221" type="ID" min_length="1" max_length="3" name="Provider Code"/>
+<element id="1222" type="AN" min_length="1" max_length="3" name="Provider Specialty Code"/>
+<element id="1223" type="ID" min_length="3" max_length="3" name="Provider Organization Code"/>
+<element id="1224" type="ID" min_length="2" max_length="2" name="Contribution Code"/>
+<element id="123" type="N0" min_length="1" max_length="6" name="idber of Received Transaction Sets"/>
+<element id="124" type="AN" min_length="2" max_length="15" name="124"/>
+<element id="1250" type="ID" min_length="2" max_length="3" name="Date Time Period Format Qualifier"/>
+<element id="1251" type="AN" min_length="1" max_length="35" name="Date Time Period"/>
+<element id="1253" type="ID" min_length="3" max_length="6" name="Immunization Type Code"/>
+<element id="1254" type="ID" min_length="1" max_length="2" name="Immunization Status Code"/>
+<element id="127" type="AN" min_length="1" max_length="50" name="Reference Identification"/>
+<element id="1270" type="ID" min_length="1" max_length="3" name="Code List Qualifier Code"/>
+<element id="1271" type="AN" min_length="1" max_length="30" name="Industry Code"/>
+<element id="128" type="ID" min_length="2" max_length="3" name="Reference Identification Qualifier"/>
+<element id="1295" type="ID" min_length="1" max_length="2" name="Participant Status Code"/>
+<element id="1296" type="AN" min_length="1" max_length="6" name="Special Processing Type"/>
+<element id="1300" type="ID" min_length="4" max_length="4" name="Service, Promotion, Allowance, or Charge Code"/>
+<element id="1301" type="AN" min_length="1" max_length="10" name="Agency Service, Promotion, Allowance, or Charge Code"/>
+<element id="1303" type="ID" min_length="1" max_length="2" name="Use of Language Indicator"/>
+<element id="1314" type="ID" min_length="1" max_length="1" name="Admission Source Code"/>
+<element id="1315" type="ID" min_length="1" max_length="1" name="Admission Type Code"/>
+<element id="1316" type="ID" min_length="1" max_length="1" name="Ambulance Transport Code"/>
+<element id="1317" type="ID" min_length="1" max_length="1" name="Ambulance Transport Reason Code"/>
+<element id="1318" type="ID" min_length="1" max_length="1" name="Approval Code"/>
+<element id="1319" type="ID" min_length="1" max_length="2" name="Basis of Cost Determination Code"/>
+<element id="1320" type="ID" min_length="1" max_length="1" name="Basis of Days Supply Determination Code"/>
+<element id="1321" type="ID" min_length="2" max_length="3" name="Condition Indicator"/>
+<element id="1322" type="ID" min_length="1" max_length="1" name="Certification Type Code"/>
+<element id="1325" type="ID" min_length="1" max_length="1" name="Claim Frequency Type Code"/>
+<element id="1327" type="ID" min_length="1" max_length="1" name="Copay Status Code"/>
+<element id="1328" type="N0" min_length="1" max_length="2" name="Diagnosis Code Pointer"/>
+<element id="1329" type="ID" min_length="1" max_length="1" name="Dispense as Written Code"/>
+<element id="1330" type="ID" min_length="2" max_length="2" name="Dosage Form Code"/>
+<element id="1331" type="AN" min_length="1" max_length="2" name="Facility Code Value"/>
+<element id="1332" type="ID" min_length="1" max_length="2" name="Facility Code Qualifier"/>
+<element id="1333" type="ID" min_length="1" max_length="2" name="Record Format Code"/>
+<element id="1334" type="ID" min_length="1" max_length="1" name="Health Care Professional Shortage Area Code"/>
+<element id="1335" type="ID" min_length="1" max_length="1" name="Insulin Dependent Code"/>
+<element id="1336" type="ID" min_length="1" max_length="3" name="Insurance Type Code"/>
+<element id="1337" type="ID" min_length="1" max_length="1" name="Level of Care Code"/>
+<element id="1338" type="ID" min_length="1" max_length="3" name="Level of Service Code"/>
+<element id="1339" type="AN" min_length="2" max_length="2" name="Procedure Modifier"/>
+<element id="1340" type="ID" min_length="1" max_length="2" name="Multiple Procedure Code"/>
+<element id="1341" type="AN" min_length="1" max_length="2" name="National or Local Assigned Review Value"/>
+<element id="1342" type="ID" min_length="1" max_length="1" name="Nature of Condition Code"/>
+<element id="1343" type="ID" min_length="1" max_length="2" name="Non-Institutional Claim Type Code"/>
+<element id="1344" type="ID" min_length="1" max_length="1" name="Non-Visit Code"/>
+<element id="1345" type="ID" min_length="1" max_length="1" name="Nursing Home Residential Status Code"/>
+<element id="1346" type="ID" min_length="1" max_length="1" name="Nutrient Administration Method Code"/>
+<element id="1347" type="ID" min_length="1" max_length="1" name="Nutrient Administration Technique Code"/>
+<element id="1348" type="ID" min_length="1" max_length="1" name="Oxygen Equipment Type Code"/>
+<element id="1349" type="ID" min_length="1" max_length="1" name="Oxygen Test Condition Code"/>
+<element id="1350" type="ID" min_length="1" max_length="1" name="Oxygen Test Findings Code"/>
+<element id="1351" type="ID" min_length="1" max_length="1" name="Patient Signature Source Code"/>
+<element id="1352" type="ID" min_length="1" max_length="2" name="Patient Status Code"/>
+<element id="1354" type="ID" min_length="1" max_length="4" name="Diagnosis Related Group (DRG) Code"/>
+<element id="1355" type="ID" min_length="2" max_length="2" name="Prescription Denial Override Code"/>
+<element id="1356" type="ID" min_length="1" max_length="1" name="Prescription Origin Code"/>
+<element id="1357" type="ID" min_length="1" max_length="1" name="Prior Authorization Type Code"/>
+<element id="1358" type="ID" min_length="1" max_length="1" name="Prosthesis, Crown or Inlay Code"/>
+<element id="1359" type="ID" min_length="1" max_length="1" name="Provider Accept Assignment Code"/>
+<element id="1360" type="ID" min_length="1" max_length="1" name="Provider Agreement Code"/>
+<element id="1361" type="ID" min_length="1" max_length="3" name="Oral Cavity Designation Code"/>
+<element id="1362" type="ID" min_length="2" max_length="3" name="Related-Causes Code"/>
+<element id="1363" type="ID" min_length="1" max_length="1" name="Release of Information Code"/>
+<element id="1364" type="ID" min_length="1" max_length="2" name="Review Code"/>
+<element id="1365" type="ID" min_length="1" max_length="2" name="Service Type Code"/>
+<element id="1366" type="ID" min_length="2" max_length="3" name="Special Program Code"/>
+<element id="1367" type="ID" min_length="2" max_length="3" name="Subluxation Level Code"/>
+<element id="1368" type="ID" min_length="1" max_length="2" name="Tooth Status Code"/>
+<element id="1369" type="ID" min_length="1" max_length="2" name="Tooth Surface Code"/>
+<element id="1370" type="ID" min_length="1" max_length="1" name="Unit Dose Code"/>
+<element id="1371" type="R" min_length="1" max_length="10" name="Unit Rate"/>
+<element id="1373" type="ID" min_length="2" max_length="4" name="Measurement Method or Device"/>
+<element id="1382" type="ID" min_length="1" max_length="1" name="Oxygen Delivery System Code"/>
+<element id="1383" type="ID" min_length="2" max_length="2" name="Claim Submission Reason Code"/>
+<element id="1384" type="ID" min_length="1" max_length="1" name="Patient Location Code"/>
+<element id="1390" type="ID" min_length="1" max_length="2" name="Eligibility or Benefit Information Code"/>
+<element id="1403" type="ID" min_length="1" max_length="1" name="Implant Type Code"/>
+<element id="1404" type="ID" min_length="1" max_length="1" name="Implant Status Code"/>
+<element id="142" type="AN" min_length="2" max_length="15" name="Application Senders Code"/>
+<element id="1429" type="ID" min_length="1" max_length="2" name="Construction Type"/>
+<element id="143" type="ID" min_length="3" max_length="3" name="Transaction Set Identifier Code"/>
+<element id="1470" type="N0" min_length="1" max_length="9" name="idber"/>
+<element id="1473" type="ID" min_length="2" max_length="2" name="Pricing Methodology"/>
+<element id="1476" type="ID" min_length="1" max_length="1" name="Language Proficiency Indicator"/>
+<element id="151" type="AN" min_length="1" max_length="20" name="Authority"/>
+<element id="1514" type="ID" min_length="1" max_length="2" name="Delay Reason Code"/>
+<element id="1525" type="ID" min_length="1" max_length="2" name="Request Category Code"/>
+<element id="1526" type="ID" min_length="1" max_length="2" name="Policy Compliance Code"/>
+<element id="1527" type="ID" min_length="1" max_length="2" name="Exception Code"/>
+<element id="1528" type="N0" min_length="1" max_length="2" name="Composite Data Element Position in Composite"/>
+<element id="156" type="ID" min_length="2" max_length="2" name="State or Province Code"/>
+<element id="1595" type="ID" min_length="1" max_length="1" name="Government Service Affiliation Code"/>
+<element id="1596" type="ID" min_length="2" max_length="2" name="Military Service Rank Code"/>
+<element id="166" type="AN" min_length="1" max_length="55" name="Address Information"/>
+<element id="1685" type="ID" min_length="1" max_length="2" name="Tax Treatment Code"/>
+<element id="1686" type="N0" min_length="1" max_length="4" name="Repeating Data Element Position"/>
+<element id="1687" type="R" min_length="1" max_length="15" name="Earnings Rate of Pay"/>
+<element id="1701" type="ID" min_length="1" max_length="1" name="Eligibility Reason Code"/>
+<element id="1705" type="AN" min_length="1" max_length="35" name="Implementation Convention Reference"/>
+<element id="1715" type="ID" min_length="1" max_length="3" name="Country Subdivision Code"/>
+<element id="183" type="R" min_length="1" max_length="8" name="Volume"/>
+<element id="184" type="ID" min_length="1" max_length="1" name="Volume Unit Qualifier"/>
+<element id="188" type="ID" min_length="1" max_length="1" name="Weight Unit Code"/>
+<element id="19" type="AN" min_length="2" max_length="30" name="City Name"/>
+<element id="2" type="N0" min_length="1" max_length="6" name="idber of Accepted Transaction Sets"/>
+<element id="212" type="R" min_length="1" max_length="17" name="Unit Price"/>
+<element id="22" type="AN" min_length="1" max_length="30" name="Commodity Code"/>
+<element id="23" type="ID" min_length="1" max_length="1" name="Commodity Code Qualifier"/>
+<element id="234" type="AN" min_length="1" max_length="48" name="Product/Service ID"/>
+<element id="235" type="ID" min_length="2" max_length="2" name="Product/Service ID Qualifier"/>
+<element id="236" type="ID" min_length="3" max_length="3" name="Price Identifier Code"/>
+<element id="248" type="ID" min_length="1" max_length="1" name="Allowance or Charge Indicator"/>
+<element id="26" type="ID" min_length="2" max_length="3" name="Country Code"/>
+<element id="28" type="N0" min_length="1" max_length="9" name="Group Control idber"/>
+<element id="29" type="DT" min_length="6" max_length="8" name="Date"/>
+<element id="30" type="TM" min_length="4" max_length="4" name="Time"/>
+<element id="280" type="R" min_length="4" max_length="10" name="Exchange Rate"/>
+<element id="289" type="N0" min_length="1" max_length="2" name="Multiple Price Quantity"/>
+<element id="305" type="ID" min_length="1" max_length="2" name="Transaction Handling Code"/>
+<element id="306" type="ID" min_length="1" max_length="2" name="Action Code"/>
+<element id="309" type="ID" min_length="1" max_length="2" name="Location Qualifier"/>
+<element id="310" type="AN" min_length="1" max_length="30" name="Location Identifier"/>
+<element id="324" type="AN" min_length="1" max_length="22" name="Purchase Order idber"/>
+<element id="328" type="AN" min_length="1" max_length="30" name="Release idber"/>
+<element id="329" type="AN" min_length="4" max_length="9" name="Transaction Set Control idber"/>
+<element id="331" type="ID" min_length="2" max_length="2" name="Allowance or Charge Method of Handling Code"/>
+<element id="332" type="R" min_length="1" max_length="6" name="Percent, Decimal Format"/>
+<element id="337" type="TM" min_length="4" max_length="8" name="Time"/>
+<element id="338" type="R" min_length="1" max_length="6" name="Terms Discount Percent"/>
+<element id="349" type="ID" min_length="1" max_length="1" name="Item Description Type"/>
+<element id="350" type="AN" min_length="1" max_length="20" name="Assigned Identification"/>
+<element id="352" type="AN" min_length="1" max_length="80" name="Description"/>
+<element id="353" type="ID" min_length="2" max_length="2" name="Transaction Set Purpose Code"/>
+<element id="354" type="N0" min_length="1" max_length="6" name="idber of Line Items"/>
+<element id="355" type="ID" min_length="2" max_length="2" name="Unit or Basis for Measurement Code"/>
+<element id="358" type="R" min_length="1" max_length="15" name="Quantity Invoiced"/>
+<element id="363" type="ID" min_length="3" max_length="3" name="Note Reference Code"/>
+<element id="364" type="AN" min_length="1" max_length="256" name="Communication idber"/>
+<element id="365" type="ID" min_length="2" max_length="2" name="Communication idber Qualifier"/>
+<element id="366" type="ID" min_length="2" max_length="2" name="Contact Function Code"/>
+<element id="373" type="DT" min_length="8" max_length="8" name="Date"/>
+<element id="374" type="ID" min_length="3" max_length="3" name="Date/Time Qualifier"/>
+<element id="378" type="ID" min_length="1" max_length="1" name="Allowance/Charge Percent Qualifier"/>
+<element id="380" type="R" min_length="1" max_length="15" name="Quantity"/>
+<element id="426" type="ID" min_length="2" max_length="2" name="Adjustment Reason Code"/>
+<element id="429" type="AN" min_length="1" max_length="16" name="Check idber"/>
+<element id="443" type="AN" min_length="1" max_length="20" name="Contact Inquiry Reference"/>
+<element id="447" type="AN" min_length="1" max_length="4" name="Loop Identifier Code"/>
+<element id="449" type="AN" min_length="1" max_length="80" name="Fixed Format Information"/>
+<element id="455" type="ID" min_length="1" max_length="2" name="Responsible Agency Code"/>
+<element id="478" type="ID" min_length="1" max_length="1" name="Credit/Debit Flag Code"/>
+<element id="479" type="ID" min_length="2" max_length="2" name="Functional Identifier Code"/>
+<element id="480" type="AN" min_length="1" max_length="12" name="Version / Release / Industry Identifier Code"/>
+<element id="481" type="ID" min_length="1" max_length="2" name="Trace Type Code"/>
+<element id="482" type="ID" min_length="2" max_length="2" name="Payment Action Code"/>
+<element id="499" type="AN" min_length="1" max_length="10" name="Condition Value"/>
+<element id="506" type="ID" min_length="2" max_length="2" name="(DFI) ID idber Qualifier"/>
+<element id="507" type="AN" min_length="3" max_length="12" name="(DFI) Identification idber"/>
+<element id="508" type="AN" min_length="1" max_length="35" name="Account idber"/>
+<element id="509" type="AN" min_length="10" max_length="10" name="Originating Company Identifier"/>
+<element id="510" type="AN" min_length="9" max_length="9" name="Originating Company Supplemental Code"/>
+<element id="522" type="ID" min_length="1" max_length="3" name="Amount Qualifier Code"/>
+<element id="539" type="AN" min_length="1" max_length="30" name="Vehicle Identification idber"/>
+<element id="554" type="N0" min_length="1" max_length="6" name="Assigned idber"/>
+<element id="559" type="ID" min_length="2" max_length="2" name="Agency Qualifier Code"/>
+<element id="569" type="ID" min_length="1" max_length="3" name="Account idber Qualifier"/>
+<element id="584" type="ID" min_length="2" max_length="2" name="Employment Status Code"/>
+<element id="591" type="ID" min_length="3" max_length="3" name="Payment Method Code"/>
+<element id="594" type="ID" min_length="1" max_length="1" name="Frequency Code"/>
+<element id="609" type="N0" min_length="1" max_length="9" name="Count"/>
+<element id="61" type="AN" min_length="1" max_length="30" name="Free-form Information"/>
+<element id="610" type="N2" min_length="1" max_length="15" name="Amount"/>
+<element id="615" type="ID" min_length="1" max_length="2" name="Time Period Qualifier"/>
+<element id="616" type="N0" min_length="1" max_length="3" name="idber of Periods"/>
+<element id="618" type="ID" min_length="1" max_length="3" name="Implementation Transaction Set Syntax Error Code"/>
+<element id="620" type="ID" min_length="1" max_length="3" name="Implementation Segment Syntax Error Code"/>
+<element id="621" type="ID" min_length="1" max_length="3" name="Implementation Segment Syntax Error Code"/>
+<element id="623" type="ID" min_length="2" max_length="2" name="Time Code"/>
+<element id="628" type="AN" min_length="1" max_length="12" name="Hierarchical ID idber"/>
+<element id="639" type="ID" min_length="2" max_length="2" name="Basis of Unit Price Code"/>
+<element id="640" type="ID" min_length="2" max_length="2" name="Transaction Type Code"/>
+<element id="648" type="ID" min_length="3" max_length="3" name="Price Multiplier Qualifier"/>
+<element id="649" type="R" min_length="1" max_length="10" name="Multiplier"/>
+<element id="65" type="R" min_length="1" max_length="8" name="Height"/>
+<element id="659" type="ID" min_length="1" max_length="2" name="Basis of Verification Code"/>
+<element id="66" type="ID" min_length="1" max_length="2" name="Identification Code Qualifier"/>
+<element id="662" type="ID" min_length="1" max_length="1" name="Relationship Code"/>
+<element id="669" type="ID" min_length="3" max_length="3" name="Currency Market/Exchange Code"/>
+<element id="67" type="AN" min_length="2" max_length="80" name="Identification Code"/>
+<element id="672" type="ID" min_length="2" max_length="2" name="Resource Authorization Code"/>
+<element id="673" type="ID" min_length="2" max_length="2" name="Quantity Qualifier"/>
+<element id="675" type="ID" min_length="2" max_length="2" name="Schedule Type Qualifier"/>
+<element id="676" type="ID" min_length="1" max_length="1" name="Schedule Quantity Qualifier"/>
+<element id="678" type="ID" min_length="1" max_length="2" name="Ship/Delivery or Calendar Pattern Code"/>
+<element id="679" type="ID" min_length="1" max_length="1" name="Ship/Delivery Pattern Time Code"/>
+<element id="680" type="ID" min_length="1" max_length="1" name="Forecast Qualifier"/>
+<element id="681" type="ID" min_length="1" max_length="1" name="Forecast Timing Qualifier"/>
+<element id="687" type="ID" min_length="2" max_length="2" name="Class of Trade Code"/>
+<element id="689" type="ID" min_length="2" max_length="2" name="Occupancy Code"/>
+<element id="704" type="ID" min_length="1" max_length="2" name="Paperwork/Report Action Code"/>
+<element id="706" type="ID" min_length="2" max_length="2" name="Entity Relationship Code"/>
+<element id="715" type="ID" min_length="1" max_length="1" name="Functional Group Acknowledgment Code"/>
+<element id="716" type="ID" min_length="1" max_length="3" name="Functional Group Syntax Error Code"/>
+<element id="717" type="ID" min_length="1" max_length="1" name="Transaction Set Acknowledgment Code"/>
+<element id="718" type="ID" min_length="1" max_length="3" name="Transaction Set Syntax Error Code"/>
+<element id="719" type="N0" min_length="1" max_length="6" name="Segment Position in Transaction Set"/>
+<element id="720" type="ID" min_length="1" max_length="3" name="Segment Syntax Error Code"/>
+<element id="721" type="ID" min_length="2" max_length="3" name="Segment ID Code"/>
+<element id="722" type="N0" min_length="1" max_length="2" name="Element Position in Segment"/>
+<element id="723" type="ID" min_length="1" max_length="3" name="Data Element Syntax Error Code"/>
+<element id="724" type="AN" min_length="1" max_length="99" name="Copy of Bad Data Element"/>
+<element id="725" type="N0" min_length="1" max_length="4" name="Data Element Reference idber"/>
+<element id="734" type="AN" min_length="1" max_length="12" name="Hierarchical Parent ID idber"/>
+<element id="735" type="ID" min_length="1" max_length="2" name="Hierarchical Level Code"/>
+<element id="736" type="ID" min_length="1" max_length="1" name="Hierarchical Child Code"/>
+<element id="737" type="ID" min_length="2" max_length="2" name="Measurement Reference ID Code"/>
+<element id="738" type="ID" min_length="1" max_length="3" name="Measurement Qualifier"/>
+<element id="739" type="R" min_length="1" max_length="20" name="Measurement Value"/>
+<element id="740" type="R" min_length="1" max_length="20" name="Range Minimum"/>
+<element id="741" type="R" min_length="1" max_length="20" name="Range Maximum"/>
+<element id="750" type="ID" min_length="2" max_length="3" name="Product/Process Characteristic Code"/>
+<element id="751" type="AN" min_length="1" max_length="12" name="Product Description Code"/>
+<element id="752" type="ID" min_length="2" max_length="2" name="Surface/Layer/Position Code"/>
+<element id="754" type="AN" min_length="1" max_length="7" name="Packaging Description Code"/>
+<element id="755" type="ID" min_length="2" max_length="2" name="Report Type Code"/>
+<element id="756" type="ID" min_length="1" max_length="2" name="Report Transmission Code"/>
+<element id="757" type="N0" min_length="1" max_length="2" name="Report Copies Needed"/>
+<element id="770" type="AN" min_length="1" max_length="20" name="Option idber"/>
+<element id="782" type="R" min_length="1" max_length="18" name="Monetary Amount"/>
+<element id="786" type="ID" min_length="2" max_length="2" name="Security Level Code"/>
+<element id="799" type="AN" min_length="1" max_length="30" name="Version Identifier"/>
+<element id="81" type="R" min_length="1" max_length="10" name="Weight"/>
+<element id="812" type="ID" min_length="1" max_length="10" name="Payment Format Code"/>
+<element id="819" type="ID" min_length="2" max_length="3" name="Language Code"/>
+<element id="82" type="R" min_length="1" max_length="8" name="Length"/>
+<element id="821" type="ID" min_length="3" max_length="3" name="Safety Characteristic/Hazard Code"/>
+<element id="822" type="AN" min_length="1" max_length="15" name="Source Subqualifier"/>
+<element id="875" type="ID" min_length="3" max_length="3" name="Maintenance Type Code"/>
+<element id="889" type="ID" min_length="1" max_length="1" name="Follow-up Action Code"/>
+<element id="9" type="ID" min_length="2" max_length="2" name="Late Reason Code"/>
+<element id="901" type="ID" min_length="2" max_length="2" name="Reject Reason Code"/>
+<element id="921" type="ID" min_length="2" max_length="2" name="Discipline Type Code"/>
+<element id="923" type="ID" min_length="1" max_length="1" name="Prognosis Code"/>
+<element id="93" type="AN" min_length="1" max_length="60" name="Name"/>
+<element id="933" type="AN" min_length="1" max_length="264" name="Free-form Message Text"/>
+<element id="934" type="ID" min_length="2" max_length="2" name="Printer Carriage Control Code"/>
+<element id="935" type="ID" min_length="2" max_length="2" name="Measurement Significance Code"/>
+<element id="936" type="ID" min_length="2" max_length="2" name="Measurement Attribute Code"/>
+<element id="954" type="R" min_length="1" max_length="10" name="Percentage as Decimal"/>
+<element id="96" type="N0" min_length="1" max_length="10" name="idber of Included Segments"/>
+<element id="97" type="N0" min_length="1" max_length="6" name="97"/>
+<element id="98" type="ID" min_length="2" max_length="3" name="Entity Identifier Code"/>
+<element id="9998" type="AN" min_length="1" max_length="35" name="Context Reference"/>
+<element id="9999" type="AN" min_length="1" max_length="35" name="Context Name"/>
+<element id="I01" type="ID" min_length="2" max_length="2" name="I01"/>
+<element id="I02" type="AN" min_length="10" max_length="10" name="I02"/>
+<element id="I03" type="ID" min_length="2" max_length="2" name="I03"/>
+<element id="I04" type="AN" min_length="10" max_length="10" name="I04"/>
+<element id="I05" type="ID" min_length="2" max_length="2" name="I05"/>
+<element id="I06" type="AN" min_length="15" max_length="15" name="I06"/>
+<element id="I07" type="AN" min_length="15" max_length="15" name="I07"/>
+<element id="I08" type="DT" min_length="6" max_length="6" name="I08"/>
+<element id="I09" type="TM" min_length="4" max_length="4" name="I09"/>
+<element id="I10" type="ID" min_length="1" max_length="1" name="I10"/>
+<element id="I11" type="ID" min_length="5" max_length="5" name="I11"/>
+<element id="I12" type="N0" min_length="9" max_length="9" name="I12"/>
+<element id="I13" type="ID" min_length="1" max_length="1" name="I13"/>
+<element id="I14" type="ID" min_length="1" max_length="1" name="I14"/>
+<element id="I15" type="AN" min_length="1" max_length="1" name="I15"/>
+<element id="I16" type="N0" min_length="1" max_length="5" name="I16"/>
+<element id="I17" type="ID" min_length="1" max_length="1" name="I17"/>
+<element id="I18" type="ID" min_length="3" max_length="3" name="I18"/>
+<element id="I65" type="AN" min_length="1" max_length="1" name="I65"/>
+</elements>

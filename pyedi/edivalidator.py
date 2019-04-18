@@ -16,14 +16,40 @@ class EDIValidator:
         @param element_file: path to element file
         @type element_file: string
         """
+        self.dataele = {}
+        fd = None
         try:
-            fd = open(map_file, 'r')
-            self.spec = parse(fd)
-        except OSError:
-            raise EDIFileNotFoundError('{}'.format(map_file))
+            # Load xml based map file
+            with open(map_file, 'r') as fd:
+                self.spec = parse(fd)
+                self.remove_whitespace_nodes(self.spec, True)
+                
+            # Load data elements from xml files
+            with open(element_file, 'r') as fd:
+                self.element_spec = parse(fd)
+                self.remove_whitespace_nodes(self.element_spec, True)
+                
+                for element in self.element_spec.documentElement.childNodes:
+                    self.dataele[element.getAttribute('id')] = {
+                        'type': element.getAttribute('type'),
+                        'min_length': element.getAttribute('min_length'),
+                        'max_length': element.getAttribute('max_length')
+                    }
 
-        try:
-            fd = open(element_file, 'r')
-            self.element_spec = parse(fd)
         except OSError:
-            raise EDIFileNotFoundError('{}'.format(element_file))
+            raise EDIFileNotFoundError(
+                'Cannot find {} or {}'.format(map_file, element_file)
+            )
+
+    def remove_whitespace_nodes(self,  node, unlink=False):
+        remove_list = []
+        for child in node.childNodes:
+            if child.nodeType == node.TEXT_NODE and \
+               not child.data.strip():
+                remove_list.append(child)
+            elif child.hasChildNodes():
+                self.remove_whitespace_nodes(child, unlink)
+        for node in remove_list:
+            node.parentNode.removeChild(node)
+            if unlink:
+                node.unlink()
