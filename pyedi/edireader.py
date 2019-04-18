@@ -1,6 +1,8 @@
+import os
 import logging
 from .edivalidator import EDIValidator
 from .ediexceptions import EDIFileNotFoundError
+from pkg_resources import resource_stream
 
 
 class EDIReader:
@@ -11,7 +13,7 @@ class EDIReader:
     isa_len = 106
     buf_size = 8 * 1024
 
-    def __init__(self, file_name, map_file, element_file):
+    def __init__(self, file_name, map_file=None, element_file=None):
         """
         Initialize the edi reader
 
@@ -24,12 +26,12 @@ class EDIReader:
         """
         self.fd = None
         try:
+            self.validator = EDIValidator(map_file, element_file)
+            
             self.fd = open(file_name, 'r')
             line = self.fd.read(self.isa_len)
 
             # TODO: ISA/FG Validation
-
-            self.validator = EDIValidator(map_file, element_file)
 
         except OSError:
             logger = logging.getLogger('pyedi')
