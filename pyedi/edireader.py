@@ -32,9 +32,7 @@ class EDIReader:
         except OSError:
             logger = logging.getLogger('pyedi')
             logger.error('File Not Found: {}'.format(file_name))
-            raise EDIFileNotFoundError(
-                'Cannot find {}'.format(file_name)
-            )
+            raise EDIFileNotFoundError('File Not Found: {}'.format(file_name))
 
     def __del__(self):
         if self.fd is not None:
