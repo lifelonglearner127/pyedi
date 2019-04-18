@@ -19,7 +19,7 @@
             <element ref="ISA16" id="I15" usage="M" name="Component Element Separator" />
         </segment>
 
-        <loop ref="ISA_LOOP" repeat="1" name="Interchange Control Header Loop">
+        <loop ref="ISA_LOOP" repeat="&gt;1" name="Interchange Control Header Loop">
             <segment ref="GS" usage="M" repeat="1" name="Functional Group Header">
                 <element ref="GS01" id="479" usage="M" name="Functional Identifier Code" values="AG,AQ,AS,AZ,BE,CD,CI,CT,FA,HP,GF,IM,IN,OG,OR,PD,PO,PR,PS,PV,QG,QM,QO,RA,RC,RF,RG,SC,SH,SM,TM,TU,TX" />
                 <element ref="GS02" id="142" usage="M" name="Application Sender's Code" />
@@ -27,14 +27,16 @@
                 <element ref="GS04" id="373" usage="M" name="Date" />
                 <element ref="GS05" id="337" usage="M" name="Time" />
                 <element ref="GS06" id="28"  usage="M" name="Group Control Number" />
-                <element ref="GS07" id="455" usage="M" name="Responsible Agency Code" />
-                <element ref="GS08" id="480" usage="M" name="Version / Release / Industry Identifier Code" />
+                <element ref="GS07" id="455" usage="M" name="Responsible Agency Code" values="X" />
+                <element ref="GS08" id="480" usage="M" name="Version / Release / Industry Identifier Code" values="005010" />
             </segment>
+
             <segment ref="GE" usage="M" repeat="1" name="Functional Group Trailer">
                 <element ref="GE01" id="97" usage="M" name="Number of Transaction Sets Included" />
                 <element ref="GE02" id="28" usage="M" name="Group Control Number" />
             </segment>
         </loop>
+
         <segment ref="IEA" usage="M" repeat="1" name="Interchange Control Trailer">
             <element ref="IEA01" id="I16" usage="M" name="Number of Included Functional Groups" />
             <element ref="IEA02" id="I12" usage="M" name="Interchange Control Number" />
