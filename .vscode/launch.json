@@ -11,9 +11,7 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "args": [
-                "-f", "856Sample.txt",
-                "-m", "pyedi/map/856.5010.xml",
-                "-e", "pyedi/map/data_ele.xml"
+                "-f", "856Sample.txt"
             ]
         }
         

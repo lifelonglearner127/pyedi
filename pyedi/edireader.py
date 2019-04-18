@@ -13,20 +13,16 @@ class EDIReader:
     isa_len = 106
     buf_size = 8 * 1024
 
-    def __init__(self, file_name, map_file=None, element_file=None):
+    def __init__(self, file_name):
         """
         Initialize the edi reader
 
         @param file_name: path to edi file
         @type file_name: string
-        @param map_file: path to map file
-        @type map_file: string
-        @param element_file: path to element file
-        @type element_file: string
         """
         self.fd = None
         try:
-            self.validator = EDIValidator(map_file, element_file)
+            self.validator = EDIValidator('856.5010')
             
             self.fd = open(file_name, 'r')
             line = self.fd.read(self.isa_len)
