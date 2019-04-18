@@ -14,7 +14,7 @@ class EDISegment:
     def get_element_by_index(self, index):
         try:
             return self.elements[index]
-        except:
+        except IndexError:
             return None
 
     def to_string(self):
