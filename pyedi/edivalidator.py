@@ -19,7 +19,7 @@ class EDIValidator:
         try:
             # Load xml based map file
             fd = resource_stream(
-                __name__, 'map/transaction/{}.xml'.format(map_file)
+                __name__, 'map/{}.xml'.format(map_file)
             )
             self.spec = parse(fd)
             self.remove_whitespace_nodes(self.spec, True)

@@ -1,6 +1,7 @@
 import logging
 from .edivalidator import EDIValidator
-from .ediexceptions import EDIFileNotFoundError
+from .edisegment import EDISegment
+from .ediexceptions import EDIFileNotFoundError, InterchangeControlError
 
 
 class EDIReader:
@@ -20,12 +21,33 @@ class EDIReader:
         """
         self.fd = None
         try:
-            self.validator = EDIValidator('856.5010')
-
             self.fd = open(file_name, 'r')
             line = self.fd.read(EDIReader.ISA_LEN)
 
-            # TODO: ISA/FG Validation
+            if line[:3] != 'ISA':
+                raise InterchangeControlError(
+                    "First line does not begin with 'ISA': %s" % line[:3]
+                )
+
+            self.icvn = line[84:89]
+            if self.icvn not in ('00501'):
+                raise InterchangeControlError(
+                    'ISA Interchange Control Version Number is unknown:'
+                    '%s for %s' % (self.icvn, line)
+                )
+
+            self.segment_delimiter = line[-1]
+            self.element_delimiter = line[3]
+            self.subelement_delimiter = line[-2]
+            self.repetition_delimiter = (
+                line[82] if self.icvn == '00501' else None
+            )
+            self.buffer = line
+            self.buffer += self.fd.read(EDIReader.BUF_SIZE)
+            self.envelope_validator = EDIValidator(
+                'envelope/{}'.format(self.icvn)
+            )
+            self.transaction_validator = None
 
         except OSError:
             logger = logging.getLogger('pyedi')
@@ -36,8 +58,39 @@ class EDIReader:
         if self.fd is not None:
             self.fd.close()
 
+    def __iter__(self):
+        while True:
+            if self.buffer.find(self.segment_delimiter) == -1:
+                self.buffer += self.fd.read(EDIReader.BUF_SIZE)
+
+            if self.buffer.find(self.segment_delimiter) == -1:
+                break
+
+            (line, self.buffer) = self.buffer.split(self.seg_term, 1)
+            line = line.lstrip('\n\r')
+
+            if line == '':
+                break
+
+            yield(EDISegment(line, self.element_delimiter))
+
     def validate(self):
         """
         Validate transaction
         """
-        pass
+        for segment in self:
+            segment_id = segment.get_segment_id()
+            if segment_id == 'ISA':
+                pass
+
+            elif segment_id == 'GS':
+                pass
+
+            elif segment_id == 'GE':
+                pass
+
+            elif segment_id == 'IEA':
+                pass
+
+            else:
+                pass
