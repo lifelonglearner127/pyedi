@@ -18,7 +18,9 @@ class EDIValidator:
 
         try:
             # Load xml based map file
-            fd = resource_stream(__name__, 'map/transaction/{}.xml'.format(map_file))
+            fd = resource_stream(
+                __name__, 'map/transaction/{}.xml'.format(map_file)
+            )
             self.spec = parse(fd)
             self.remove_whitespace_nodes(self.spec, True)
             fd.close()
@@ -39,7 +41,9 @@ class EDIValidator:
         except OSError:
             logger = logging.getLogger('pyedi')
             logger.error('Element file or map file is missing in the package')
-            raise EDIFileNotFoundError('Element file or map file is missing in the package')
+            raise EDIFileNotFoundError(
+                'Element file or map file is missing in the package'
+            )
 
     def remove_whitespace_nodes(self,  node, unlink=False):
         remove_list = []

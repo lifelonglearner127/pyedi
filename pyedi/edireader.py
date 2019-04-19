@@ -1,8 +1,6 @@
-import os
 import logging
 from .edivalidator import EDIValidator
 from .ediexceptions import EDIFileNotFoundError
-from pkg_resources import resource_stream
 
 
 class EDIReader:
@@ -10,8 +8,8 @@ class EDIReader:
     Read edi file and validate it against xml based map file
     """
 
-    isa_len = 106
-    buf_size = 8 * 1024
+    ISA_LEN = 106
+    BUF_SIZE = 8 * 1024
 
     def __init__(self, file_name):
         """
@@ -23,9 +21,9 @@ class EDIReader:
         self.fd = None
         try:
             self.validator = EDIValidator('856.5010')
-            
+
             self.fd = open(file_name, 'r')
-            line = self.fd.read(self.isa_len)
+            line = self.fd.read(EDIReader.ISA_LEN)
 
             # TODO: ISA/FG Validation
 

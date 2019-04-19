@@ -1,3 +1,8 @@
+class EDISegmentError(Exception):
+    """Class for EDISegment"""
+    pass
+
+
 class EDIFileNotFoundError(Exception):
     """Class for EDI Validator errors"""
     pass
