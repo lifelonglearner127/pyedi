@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <maps>
     <version icvn="00501">
-        <map vriic="005010" fic="SH">856.5010.xml</map>
+        <map fic="SH" vriic="005010" >856.5010.xml</map>
     </version>
 </maps>

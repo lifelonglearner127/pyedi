@@ -1,6 +1,7 @@
 import logging
 from .edivalidator import EDIValidator
 from .edisegment import EDISegment
+from .edimaps import EDIMap
 from .ediexceptions import EDIFileNotFoundError, InterchangeControlError
 
 
@@ -45,9 +46,10 @@ class EDIReader:
             self.buffer = line
             self.buffer += self.fd.read(EDIReader.BUF_SIZE)
             self.envelope_validator = EDIValidator(
-                'envelope/{}'.format(self.icvn)
+                'envelope/{}.xml'.format(self.icvn)
             )
             self.transaction_validator = None
+            self.maps = EDIMap()
 
         except OSError:
             logger = logging.getLogger('pyedi')
@@ -80,17 +82,21 @@ class EDIReader:
         """
         for segment in self:
             segment_id = segment.get_segment_id()
-            if segment_id == 'ISA':
-                pass
-
-            elif segment_id == 'GS':
-                pass
-
-            elif segment_id == 'GE':
-                pass
-
-            elif segment_id == 'IEA':
-                pass
+            if segment_id not in ['ISA', 'GS', 'GE', 'IEA']:
+                match = self.transaction_validator.matchSegment(segment)
 
             else:
-                pass
+                match = self.envelope_validator.matchSegment(segment)
+
+            if segment_id == 'GS':
+                fic = segment.get_element_by_ref('GS01')
+                vriic = segment.get_element_by_ref('GS08')
+                self.maps.get_file_name(self.icvn, fic, fic)
+
+            if match == 1:
+                logger = logging.getLogger('pyedi')
+                logger.debug('Parsed {}'.format(segment.to_string()))
+            else:
+                break
+
+        return match

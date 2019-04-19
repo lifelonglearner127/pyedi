@@ -12,5 +12,6 @@ if __name__ == '__main__':
 
     try:
         edi_reader = EDIReader(args['file'])
+        edi_reader.validate()
     except Exception as err:
         print('{}'.format(err))
