@@ -68,7 +68,7 @@ class EDIReader:
             if self.buffer.find(self.segment_delimiter) == -1:
                 break
 
-            (line, self.buffer) = self.buffer.split(self.seg_term, 1)
+            (line, self.buffer) = self.buffer.split(self.segment_delimiter, 1)
             line = line.lstrip('\n\r')
 
             if line == '':
@@ -83,10 +83,10 @@ class EDIReader:
         for segment in self:
             segment_id = segment.get_segment_id()
             if segment_id not in ['ISA', 'GS', 'GE', 'IEA']:
-                match = self.transaction_validator.matchSegment(segment)
+                match = self.transaction_validator.match_segment(segment)
 
             else:
-                match = self.envelope_validator.matchSegment(segment)
+                match = self.envelope_validator.match_segment(segment)
 
             if segment_id == 'GS':
                 fic = segment.get_element_by_ref('GS01')

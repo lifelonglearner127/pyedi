@@ -38,3 +38,6 @@ class EDIValidator(EDIXMLParser):
             )
 
         super().__init__(map_file)
+
+    def match_segment(self, segment):
+        pass
