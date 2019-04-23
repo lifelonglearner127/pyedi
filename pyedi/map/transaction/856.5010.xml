@@ -37,12 +37,12 @@
           <element ref="ST03" id="1705" usage="O" name="Implementation Convention Reference" />
         </segment>
         <segment ref="BSN" usage="M" repeat="1" name="Beginning Segment for Ship Notice">
-          <element ref="BSN01" id="353"  usage="M" name="Transaction Set Purpose Code" />
+          <element ref="BSN01" id="353"  usage="M" name="Transaction Set Purpose Code" values="00" />
           <element ref="BSN02" id="396"  usage="M" name="Shipment Identification" />
           <element ref="BSN03" id="373"  usage="M" name="Date" />
           <element ref="BSN04" id="337"  usage="M" name="Time" />
           <element ref="BSN05" id="1005" usage="O" name="Heirarchical Structure Code" values="0001" />
-          <element ref="BSN06" id="640"  usage="O" name="Transaction Type Code" />
+          <element ref="BSN06" id="640"  usage="C" name="Transaction Type Code" />
           <element ref="BSN07" id="641"  usage="O" name="Status Reason Code" />
         </segment>
         <loop ref="DETAIL" repeat="&gt;1" name="Transaction Detail">
