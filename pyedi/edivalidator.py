@@ -18,7 +18,7 @@ class EDIValidator:
         self.dataele = {}
 
         try:
-             # Load xml file
+            # Load xml file
             fd = resource_stream(__name__, 'map/{}'.format(map_file))
             self.spec = parse(fd)
             self.remove_whitespace_nodes(self.spec, True)
@@ -81,19 +81,21 @@ class EDIValidator:
             else:
                 spec_segment.setAttribute("has_occurred", 1)
 
+            parent_node = spec_segment.parentNode
             if (
-                spec_segment.parentNode.nodeName == "loop" and
-                spec_segment.parentNode.firstChild.isSameNode(spec_segment)
+                parent_node.nodeName == "loop" and
+                parent_node.firstChild.isSameNode(spec_segment)
             ):
-                self.reset_has_occurred(spec_segment.parentNode)
 
-                if spec_segment.parentNode.hasAttribute("has_occurred"):
-                    spec_segment.parentNode.setAttribute(
+                self.reset_has_occurred(parent_node)
+
+                if parent_node.hasAttribute("has_occurred"):
+                    parent_node.setAttribute(
                         "has_occurred",
-                        int(spec_segment.parentNode.getAttribute("has_occurred")) + 1
+                        int(parent_node.getAttribute("has_occurred")) + 1
                     )
                 else:
-                    spec_segment.parentNode.setAttribute("has_occurred", 1)
+                    parent_node.setAttribute("has_occurred", 1)
 
                 spec_segment.setAttribute("has_occurred", 1)
 
@@ -109,6 +111,11 @@ class EDIValidator:
         for (element, spec_element)\
                 in zip(edi_segment.elements, spec_segment.childNodes):
 
+            if (
+                spec_element.getAttribute('usage') != 'M' and
+                element == ''
+            ):
+                continue
             err_str = 'Error occurred while parsing {}-{}\n'.format(
                 edi_segment.get_segment_id(),
                 spec_element.getAttribute('ref'),
