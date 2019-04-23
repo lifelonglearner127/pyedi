@@ -45,237 +45,235 @@
           <element ref="BSN06" id="640"  usage="C" name="Transaction Type Code" />
           <element ref="BSN07" id="641"  usage="O" name="Status Reason Code" />
         </segment>
-        <loop ref="DETAIL" repeat="&gt;1" name="Transaction Detail">
-          <loop ref="HL_SHIPMENT_LOOP" repeat="200000" name="Hierarchical Level Shipment">
-            <segment ref="HL" usage="M" repeat="1" name="Hierachical Level Shipment">
-              <element ref="HL01" id="628" usage="M" name="Hierarchical ID Number" />
-              <element ref="HL02" id="734" usage="O" name="Hierarchical Parent ID Number" />
-              <element ref="HL03" id="735" usage="M" name="Hierarchical Level Code" />
-              <element ref="HL04" id="736" usage="O" name="Hierarchical Child Code" />
-            </segment>
-            <segment ref="TD1" usage="O" repeat="20" name="Carrier Details Quantity and Weight">
-              <!-- TODO: Part1, Part2, Element Dependencies -->
-              <element ref="TD101" id="103" usage="O" name="Packaging Code" /> 
-              <element ref="TD102" id="80"  usage="O" name="Lading Quantity" />
-              <element ref="TD103" id="23"  usage="O" name="Commodity Code Qualifier" />
-              <element ref="TD104" id="22"  usage="O" name="Commodity Code" />
-              <element ref="TD105" id="79"  usage="O" name="Lading Description" />
-              <element ref="TD106" id="187" usage="O" name="Weight Qualifier" />
-              <element ref="TD107" id="81"  usage="X" name="Weight" />
-              <element ref="TD108" id="355" usage="X" name="Unit or Basis for Measurement Code" />
-              <element ref="TD109" id="183" usage="X" name="Volume" />
-              <element ref="TD110" id="355" usage="X" name="Unit or Basis for Measurement Code" />
-            </segment>
-            <segment ref="TD5" usage="O" repeat="12" name="Carrier Details Routing Sequence Transit Time">
-              <element ref="TD501" id="133" usage="O" name="Routing Sequence Code" values="B" />
-              <element ref="TD502" id="66"  usage="C" name="Identification Code Qualifier" values="2" />
-              <element ref="TD503" id="67"  usage="C" name="Identification Code" />
-              <element ref="TD504" id="91"  usage="C" name="" values="A,AE,BU,C,CE,D,E,H,L,M" />
-              <element ref="TD505" id="387" usage="C" name="Routing" />
-              <element ref="TD506" id="368" usage="C" name="Shipment/Order Status Code" />
-              <element ref="TD507" id="309" usage="O" name="Location Qualifier" />
-              <element ref="TD508" id="310" usage="C" name="Location Identifier" />
-              <element ref="TD509" id="731" usage="O" name="Transit Direction Code" />
-              <element ref="TD510" id="732" usage="O" name="Transit Time Direction Qualifier" />
-              <element ref="TD511" id="733" usage="C" name="Transit Time" />
-              <element ref="TD512" id="284" usage="X" name="Service Level Code" />
-              <element ref="TD513" id="284" usage="X" name="Service Level Code" />
-              <element ref="TD514" id="284" usage="O" name="Service Level Code" />
-              <element ref="TD515" id="26"  usage="O" name="Country Code" />
-            </segment>
-            <loop ref="HL-TD3" repeat="12" name="Carier Details Equipment">
-              <segment ref="TD3" usage="O" repeat="1" name="Carrier Details Equipment">
-                <element ref="TD301" id="40"  usage="C" name="Equipment Description Code" />
-                <element ref="TD302" id="206" usage="O" name="Equipment Initial" />
-                <element ref="TD303" id="207" usage="C" name="Equipment Number" />
-                <element ref="TD304" id="187" usage="O" name="Weight Qualifier" />
-                <element ref="TD305" id="81"  usage="C" name="Weight" />
-                <element ref="TD306" id="355" usage="C" name="Unit or Basis for Measurement Code" />
-                <element ref="TD307" id="102" usage="O" name="Ownership Code" />
-                <element ref="TD308" id="407" usage="O" name="Seal Status Code" />
-                <element ref="TD309" id="225" usage="O" name="Seal Number" />
-                <element ref="TD310" id="24"  usage="C" name="Equipment Type" />
-              </segment>
-            </loop>
-            <segment ref="REF" usage="O" repeat="&gt;1" name="Reference Information">
-              <element ref="REF01" id="128" usage="M" name="Reference Identification Qualifier" values="BM,UCB" />
-              <element ref="REF02" id="127" usage="C" name="Reference Identification" />
-            </segment>
-            <segment ref="MAN" usage="O" repeat="&gt;1" name="Marks and Numbers Information">
-              <element ref="MAN01" id="88" usage="M" name="Marks and Numbers Qualifier" values="GM,SI" />
-              <element ref="MAN02" id="87" usage="M" name="Marks and Numbers" />
-              <element ref="MAN03" id="87" usage="M" name="Marks and Numbers" />
-              <element ref="MAN04" id="88" usage="M" name="Marks and Numbers Qualifier" />
-              <element ref="MAN05" id="87" usage="M" name="Marks and Numbers" />
-              <element ref="MAN06" id="87" usage="M" name="Marks and Numbers" />
-            </segment>
-            <segment ref="DTM" usage="O" repeat="10" name="Date/Time Reference">
-              <element ref="DTM01" id="374"  usage="M" name="Date/Time Qualifier" values="067,011"/>
-              <element ref="DTM02" id="373"  usage="X" name="Date" />
-              <element ref="DTM03" id="337"  usage="X" name="Time" />
-              <element ref="DTM04" id="623"  usage="O" name="Time Code" />
-              <element ref="DTM05" id="1250" usage="X" name="Date Time Period Format Qualifier" />
-              <element ref="DTM06" id="1251" usage="X" name="Date Time Period" />
-            </segment>
-            <segment ref="FOB" usage="O" repeat="1" name="F.O.B.Related Instructions">
-              <element ref="FOB01" id="146" usage="M" name="Shipment Method of Payment" values="CC,PP" />
-              <element ref="FOB02" id="309" usage="C" name="Location Qualifier" />
-              <element ref="FOB03" id="352" usage="O" name="Description" />
-              <element ref="FOB04" id="334" usage="O" name="Transportation Terms Qualifier Code" />
-              <element ref="FOB05" id="335" usage="C" name="Transportation Terms Code" />
-              <element ref="FOB06" id="309" usage="C" name="Location Qualifier" />
-              <element ref="FOB07" id="352" usage="O" name="Description" />
-              <element ref="FOB08" id="54"  usage="O" name="Risk of Loss Code" />
-              <element ref="FOB09" id="352" usage="X" name="Description" />
-            </segment>
-            <loop ref="HL-N1" repeat="200" name="Party Identification">
-              <segment ref="N1" usage="O" repeat="1" name="Party Identification">
-                <element ref="N101" id="98"  usage="M" name="Entity Identifier Code" values="ST,SF" />
-                <element ref="N102" id="93"  usage="C" name="Name" />
-                <element ref="N103" id="66"  usage="C" name="Identification Code Qualifier" values="UL" />
-                <element ref="N104" id="67"  usage="C" name="Identification Code" />
-                <element ref="N105" id="706" usage="O" name="Entity Relationship Code" />
-                <element ref="N106" id="98"  usage="O" name="Entity Identifier Code" />
-              </segment>
-            </loop>
-          </loop>
-          <loop ref="HL_ORDER_LOOP" repeat="200000" name="Hierarchical Level Order">
-            <segment ref="HL" usage="M" repeat="1" name="Hierachical Level Order">
-              <element ref="HL01" id="628" usage="M" name="Hierarchical ID Number" />
-              <element ref="HL02" id="734" usage="O" name="Hierarchical Parent ID Number" />
-              <element ref="HL03" id="735" usage="M" name="Hierarchical Level Code" values="O" />
-              <element ref="HL04" id="736" usage="O" name="Hierarchical Child Code" />
-            </segment>
-            <segment ref="PRF" usage="O" repeat="1" name="Purchase Order Reference">
-              <element ref="PRF01" id="324" usage="M" name="Purchase Order Number" />
-              <element ref="PRF02" id="328" usage="O" name="Release Number" />
-              <element ref="PRF03" id="327" usage="O" name="Change Order Sequence Number" />
-              <element ref="PRF04" id="373" usage="O" name="Date" />
-              <element ref="PRF05" id="350" usage="O" name="Assigned Identification" />
-              <element ref="PRF06" id="367" usage="O" name="Contract Number" />
-              <element ref="PRF07" id="92"  usage="O" name="Purchase Order Type Code" />
-            </segment>
-            <segment ref="REF" usage="O" repeat="&gt;1" name="Reference Information">
-              <element ref="REF01" id="128" usage="M" name="Reference Identification Qualifier" values="IA" />
-              <element ref="REF02" id="127" usage="X" name="Reference Identification" />
-            </segment>
-            <loop ref="HL-N1" repeat="200" name="Party Identification">
-              <segment ref="N1" usage="O" repeat="1" name="Party Identification">
-                <element ref="N101" id="98"  usage="M" name="Entity Identifier Code" values="BY" />
-                <element ref="N102" id="93"  usage="C" name="Name" />
-                <element ref="N103" id="66"  usage="C" name="Identification Code Qualifier" values="UL" />
-                <element ref="N104" id="67"  usage="C" name="Identification Code" />
-                <element ref="N105" id="706" usage="O" name="Entity Relationship Code" />
-                <element ref="N106" id="98"  usage="O" name="Entity Identifier Code" />
-              </segment>
-            </loop>
-          </loop>
-          <loop ref="HL_SHIPPING_TARE_LOOP" repeat="200000" name="Hierarchical Level Tare">
-            <segment ref="HL" usage="M" repeat="1" name="Hierachical Level Order">
-              <element ref="HL01" id="628" usage="M" name="Hierarchical ID Number" />
-              <element ref="HL02" id="734" usage="O" name="Hierarchical Parent ID Number" />
-              <element ref="HL03" id="735" usage="M" name="Hierarchical Level Code" values="T" />
-              <element ref="HL04" id="736" usage="O" name="Hierarchical Child Code" />
-            </segment>
-            <segment ref="REF" usage="O" repeat="&gt;1" name="Reference Information">
-              <element ref="REF01" id="128" usage="M" name="Reference Identification Qualifier" values="IA" />
-              <element ref="REF02" id="127" usage="X" name="Reference Identification" />
-            </segment>
-            <segment ref="MAN" usage="O" repeat="&gt;1" name="Marks and Numbers Information">
-              <element ref="MAN01" id="88" usage="M" name="Marks and Numbers Qualifier" values="GM,SI" />
-              <element ref="MAN02" id="87" usage="M" name="Marks and Numbers" />
-              <element ref="MAN03" id="87" usage="M" name="Marks and Numbers" />
-              <element ref="MAN04" id="88" usage="M" name="Marks and Numbers Qualifier" />
-              <element ref="MAN05" id="87" usage="M" name="Marks and Numbers" />
-              <element ref="MAN06" id="87" usage="M" name="Marks and Numbers" />
-            </segment>
-            <segment ref="PAL" usage="O" repeat="1" name="Pallet Type and Load Characteristics">
-              <element ref="PAL01" id="883"  usage="M" name="Pallet Type Code" />
-              <element ref="PAL02" id="884"  usage="M" name="Pallet Tiers" />
-              <element ref="PAL03" id="885"  usage="M" name="Pallet Blocks" />
-              <element ref="PAL04" id="356"  usage="M" name="Pack" />
-              <element ref="PAL05" id="395"  usage="M" name="Unit Weight" />
-              <element ref="PAL06" id="355"  usage="M" name="Unit or Basis for Measurement Code" />
-              <element ref="PAL07" id="82"   usage="M" name="Length" />
-              <element ref="PAL08" id="189"  usage="M" name="Width" />
-              <element ref="PAL09" id="65"   usage="M" name="Height" />
-              <element ref="PAL10" id="355"  usage="M" name="Unit or Basis for Measurement Code" />
-              <element ref="PAL11" id="384"  usage="M" name="Gross Weight per Pack" />
-              <element ref="PAL12" id="355"  usage="M" name="Unit or Basis for Measurement Code" />
-              <element ref="PAL13" id="385"  usage="M" name="Gross Volume per Pack" />
-              <element ref="PAL14" id="355"  usage="M" name="Unit or Basis for Measurement Code" />
-              <element ref="PAL15" id="399"  usage="M" name="Pallet Exchange Code" />
-              <element ref="PAL16" id="810"  usage="M" name="Inner Pack" />
-              <element ref="PAL17" id="1699" usage="M" name="Pallet Structure Code" />
+        <loop ref="HL_SHIPMENT_LOOP" repeat="200000" name="Hierarchical Level Shipment">
+          <segment ref="HL" usage="M" repeat="1" name="Hierachical Level Shipment">
+            <element ref="HL01" id="628" usage="M" name="Hierarchical ID Number" />
+            <element ref="HL02" id="734" usage="O" name="Hierarchical Parent ID Number" />
+            <element ref="HL03" id="735" usage="M" name="Hierarchical Level Code" values="S" />
+            <element ref="HL04" id="736" usage="O" name="Hierarchical Child Code" />
+          </segment>
+          <segment ref="TD1" usage="O" repeat="20" name="Carrier Details Quantity and Weight">
+            <!-- TODO: Part1, Part2, Element Dependencies -->
+            <element ref="TD101" id="103" usage="O" name="Packaging Code" /> 
+            <element ref="TD102" id="80"  usage="C" name="Lading Quantity" />
+            <element ref="TD103" id="23"  usage="O" name="Commodity Code Qualifier" />
+            <element ref="TD104" id="22"  usage="C" name="Commodity Code" />
+            <element ref="TD105" id="79"  usage="O" name="Lading Description" />
+            <element ref="TD106" id="187" usage="O" name="Weight Qualifier" values="G" />
+            <element ref="TD107" id="81"  usage="X" name="Weight" />
+            <element ref="TD108" id="355" usage="X" name="Unit or Basis for Measurement Code" values="KG,LB" />
+            <element ref="TD109" id="183" usage="X" name="Volume" />
+            <element ref="TD110" id="355" usage="X" name="Unit or Basis for Measurement Code" values="CF,CR" />
+          </segment>
+          <segment ref="TD5" usage="O" repeat="12" name="Carrier Details Routing Sequence Transit Time">
+            <element ref="TD501" id="133" usage="O" name="Routing Sequence Code" values="B" />
+            <element ref="TD502" id="66"  usage="C" name="Identification Code Qualifier" values="2" />
+            <element ref="TD503" id="67"  usage="C" name="Identification Code" />
+            <element ref="TD504" id="91"  usage="C" name="" values="A,AE,BU,C,CE,D,E,H,L,M" />
+            <element ref="TD505" id="387" usage="C" name="Routing" />
+            <element ref="TD506" id="368" usage="C" name="Shipment/Order Status Code" />
+            <element ref="TD507" id="309" usage="O" name="Location Qualifier" />
+            <element ref="TD508" id="310" usage="C" name="Location Identifier" />
+            <element ref="TD509" id="731" usage="O" name="Transit Direction Code" />
+            <element ref="TD510" id="732" usage="O" name="Transit Time Direction Qualifier" />
+            <element ref="TD511" id="733" usage="C" name="Transit Time" />
+            <element ref="TD512" id="284" usage="X" name="Service Level Code" />
+            <element ref="TD513" id="284" usage="X" name="Service Level Code" />
+            <element ref="TD514" id="284" usage="O" name="Service Level Code" />
+            <element ref="TD515" id="26"  usage="O" name="Country Code" />
+          </segment>
+          <loop ref="HL-TD3" repeat="12" name="Carier Details Equipment">
+            <segment ref="TD3" usage="O" repeat="1" name="Carrier Details Equipment">
+              <element ref="TD301" id="40"  usage="C" name="Equipment Description Code" />
+              <element ref="TD302" id="206" usage="O" name="Equipment Initial" />
+              <element ref="TD303" id="207" usage="C" name="Equipment Number" />
+              <element ref="TD304" id="187" usage="O" name="Weight Qualifier" />
+              <element ref="TD305" id="81"  usage="C" name="Weight" />
+              <element ref="TD306" id="355" usage="C" name="Unit or Basis for Measurement Code" />
+              <element ref="TD307" id="102" usage="O" name="Ownership Code" />
+              <element ref="TD308" id="407" usage="O" name="Seal Status Code" />
+              <element ref="TD309" id="225" usage="O" name="Seal Number" />
+              <element ref="TD310" id="24"  usage="C" name="Equipment Type" />
             </segment>
           </loop>
-          <loop ref="HL_PACK_LOOP" repeat="200000" name="Hierarchical Level Pack">
-            <segment ref="HL" usage="M" repeat="1" name="Hirachical Level Pack">
-              <element ref="HL01" id="628"  usage="M" name="Hierarchical ID Number" />
-              <element ref="HL02" id="734"  usage="O" name="Hierarchical Parent ID Number" />
-              <element ref="HL03" id="735"  usage="M" name="Hierarchical Level Code" values="P" />
-              <element ref="HL04" id="736"  usage="O" name="Hierarchical Child Code" />
-            </segment>
-            <segment ref="MAN" usage="O" repeat="&gt;1" name="Marks and Numbers Information">
-              <element ref="MAN01" id="88" usage="M" name="Marks and Numbers Qualifier" values="GM, SI" />
-              <element ref="MAN02" id="87" usage="M" name="Marks and Numbers" />
-              <element ref="MAN03" id="87" usage="O" name="Marks and Numbers" />
-              <element ref="MAN04" id="88" usage="C" name="Marks and Numbers Qualifier" />
-              <element ref="MAN05" id="87" usage="C" name="Marks and Numbers" />
-              <element ref="MAN06" id="87" usage="O" name="Marks and Numbers" />
-            </segment>
-          </loop>
-          <loop ref="HL_ITEM_LOOP" repeat="200000" name="Hierarchical Level Item">
-            <segment ref="HL" usage="M" repeat="1" name="Hirachical Level Item">
-              <element ref="HL01" id="628" usage="M" name="Hierarchical ID Number" />
-              <element ref="HL02" id="734" usage="O" name="Hierarchical Parent ID Number" />
-              <element ref="HL03" id="735" usage="M" name="Hierarchical Level Code" values="I" />
-              <element ref="HL04" id="736" usage="O" name="Hierarchical Child Code" />
-            </segment>
-            <segment ref="LIN" usage="O" repeat="1" name="Item Identification">
-              <element ref="LIN01" id="350" usage="O" name="Assigned Identification" />
-              <element ref="LIN02" id="235" usage="M" name="Product/Service ID Qualifier" />
-              <element ref="LIN03" id="234" usage="M" name="Product/Service ID" />
-              <element ref="LIN04" id="235" usage="X" name="Product/Service ID Qualifier" />
-              <element ref="LIN05" id="234" usage="X" name="Product/Service ID" />
-              <element ref="LIN06" id="235" usage="X" name="Product/Service ID Qualifier" />
-              <element ref="LIN07" id="234" usage="X" name="Product/Service ID" />
-              <element ref="LIN08" id="235" usage="X" name="Product/Service ID Qualifier" />
-              <element ref="LIN09" id="234" usage="X" name="Product/Service ID" />
-              <element ref="LIN10" id="235" usage="X" name="Product/Service ID Qualifier" />
-              <element ref="LIN11" id="234" usage="X" name="Product/Service ID" />
-              <element ref="LIN12" id="235" usage="X" name="Product/Service ID Qualifier" />
-              <element ref="LIN13" id="234" usage="X" name="Product/Service ID" />
-              <element ref="LIN14" id="235" usage="X" name="Product/Service ID Qualifier" />
-              <element ref="LIN15" id="234" usage="X" name="Product/Service ID" />
-              <element ref="LIN16" id="235" usage="X" name="Product/Service ID Qualifier" />
-              <element ref="LIN17" id="234" usage="X" name="Product/Service ID" />
-              <element ref="LIN18" id="235" usage="X" name="Product/Service ID Qualifier" />
-              <element ref="LIN19" id="234" usage="X" name="Product/Service ID" />
-              <element ref="LIN20" id="235" usage="X" name="Product/Service ID Qualifier" />
-              <element ref="LIN21" id="234" usage="X" name="Product/Service ID" />
-              <element ref="LIN22" id="235" usage="X" name="Product/Service ID Qualifier" />
-              <element ref="LIN23" id="234" usage="X" name="Product/Service ID" />
-              <element ref="LIN24" id="235" usage="X" name="Product/Service ID Qualifier" />
-              <element ref="LIN25" id="234" usage="X" name="Product/Service ID" />
-              <element ref="LIN26" id="235" usage="X" name="Product/Service ID Qualifier" />
-              <element ref="LIN27" id="234" usage="X" name="Product/Service ID" />
-              <element ref="LIN28" id="235" usage="X" name="Product/Service ID Qualifier" />
-              <element ref="LIN29" id="234" usage="X" name="Product/Service ID" />
-              <element ref="LIN30" id="235" usage="X" name="Product/Service ID Qualifier" />
-              <element ref="LIN31" id="234" usage="X" name="Product/Service ID" />
-            </segment>
-            <segment ref="SN1" usage="O" repeat="1" name="Item Detail Shipment">
-              <element ref="SN101" id="350" usage="O" name="Assigned Identification" />
-              <element ref="SN102" id="382" usage="M" name="Number of Units Shipped" />
-              <element ref="SN103" id="355" usage="M" name="Unit or Basis for Measurement Code" />
-              <element ref="SN104" id="646" usage="O" name="Quantity Shipped to Date" />
-              <element ref="SN105" id="380" usage="X" name="Quantity" />
-              <element ref="SN106" id="355" usage="X" name="Unit or Basis for Measurement Code" />
-              <element ref="SN107" id="728" usage="O" name="Returnable Container Load Make-Up Code" />
-              <element ref="SN108" id="668" usage="O" name="Line Item" />
+          <segment ref="REF" usage="O" repeat="&gt;1" name="Reference Information">
+            <element ref="REF01" id="128" usage="M" name="Reference Identification Qualifier" values="BM,UCB" />
+            <element ref="REF02" id="127" usage="C" name="Reference Identification" />
+          </segment>
+          <segment ref="MAN" usage="O" repeat="&gt;1" name="Marks and Numbers Information">
+            <element ref="MAN01" id="88" usage="M" name="Marks and Numbers Qualifier" values="GM,SI" />
+            <element ref="MAN02" id="87" usage="M" name="Marks and Numbers" />
+            <element ref="MAN03" id="87" usage="M" name="Marks and Numbers" />
+            <element ref="MAN04" id="88" usage="M" name="Marks and Numbers Qualifier" />
+            <element ref="MAN05" id="87" usage="M" name="Marks and Numbers" />
+            <element ref="MAN06" id="87" usage="M" name="Marks and Numbers" />
+          </segment>
+          <segment ref="DTM" usage="O" repeat="10" name="Date/Time Reference">
+            <element ref="DTM01" id="374"  usage="M" name="Date/Time Qualifier" values="067,011"/>
+            <element ref="DTM02" id="373"  usage="X" name="Date" />
+            <element ref="DTM03" id="337"  usage="X" name="Time" />
+            <element ref="DTM04" id="623"  usage="O" name="Time Code" />
+            <element ref="DTM05" id="1250" usage="X" name="Date Time Period Format Qualifier" />
+            <element ref="DTM06" id="1251" usage="X" name="Date Time Period" />
+          </segment>
+          <segment ref="FOB" usage="O" repeat="1" name="F.O.B.Related Instructions">
+            <element ref="FOB01" id="146" usage="M" name="Shipment Method of Payment" values="CC,PP" />
+            <element ref="FOB02" id="309" usage="C" name="Location Qualifier" />
+            <element ref="FOB03" id="352" usage="O" name="Description" />
+            <element ref="FOB04" id="334" usage="O" name="Transportation Terms Qualifier Code" />
+            <element ref="FOB05" id="335" usage="C" name="Transportation Terms Code" />
+            <element ref="FOB06" id="309" usage="C" name="Location Qualifier" />
+            <element ref="FOB07" id="352" usage="O" name="Description" />
+            <element ref="FOB08" id="54"  usage="O" name="Risk of Loss Code" />
+            <element ref="FOB09" id="352" usage="X" name="Description" />
+          </segment>
+          <loop ref="HL-N1" repeat="200" name="Party Identification">
+            <segment ref="N1" usage="O" repeat="1" name="Party Identification">
+              <element ref="N101" id="98"  usage="M" name="Entity Identifier Code" values="ST,SF" />
+              <element ref="N102" id="93"  usage="C" name="Name" />
+              <element ref="N103" id="66"  usage="C" name="Identification Code Qualifier" values="UL" />
+              <element ref="N104" id="67"  usage="C" name="Identification Code" />
+              <element ref="N105" id="706" usage="O" name="Entity Relationship Code" />
+              <element ref="N106" id="98"  usage="O" name="Entity Identifier Code" />
             </segment>
           </loop>
+        </loop>
+        <loop ref="HL_ORDER_LOOP" repeat="200000" name="Hierarchical Level Order">
+          <segment ref="HL" usage="M" repeat="1" name="Hierachical Level Order">
+            <element ref="HL01" id="628" usage="M" name="Hierarchical ID Number" />
+            <element ref="HL02" id="734" usage="O" name="Hierarchical Parent ID Number" />
+            <element ref="HL03" id="735" usage="M" name="Hierarchical Level Code" values="O" />
+            <element ref="HL04" id="736" usage="O" name="Hierarchical Child Code" />
+          </segment>
+          <segment ref="PRF" usage="O" repeat="1" name="Purchase Order Reference">
+            <element ref="PRF01" id="324" usage="M" name="Purchase Order Number" />
+            <element ref="PRF02" id="328" usage="O" name="Release Number" />
+            <element ref="PRF03" id="327" usage="O" name="Change Order Sequence Number" />
+            <element ref="PRF04" id="373" usage="O" name="Date" />
+            <element ref="PRF05" id="350" usage="O" name="Assigned Identification" />
+            <element ref="PRF06" id="367" usage="O" name="Contract Number" />
+            <element ref="PRF07" id="92"  usage="O" name="Purchase Order Type Code" />
+          </segment>
+          <segment ref="REF" usage="O" repeat="&gt;1" name="Reference Information">
+            <element ref="REF01" id="128" usage="M" name="Reference Identification Qualifier" values="IA" />
+            <element ref="REF02" id="127" usage="X" name="Reference Identification" />
+          </segment>
+          <loop ref="HL-N1" repeat="200" name="Party Identification">
+            <segment ref="N1" usage="O" repeat="1" name="Party Identification">
+              <element ref="N101" id="98"  usage="M" name="Entity Identifier Code" values="BY" />
+              <element ref="N102" id="93"  usage="C" name="Name" />
+              <element ref="N103" id="66"  usage="C" name="Identification Code Qualifier" values="UL" />
+              <element ref="N104" id="67"  usage="C" name="Identification Code" />
+              <element ref="N105" id="706" usage="O" name="Entity Relationship Code" />
+              <element ref="N106" id="98"  usage="O" name="Entity Identifier Code" />
+            </segment>
+          </loop>
+        </loop>
+        <loop ref="HL_SHIPPING_TARE_LOOP" repeat="200000" name="Hierarchical Level Tare">
+          <segment ref="HL" usage="M" repeat="1" name="Hierachical Level Order">
+            <element ref="HL01" id="628" usage="M" name="Hierarchical ID Number" />
+            <element ref="HL02" id="734" usage="O" name="Hierarchical Parent ID Number" />
+            <element ref="HL03" id="735" usage="M" name="Hierarchical Level Code" values="T" />
+            <element ref="HL04" id="736" usage="O" name="Hierarchical Child Code" />
+          </segment>
+          <segment ref="REF" usage="O" repeat="&gt;1" name="Reference Information">
+            <element ref="REF01" id="128" usage="M" name="Reference Identification Qualifier" values="IA" />
+            <element ref="REF02" id="127" usage="X" name="Reference Identification" />
+          </segment>
+          <segment ref="MAN" usage="O" repeat="&gt;1" name="Marks and Numbers Information">
+            <element ref="MAN01" id="88" usage="M" name="Marks and Numbers Qualifier" values="GM,SI" />
+            <element ref="MAN02" id="87" usage="M" name="Marks and Numbers" />
+            <element ref="MAN03" id="87" usage="M" name="Marks and Numbers" />
+            <element ref="MAN04" id="88" usage="M" name="Marks and Numbers Qualifier" />
+            <element ref="MAN05" id="87" usage="M" name="Marks and Numbers" />
+            <element ref="MAN06" id="87" usage="M" name="Marks and Numbers" />
+          </segment>
+          <segment ref="PAL" usage="O" repeat="1" name="Pallet Type and Load Characteristics">
+            <element ref="PAL01" id="883"  usage="M" name="Pallet Type Code" />
+            <element ref="PAL02" id="884"  usage="M" name="Pallet Tiers" />
+            <element ref="PAL03" id="885"  usage="M" name="Pallet Blocks" />
+            <element ref="PAL04" id="356"  usage="M" name="Pack" />
+            <element ref="PAL05" id="395"  usage="M" name="Unit Weight" />
+            <element ref="PAL06" id="355"  usage="M" name="Unit or Basis for Measurement Code" />
+            <element ref="PAL07" id="82"   usage="M" name="Length" />
+            <element ref="PAL08" id="189"  usage="M" name="Width" />
+            <element ref="PAL09" id="65"   usage="M" name="Height" />
+            <element ref="PAL10" id="355"  usage="M" name="Unit or Basis for Measurement Code" />
+            <element ref="PAL11" id="384"  usage="M" name="Gross Weight per Pack" />
+            <element ref="PAL12" id="355"  usage="M" name="Unit or Basis for Measurement Code" />
+            <element ref="PAL13" id="385"  usage="M" name="Gross Volume per Pack" />
+            <element ref="PAL14" id="355"  usage="M" name="Unit or Basis for Measurement Code" />
+            <element ref="PAL15" id="399"  usage="M" name="Pallet Exchange Code" />
+            <element ref="PAL16" id="810"  usage="M" name="Inner Pack" />
+            <element ref="PAL17" id="1699" usage="M" name="Pallet Structure Code" />
+          </segment>
+        </loop>
+        <loop ref="HL_PACK_LOOP" repeat="200000" name="Hierarchical Level Pack">
+          <segment ref="HL" usage="M" repeat="1" name="Hirachical Level Pack">
+            <element ref="HL01" id="628"  usage="M" name="Hierarchical ID Number" />
+            <element ref="HL02" id="734"  usage="O" name="Hierarchical Parent ID Number" />
+            <element ref="HL03" id="735"  usage="M" name="Hierarchical Level Code" values="P" />
+            <element ref="HL04" id="736"  usage="O" name="Hierarchical Child Code" />
+          </segment>
+          <segment ref="MAN" usage="O" repeat="&gt;1" name="Marks and Numbers Information">
+            <element ref="MAN01" id="88" usage="M" name="Marks and Numbers Qualifier" values="GM, SI" />
+            <element ref="MAN02" id="87" usage="M" name="Marks and Numbers" />
+            <element ref="MAN03" id="87" usage="O" name="Marks and Numbers" />
+            <element ref="MAN04" id="88" usage="C" name="Marks and Numbers Qualifier" />
+            <element ref="MAN05" id="87" usage="C" name="Marks and Numbers" />
+            <element ref="MAN06" id="87" usage="O" name="Marks and Numbers" />
+          </segment>
+        </loop>
+        <loop ref="HL_ITEM_LOOP" repeat="200000" name="Hierarchical Level Item">
+          <segment ref="HL" usage="M" repeat="1" name="Hirachical Level Item">
+            <element ref="HL01" id="628" usage="M" name="Hierarchical ID Number" />
+            <element ref="HL02" id="734" usage="O" name="Hierarchical Parent ID Number" />
+            <element ref="HL03" id="735" usage="M" name="Hierarchical Level Code" values="I" />
+            <element ref="HL04" id="736" usage="O" name="Hierarchical Child Code" />
+          </segment>
+          <segment ref="LIN" usage="O" repeat="1" name="Item Identification">
+            <element ref="LIN01" id="350" usage="O" name="Assigned Identification" />
+            <element ref="LIN02" id="235" usage="M" name="Product/Service ID Qualifier" />
+            <element ref="LIN03" id="234" usage="M" name="Product/Service ID" />
+            <element ref="LIN04" id="235" usage="X" name="Product/Service ID Qualifier" />
+            <element ref="LIN05" id="234" usage="X" name="Product/Service ID" />
+            <element ref="LIN06" id="235" usage="X" name="Product/Service ID Qualifier" />
+            <element ref="LIN07" id="234" usage="X" name="Product/Service ID" />
+            <element ref="LIN08" id="235" usage="X" name="Product/Service ID Qualifier" />
+            <element ref="LIN09" id="234" usage="X" name="Product/Service ID" />
+            <element ref="LIN10" id="235" usage="X" name="Product/Service ID Qualifier" />
+            <element ref="LIN11" id="234" usage="X" name="Product/Service ID" />
+            <element ref="LIN12" id="235" usage="X" name="Product/Service ID Qualifier" />
+            <element ref="LIN13" id="234" usage="X" name="Product/Service ID" />
+            <element ref="LIN14" id="235" usage="X" name="Product/Service ID Qualifier" />
+            <element ref="LIN15" id="234" usage="X" name="Product/Service ID" />
+            <element ref="LIN16" id="235" usage="X" name="Product/Service ID Qualifier" />
+            <element ref="LIN17" id="234" usage="X" name="Product/Service ID" />
+            <element ref="LIN18" id="235" usage="X" name="Product/Service ID Qualifier" />
+            <element ref="LIN19" id="234" usage="X" name="Product/Service ID" />
+            <element ref="LIN20" id="235" usage="X" name="Product/Service ID Qualifier" />
+            <element ref="LIN21" id="234" usage="X" name="Product/Service ID" />
+            <element ref="LIN22" id="235" usage="X" name="Product/Service ID Qualifier" />
+            <element ref="LIN23" id="234" usage="X" name="Product/Service ID" />
+            <element ref="LIN24" id="235" usage="X" name="Product/Service ID Qualifier" />
+            <element ref="LIN25" id="234" usage="X" name="Product/Service ID" />
+            <element ref="LIN26" id="235" usage="X" name="Product/Service ID Qualifier" />
+            <element ref="LIN27" id="234" usage="X" name="Product/Service ID" />
+            <element ref="LIN28" id="235" usage="X" name="Product/Service ID Qualifier" />
+            <element ref="LIN29" id="234" usage="X" name="Product/Service ID" />
+            <element ref="LIN30" id="235" usage="X" name="Product/Service ID Qualifier" />
+            <element ref="LIN31" id="234" usage="X" name="Product/Service ID" />
+          </segment>
+          <segment ref="SN1" usage="O" repeat="1" name="Item Detail Shipment">
+            <element ref="SN101" id="350" usage="O" name="Assigned Identification" />
+            <element ref="SN102" id="382" usage="M" name="Number of Units Shipped" />
+            <element ref="SN103" id="355" usage="M" name="Unit or Basis for Measurement Code" />
+            <element ref="SN104" id="646" usage="O" name="Quantity Shipped to Date" />
+            <element ref="SN105" id="380" usage="X" name="Quantity" />
+            <element ref="SN106" id="355" usage="X" name="Unit or Basis for Measurement Code" />
+            <element ref="SN107" id="728" usage="O" name="Returnable Container Load Make-Up Code" />
+            <element ref="SN108" id="668" usage="O" name="Line Item" />
+          </segment>
         </loop>
         <segment ref="CTT" usage="O" repeat="1" name="Transaction Totals">
           <element ref="CTT01" id="354" usage="M" name="Number of Line Items" />
