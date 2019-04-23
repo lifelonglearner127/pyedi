@@ -1,5 +1,8 @@
 from xml.dom.minidom import parse
-from .ediexceptions import EDIFileNotFoundError, EDIElementLengthError, EDIElementTypeError, EDIElementValueError
+from .ediexceptions import (
+    EDIFileNotFoundError, EDIElementLengthError,
+    EDIElementTypeError, EDIElementValueError
+)
 from .edixmlparser import EDIXMLParser
 from pkg_resources import resource_stream
 
@@ -61,35 +64,39 @@ class EDIValidator(EDIXMLParser):
         if edi_segment.get_segment_id() != spec_segment.getAttribute('ref'):
             return False
 
-        for (element, spec_element) in zip(edi_segment.elements, spec_segment.childNodes):
+        for (element, spec_element)\
+                in zip(edi_segment.elements, spec_segment.childNodes):
             spec_dataele = self.dataele[spec_element.getAttribute('id')]
 
             # Check Values
-            possible_values = spec_element.getAttribute('values') if spec_element.hasAttribute('values') else None
+            possible_values = spec_element.getAttribute('values') \
+                if spec_element.hasAttribute('values') else None
             if possible_values is not None:
                 if element not in possible_values.split(','):
                     raise EDIElementValueError(
-                        '{} should be one of them - {}, but its value is {}'.format(
+                        '{} should be one of them - {}, but its value is {}'.
+                        format(
                             spec_element.getAttribute('ref'),
                             possible_values,
                             element
                         )
                     )
 
-            # Check length 
+            # Check length
             if (
                 len(element) < int(spec_dataele['min_length']) or
                 len(element) > int(spec_dataele['max_length'])
             ):
                 raise EDIElementLengthError(
-                    '{} should be between {} and {} in length, but it has {}'.format(
+                    '{} should be between {} and {} in length, but it has {}'.
+                    format(
                         spec_element.getAttribute('ref'),
                         spec_dataele['min_length'],
                         spec_dataele['max_length'],
                         len(element)
                     )
                 )
-        
+
             # Check data type
             type_error = False
             type_str = ""
@@ -110,7 +117,9 @@ class EDIValidator(EDIXMLParser):
 
             if type_error:
                 raise EDIElementTypeError(
-                    '{} should have {}-{} data type, but it has invalid type - {}'.format(
+                    '{} should have {}-{} data type,'
+                    ' but it has invalid type - {}'.
+                    format(
                         spec_element.getAttribute('ref'),
                         spec_dataele['type'],
                         type_str,
@@ -125,7 +134,7 @@ class EDIValidator(EDIXMLParser):
 
         while True:
             if self.next_node.nodeType == self.next_node.TEXT_NODE:
-                if self.next_node.nextSibling != None:
+                if self.next_node.nextSibling is not None:
                     self.next_node = self.next_node.nextSibling
                 else:
                     break
@@ -137,27 +146,38 @@ class EDIValidator(EDIXMLParser):
                 if direction == "down":
                     if (
                       not self.next_node.hasAttribute("has_occurred") or
-                      int(self.nextNode.getAttribute("has_occurred")) < int(self.nextNode.getAttribute("repeat"))
+                      int(self.next_node.getAttribute("has_occurred")) <
+                      int(self.next_node.getAttribute("repeat"))
                     ):
-                        self.segment_queue.append(self.next_node.firstChild)
+                        node = self.next_node.firstChild
+                        self.segment_queue.append(node)
                         if (
-                            self.next_node.firstChild.getAttribute("usage") == "M" and
-                            (not self.next_node.firstChild.hasAttribute("has_occurred") or
-                            self.next_node.firstChild.getAttribute("has_occurred") == 0)
+                            node.getAttribute("usage") == "M" and
+                            (
+                                not node.hasAttribute("has_occurred") or
+                                node.getAttribute("has_occurred") == 0
+                            )
                         ):
                             break
-                            
-                    if self.next_node.nextSibling != None:
+
+                    if self.next_node.nextSibling is not None:
                         direction = "down"
                         self.next_node = self.next_node.nextSibling
                     else:
                         direction = "up"
                         self.next_node = self.next_node.parentNode
                 else:
-                    if (self.next_node.childNodes.length > 1 and (self.next_node.getAttribute("repeat") == ">1" or int(self.next_node.getAttribute("has_occurred")) < int(self.next_node.getAttribute("repeat")))):
+                    if (
+                        self.next_node.childNodes.length > 1 and
+                        (
+                            self.next_node.getAttribute("repeat") == ">1" or
+                            int(self.next_node.getAttribute("has_occurred")) <
+                            int(self.next_node.getAttribute("repeat"))
+                        )
+                    ):
                         self.segment_queue.append(self.next_node.firstChild)
-                        self.segment_queue[len(self.segment_queue) -  1].setAttribute("usage", "S")
-                    if self.next_node.nextSibling != None:
+                        # self.segment_queue[len(self.segment_queue) -  1].setAttribute("usage", "S")
+                    if self.next_node.nextSibling is not None:
                         direction = "down"
                         self.next_node = self.next_node.nextSibling
                     else:
@@ -166,23 +186,24 @@ class EDIValidator(EDIXMLParser):
 
             elif self.next_node.nodeName == "segment":
                 if (
-                      not self.next_node.hasAttribute("has_occurred") or
-                      int(self.nextNode.getAttribute("has_occurred")) < int(self.nextNode.getAttribute("repeat"))
-                    ):
+                    not self.next_node.hasAttribute("has_occurred") or
+                    int(self.next_node.getAttribute("has_occurred")) <
+                    int(self.next_node.getAttribute("repeat"))
+                ):
                     self.segment_queue.append(self.next_node)
 
                 if (
                     self.next_node.getAttribute("usage") == "M" and
-                    (not self.next_node.hasAttribute("has_occurred") or
-                    self.next_node.getAttribute("has_occurred") == 0)
+                    (
+                        not self.next_node.hasAttribute("has_occurred") or
+                        self.next_node.getAttribute("has_occurred") == 0
+                    )
                 ):
                     break
 
-                if self.next_node.nextSibling != None:
+                if self.next_node.nextSibling is not None:
                     direction = "down"
                     self.next_node = self.next_node.nextSibling
                 else:
                     direction = "up"
                     self.next_node = self.next_node.parentNode
-
-                

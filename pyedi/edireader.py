@@ -89,7 +89,7 @@ class EDIReader:
             if segment_id == 'GS':
                 fic = segment.get_element_by_ref('GS01')
                 vriic = segment.get_element_by_ref('GS08')
-                self.maps.get_file_name(self.icvn, fic, fic)
+                self.maps.get_file_name(self.icvn, fic, vriic)
 
             if not valid:
                 break

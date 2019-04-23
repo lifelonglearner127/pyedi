@@ -5,7 +5,7 @@ class EDIMap(EDIXMLParser):
 
     def __init__(self):
         self.maps = []
-        
+
         super().__init__('maps.xml')
 
         for version_element in self.spec.documentElement.childNodes:
