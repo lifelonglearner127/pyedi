@@ -48,3 +48,7 @@ class EDIElementLengthError(EDISegmentError):
 class EDIElementTypeError(EDISegmentError):
     """Class for EDIElementType"""
     pass
+
+class EDIElementNotExist(EDISegmentError):
+    """Class for EDIElementNotExist"""
+    pass

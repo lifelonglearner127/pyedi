@@ -1,13 +1,12 @@
 from xml.dom.minidom import parse
+from pkg_resources import resource_stream
 from .ediexceptions import (
     EDIFileNotFoundError, EDIElementLengthError,
-    EDIElementTypeError, EDIElementValueError
+    EDIElementTypeError, EDIElementValueError, EDIElementNotExist
 )
-from .edixmlparser import EDIXMLParser
-from pkg_resources import resource_stream
 
 
-class EDIValidator(EDIXMLParser):
+class EDIValidator:
     """
     EDI Validator validates edi segment against xml based map file
     """
@@ -19,10 +18,17 @@ class EDIValidator(EDIXMLParser):
         self.dataele = {}
 
         try:
+             # Load xml file
+            fd = resource_stream(__name__, 'map/{}'.format(map_file))
+            self.spec = parse(fd)
+            self.remove_whitespace_nodes(self.spec, True)
+            fd.close()
+
             # Load data elements from xml files
             fd = resource_stream(__name__, 'map/data_ele.xml')
             element_spec = parse(fd)
             self.remove_whitespace_nodes(element_spec, True)
+            fd.close()
 
             for element in element_spec.documentElement.childNodes:
                 self.dataele[element.getAttribute('id')] = {
@@ -30,16 +36,27 @@ class EDIValidator(EDIXMLParser):
                     'min_length': element.getAttribute('min_length'),
                     'max_length': element.getAttribute('max_length')
                 }
-            fd.close()
 
         except OSError:
             raise EDIFileNotFoundError(
                 'Element file or map file is missing in the package'
             )
 
-        super().__init__(map_file)
         self.next_node = self.spec.documentElement.firstChild
         self.build_segment_queue()
+
+    def remove_whitespace_nodes(self,  node, unlink=False):
+        remove_list = []
+        for child in node.childNodes:
+            if child.nodeType == node.TEXT_NODE and \
+               not child.data.strip():
+                remove_list.append(child)
+            elif child.hasChildNodes():
+                self.remove_whitespace_nodes(child, unlink)
+        for node in remove_list:
+            node.parentNode.removeChild(node)
+            if unlink:
+                node.unlink()
 
     def reset_has_occurred(self, node):
         nodes = node.getElementsByTagName('*')
@@ -91,36 +108,43 @@ class EDIValidator(EDIXMLParser):
 
         for (element, spec_element)\
                 in zip(edi_segment.elements, spec_segment.childNodes):
-            spec_dataele = self.dataele[spec_element.getAttribute('id')]
+
+            err_str = 'Error occurred while parsing {}-{}\n'.format(
+                edi_segment.get_segment_id(),
+                spec_element.getAttribute('ref'),
+            )
+
+            try:
+                spec_dataele = self.dataele[spec_element.getAttribute('id')]
+            except KeyError:
+                err_str += 'Element id should be {}, but it does not exist' \
+                    ' in the package'.format(spec_element.getAttribute('id'))
+                raise EDIElementNotExist(err_str)
 
             # Check Values
             possible_values = spec_element.getAttribute('values') \
                 if spec_element.hasAttribute('values') else None
             if possible_values is not None:
                 if element not in possible_values.split(','):
-                    raise EDIElementValueError(
-                        '{} should be one of them - {}, but its value is {}'.
-                        format(
-                            spec_element.getAttribute('ref'),
+                    err_str += 'Element value should be one of them - {}, ' \
+                        'but its value is {}'.format(
                             possible_values,
                             element
                         )
-                    )
+                    raise EDIElementValueError(err_str)
 
             # Check length
             if (
                 len(element) < int(spec_dataele['min_length']) or
                 len(element) > int(spec_dataele['max_length'])
             ):
-                raise EDIElementLengthError(
-                    '{} should be between {} and {} in length, but it has {}'.
-                    format(
-                        spec_element.getAttribute('ref'),
+                err_str += 'Element should be between {} and {} in length, ' \
+                    'but its length is {}'.format(
                         spec_dataele['min_length'],
                         spec_dataele['max_length'],
                         len(element)
                     )
-                )
+                raise EDIElementLengthError(err_str)
 
             # Check data type
             type_error = False
@@ -141,16 +165,12 @@ class EDIValidator(EDIXMLParser):
                 type_str = "Time"
 
             if type_error:
-                raise EDIElementTypeError(
-                    '{} should have {}-{} data type,'
-                    ' but it has invalid type - {}'.
-                    format(
-                        spec_element.getAttribute('ref'),
-                        spec_dataele['type'],
+                err_str += 'Element should have {} data type, ' \
+                    'but its type is {}'.format(
                         type_str,
-                        element
+                        type_str
                     )
-                )
+                raise EDIElementTypeError(err_str)
         return True
 
     def build_segment_queue(self):
