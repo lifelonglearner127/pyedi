@@ -1,4 +1,3 @@
-import logging
 from .edivalidator import EDIValidator
 from .edisegment import EDISegment
 from .edimaps import EDIMap
@@ -52,8 +51,6 @@ class EDIReader:
             self.maps = EDIMap()
 
         except OSError:
-            logger = logging.getLogger('pyedi')
-            logger.error('File Not Found: {}'.format(file_name))
             raise EDIFileNotFoundError('File Not Found: {}'.format(file_name))
 
     def __del__(self):
@@ -80,23 +77,21 @@ class EDIReader:
         """
         Validate transaction
         """
+        valid = False
         for segment in self:
             segment_id = segment.get_segment_id()
             if segment_id not in ['ISA', 'GS', 'GE', 'IEA']:
-                match = self.transaction_validator.match_segment(segment)
+                valid = self.transaction_validator.match_segment(segment)
 
             else:
-                match = self.envelope_validator.match_segment(segment)
+                valid = self.envelope_validator.match_segment(segment)
 
             if segment_id == 'GS':
                 fic = segment.get_element_by_ref('GS01')
                 vriic = segment.get_element_by_ref('GS08')
                 self.maps.get_file_name(self.icvn, fic, fic)
 
-            if match == 1:
-                logger = logging.getLogger('pyedi')
-                logger.debug('Parsed {}'.format(segment.to_string()))
-            else:
+            if not valid:
                 break
 
-        return match
+        return valid

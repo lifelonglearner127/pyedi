@@ -1,5 +1,4 @@
 import re
-import logging
 from .ediexceptions import EDISegmentError
 
 
@@ -35,13 +34,9 @@ class EDISegment:
             try:
                 ele_idx = int(ele_idx)
             except ValueError:
-                logger = logging.getLogger('pyedi')
-                logger.error('Failed to getting element value')
                 raise EDISegmentError('Failed to getting element value')
 
-            if seg_id != self.seg_id:
-                logger = logging.getLogger('pyedi')
-                logger.error('Faile to getting element value')
+            if seg_id != self.segment_id:
                 raise EDISegmentError('Failed to getting element value')
             return (seg_id, ele_idx)
         else:

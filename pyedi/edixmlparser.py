@@ -1,4 +1,3 @@
-import logging
 from xml.dom.minidom import parse
 from .ediexceptions import EDIFileNotFoundError
 from pkg_resources import resource_stream
@@ -21,8 +20,6 @@ class EDIXMLParser:
             fd.close()
 
         except OSError:
-            logger = logging.getLogger('pyedi')
-            logger.error('{} is missing in the package'.format(xml_file))
             raise EDIFileNotFoundError(
                 '{} is missing in the package'.format(xml_file)
             )
