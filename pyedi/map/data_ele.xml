@@ -208,6 +208,7 @@
 <element id="374" type="ID" min_length="3" max_length="3" name="Date/Time Qualifier"/>
 <element id="378" type="ID" min_length="1" max_length="1" name="Allowance/Charge Percent Qualifier"/>
 <element id="380" type="R" min_length="1" max_length="15" name="Quantity"/>
+<element id="396" type="AN" min_length="2" max_length="30" name="Shipment Identification"/>
 <element id="426" type="ID" min_length="2" max_length="2" name="Adjustment Reason Code"/>
 <element id="429" type="AN" min_length="1" max_length="16" name="Check idber"/>
 <element id="443" type="AN" min_length="1" max_length="20" name="Contact Inquiry Reference"/>
