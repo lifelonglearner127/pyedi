@@ -55,6 +55,31 @@ class EDIValidator(EDIXMLParser):
 
         if match:
             self.next_node = spec_segment
+
+            if spec_segment.hasAttribute('has_occurred'):
+                spec_segment.setAttribute(
+                    "has_occurred",
+                    int(spec_segment.getAttribute("has_occurred")) + 1
+                )
+            else:
+                spec_segment.setAttribute("has_occurred", 1)
+
+            if (
+                spec_segment.parentNode.nodeName == "loop" and
+                spec_segment.parentNode.firstChild.isSameNode(spec_segment)
+            ):
+                self.reset_has_occurred(spec_segment.parentNode)
+
+                if spec_segment.parentNode.hasAttribute("has_occurred"):
+                    spec_segment.parentNode.setAttribute(
+                        "has_occurred",
+                        int(spec_segment.parentNode.getAttribute("has_occurred")) + 1
+                    )
+                else:
+                    spec_segment.parentNode.setAttribute("has_occurred", 1)
+
+                spec_segment.setAttribute("has_occurred", 1)
+
             self.build_segment_queue()
             return True
 
