@@ -21,14 +21,14 @@
     </segment>
     <loop ref="GS_LOOP" repeat="&gt;1" name="Functional Group Header Loop">
       <segment ref="GS" usage="M" repeat="1" name="Functional Group Header">
-        <element ref="GS01" id="479" usage="M" name="Functional Identifier Code" values="AG,AQ,AS,AZ,BE,CD,CI,CT,FA,HP,GF,IM,IN,OG,OR,PD,PO,PR,PS,PV,QG,QM,QO,RA,RC,RF,RG,SC,SH,SM,TM,TU,TX" />
+        <element ref="GS01" id="479" usage="M" name="Functional Identifier Code" values="SH" />
         <element ref="GS02" id="142" usage="M" name="Application Sender's Code" />
         <element ref="GS03" id="124" usage="M" name="Application Receiver's Code" />
         <element ref="GS04" id="373" usage="M" name="Date" />
         <element ref="GS05" id="337" usage="M" name="Time" />
         <element ref="GS06" id="28"  usage="M" name="Group Control Number" />
-        <element ref="GS07" id="455" usage="M" name="Responsible Agency Code" />
-        <element ref="GS08" id="480" usage="M" name="Version / Release / Industry Identifier Code" />
+        <element ref="GS07" id="455" usage="M" name="Responsible Agency Code" values="X" />
+        <element ref="GS08" id="480" usage="M" name="Version / Release / Industry Identifier Code" values="005010" />
       </segment>
       <loop ref="ST_LOOP" repeat="&gt;1" name="Transaction Set Header Loop">
         <segment ref="ST" usage="M" repeat="1" name="Transaction Set Header">
