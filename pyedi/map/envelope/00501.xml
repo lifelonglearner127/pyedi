@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <transaction ref="856" name="Advance Ship Notice">
     <loop ref="ISA_LOOP" repeat="1" name="Interchange Control Header Loop">
         <segment ref="ISA" usage="M" repeat="1" name="Interchange Control Header">

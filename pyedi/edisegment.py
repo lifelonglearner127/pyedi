@@ -12,13 +12,14 @@ class EDISegment:
     re_str = '^%s%s$' % (re_seg_id, re_ele_idx)
     rec_path = re.compile(re_str, re.S)
 
-    def __init__(self, seg_str, delimiter):
+    def __init__(self, segment_string, delimiter):
+        self.segment_id = None
         self.delimiter = delimiter
-        self.elements = seg_str.split(delimiter)
-        self.seg_id = None
+        self.segment_string = segment_string
+        self.elements = segment_string.split(delimiter)
 
         if self.elements:
-            self.seg_id = self.elements[0]
+            self.segment_id = self.elements.pop(0)
 
     def get_element_by_index(self, index):
         try:
@@ -47,7 +48,7 @@ class EDISegment:
             return None
 
     def to_string(self):
-        return self.delimiter.join(self.elements)
+        return self.segment_string
 
     def get_segment_id(self):
-        return self.seg_id
+        return self.segment_id
