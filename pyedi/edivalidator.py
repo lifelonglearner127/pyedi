@@ -223,7 +223,6 @@ class EDIValidator:
                         int(self.next_node.getAttribute("repeat"))
                     ):
                         self.segment_queue.append(self.next_node.firstChild)
-                        # self.segment_queue[len(self.segment_queue) -  1].setAttribute("usage", "S")
                     if self.next_node.nextSibling is not None:
                         direction = "down"
                         self.next_node = self.next_node.nextSibling

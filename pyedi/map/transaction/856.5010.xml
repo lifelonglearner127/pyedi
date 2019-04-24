@@ -230,11 +230,11 @@
                     <element ref="LIN01" id="350" usage="O" name="Assigned Identification" />
                     <element ref="LIN02" id="235" usage="M" name="Product/Service ID Qualifier" values="EN,UP" />
                     <element ref="LIN03" id="234" usage="M" name="Product/Service ID" />
-                    <element ref="LIN04" id="235" usage="X" name="Product/Service ID Qualifier" values="IN" />
+                    <element ref="LIN04" id="235" usage="X" name="Product/Service ID Qualifier" values="IN,VN,UK" />
                     <element ref="LIN05" id="234" usage="X" name="Product/Service ID" />
-                    <element ref="LIN06" id="235" usage="X" name="Product/Service ID Qualifier" values="VN" />
+                    <element ref="LIN06" id="235" usage="X" name="Product/Service ID Qualifier" values="IN,VN,UK" />
                     <element ref="LIN07" id="234" usage="X" name="Product/Service ID" />
-                    <element ref="LIN08" id="235" usage="X" name="Product/Service ID Qualifier" values="UK" />
+                    <element ref="LIN08" id="235" usage="X" name="Product/Service ID Qualifier" values="IN,VN,UK" />
                     <element ref="LIN09" id="234" usage="X" name="Product/Service ID" />
                     <element ref="LIN10" id="235" usage="X" name="Product/Service ID Qualifier" />
                     <element ref="LIN11" id="234" usage="X" name="Product/Service ID" />
