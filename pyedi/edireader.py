@@ -77,8 +77,10 @@ class EDIReader:
         logger = logging.getLogger('pyedi')
 
         for segment in self:
+            logging.error('Parsing segment: {}'.format(
+                segment.to_string()
+            ))
             valid = self.validator.match_segment(segment)
-            logger.error(segment.to_string())
 
             if not valid:
                 break

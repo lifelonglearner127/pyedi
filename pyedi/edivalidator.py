@@ -97,8 +97,6 @@ class EDIValidator:
                 else:
                     parent_node.setAttribute("has_occurred", 1)
 
-                spec_segment.setAttribute("has_occurred", 1)
-
             self.build_segment_queue()
             return True
 
@@ -220,12 +218,9 @@ class EDIValidator:
                         self.next_node = self.next_node.parentNode
                 else:
                     if (
-                        self.next_node.childNodes.length > 1 and
-                        (
-                            self.next_node.getAttribute("repeat") == ">1" or
-                            int(self.next_node.getAttribute("has_occurred")) <
-                            int(self.next_node.getAttribute("repeat"))
-                        )
+                        self.next_node.getAttribute("repeat") == ">1" or
+                        int(self.next_node.getAttribute("has_occurred")) <
+                        int(self.next_node.getAttribute("repeat"))
                     ):
                         self.segment_queue.append(self.next_node.firstChild)
                         # self.segment_queue[len(self.segment_queue) -  1].setAttribute("usage", "S")
@@ -238,6 +233,7 @@ class EDIValidator:
 
             elif self.next_node.nodeName == "segment":
                 if (
+                    self.next_node.getAttribute("repeat") == '>1' or
                     not self.next_node.hasAttribute("has_occurred") or
                     int(self.next_node.getAttribute("has_occurred")) <
                     int(self.next_node.getAttribute("repeat"))
