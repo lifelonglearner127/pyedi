@@ -61,7 +61,7 @@ class EDIValidator:
     def reset_has_occurred(self, node):
         nodes = node.getElementsByTagName('*')
         for element in nodes:
-            element.setAttribute('has_occured', 0)
+            element.setAttribute('has_occurred', 0)
 
     def match_segment(self, edi_segment):
         match = False
@@ -73,19 +73,12 @@ class EDIValidator:
         if match:
             self.next_node = spec_segment
 
-            if spec_segment.hasAttribute('has_occurred'):
-                spec_segment.setAttribute(
-                    "has_occurred",
-                    int(spec_segment.getAttribute("has_occurred")) + 1
-                )
-            else:
-                spec_segment.setAttribute("has_occurred", 1)
-
             parent_node = spec_segment.parentNode
             if (
                 parent_node.nodeName == "loop" and
                 parent_node.firstChild.isSameNode(spec_segment)
             ):
+                self.reset_has_occurred(spec_segment.parentNode)
                 if parent_node.hasAttribute("has_occurred"):
                     parent_node.setAttribute(
                         "has_occurred",
@@ -93,6 +86,14 @@ class EDIValidator:
                     )
                 else:
                     parent_node.setAttribute("has_occurred", 1)
+
+            if spec_segment.hasAttribute('has_occurred'):
+                spec_segment.setAttribute(
+                    "has_occurred",
+                    int(spec_segment.getAttribute("has_occurred")) + 1
+                )
+            else:
+                spec_segment.setAttribute("has_occurred", 1)
 
             self.build_segment_queue()
             return True
@@ -102,6 +103,12 @@ class EDIValidator:
     def match_edi_segment(self, edi_segment, spec_segment):
         if edi_segment.get_segment_id() != spec_segment.getAttribute('ref'):
             return False
+
+        if edi_segment.get_segment_id() == 'HL':
+            hl03_value = edi_segment.get_element_by_index(2)
+            hl03_values = spec_segment.childNodes[2].getAttribute('values')
+            if hl03_value not in hl03_values:
+                return False
 
         for (element, spec_element)\
                 in zip(edi_segment.elements, spec_segment.childNodes):
