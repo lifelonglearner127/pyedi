@@ -12,6 +12,9 @@ class EDISegment:
     rec_path = re.compile(re_str, re.S)
 
     def __init__(self, segment_string, delimiter):
+        """
+        Initialize segment conf
+        """
         self.segment_id = None
         self.delimiter = delimiter
         self.segment_string = segment_string
@@ -21,12 +24,21 @@ class EDISegment:
             self.segment_id = self.elements.pop(0)
 
     def get_element_by_index(self, index):
+        """
+        Return element value by index
+        """
         try:
             return self.elements[index]
         except IndexError:
             return None
 
     def get_element_by_ref(self, ref):
+        """
+        Return element (value, index) tuple by ref
+        
+        @param ref: reference to element for example, GS01
+        @type ref: string
+        """
         m = EDISegment.rec_path.search(ref)
         if m is not None:
             seg_id = m.group('seg_id')

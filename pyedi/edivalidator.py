@@ -13,7 +13,7 @@ class EDIValidator:
 
     def __init__(self, map_file):
         """
-        Initialize the edi reader
+        Initialize the edi validator
         """
         self.dataele = {}
 
@@ -46,6 +46,9 @@ class EDIValidator:
         self.build_segment_queue()
 
     def remove_whitespace_nodes(self,  node, unlink=False):
+        """
+        remove whitespace nodes
+        """
         remove_list = []
         for child in node.childNodes:
             if child.nodeType == node.TEXT_NODE and \
