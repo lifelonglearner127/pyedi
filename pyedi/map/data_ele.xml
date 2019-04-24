@@ -8,7 +8,14 @@
 <element id="1028" type="AN" min_length="1" max_length="38" name="Claim Submitter's Identifier"/>
 <element id="1029" type="ID" min_length="1" max_length="2" name="Claim Status Code"/>
 <element id="103" type="AN" min_length="3" max_length="5" name="Packaging Code"/>
+<element id="146" type="ID" min_length="2" max_length="2" name="Shipment Method of Payment"/>
 <element id="80" type="N0" min_length="1" max_length="7" name="Lading Quantity"/>
+<element id="87" type="AN" min_length="1" max_length="48" name="Marks and Numbers"/>
+<element id="88" type="ID" min_length="1" max_length="2" name="Marks and Numbers Qualifier"/>
+<element id="883" type="ID" min_length="1" max_length="2" name="Pallet Type Code"/>
+<element id="884" type="N0" min_length="1" max_length="3" name="Pallet Tiers"/>
+<element id="885" type="N0" min_length="1" max_length="3" name="Pallet Blocks"/>
+<element id="382" type="R" min_length="1" max_length="10" name="Number of Units Shipped"/>
 <element id="1032" type="ID" min_length="1" max_length="2" name="Claim Filing Indicator Code"/>
 <element id="1033" type="ID" min_length="1" max_length="2" name="Claim Adjustment Group Code"/>
 <element id="1034" type="ID" min_length="1" max_length="5" name="Claim Adjustment Reason Code"/>
