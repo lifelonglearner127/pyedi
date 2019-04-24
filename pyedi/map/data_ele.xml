@@ -8,6 +8,7 @@
 <element id="1028" type="AN" min_length="1" max_length="38" name="Claim Submitter's Identifier"/>
 <element id="1029" type="ID" min_length="1" max_length="2" name="Claim Status Code"/>
 <element id="103" type="AN" min_length="3" max_length="5" name="Packaging Code"/>
+<element id="80" type="N0" min_length="1" max_length="7" name="Lading Quantity"/>
 <element id="1032" type="ID" min_length="1" max_length="2" name="Claim Filing Indicator Code"/>
 <element id="1033" type="ID" min_length="1" max_length="2" name="Claim Adjustment Group Code"/>
 <element id="1034" type="ID" min_length="1" max_length="5" name="Claim Adjustment Reason Code"/>

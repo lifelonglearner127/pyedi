@@ -53,7 +53,6 @@
             <element ref="HL04" id="736" usage="O" name="Hierarchical Child Code" />
           </segment>
           <segment ref="TD1" usage="O" repeat="20" name="Carrier Details Quantity and Weight">
-            <!-- TODO: Part1, Part2, Element Dependencies -->
             <element ref="TD101" id="103" usage="O" name="Packaging Code" /> 
             <element ref="TD102" id="80"  usage="C" name="Lading Quantity" />
             <element ref="TD103" id="23"  usage="O" name="Commodity Code Qualifier" />
