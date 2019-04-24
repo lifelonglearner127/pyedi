@@ -47,7 +47,7 @@
         </segment>
         <loop ref="HL_SHIPMENT_LOOP" repeat="200000" name="Hierarchical Level Shipment">
           <segment ref="HL" usage="M" repeat="1" name="Hierachical Level Shipment">
-            <element ref="HL01" id="628" usage="M" name="Hierarchical ID Number" />
+            <element ref="HL01" id="628" usage="M" name="Hierarchical ID Number" values="1" />
             <element ref="HL02" id="734" usage="O" name="Hierarchical Parent ID Number" />
             <element ref="HL03" id="735" usage="M" name="Hierarchical Level Code" values="S" />
             <element ref="HL04" id="736" usage="O" name="Hierarchical Child Code" />
@@ -96,7 +96,7 @@
             </segment>
           </loop>
           <segment ref="REF" usage="O" repeat="&gt;1" name="Reference Information">
-            <element ref="REF01" id="128" usage="M" name="Reference Identification Qualifier" values="BM,UCB" />
+            <element ref="REF01" id="128" usage="M" name="Reference Identification Qualifier" values="UCB" />
             <element ref="REF02" id="127" usage="C" name="Reference Identification" />
           </segment>
           <segment ref="MAN" usage="O" repeat="&gt;1" name="Marks and Numbers Information">
@@ -153,7 +153,7 @@
               <element ref="PRF07" id="92"  usage="O" name="Purchase Order Type Code" />
             </segment>
             <segment ref="REF" usage="O" repeat="&gt;1" name="Reference Information">
-              <element ref="REF01" id="128" usage="M" name="Reference Identification Qualifier" values="IA" />
+              <element ref="REF01" id="128" usage="M" name="Reference Identification Qualifier" values="IA,IV,DP,MR" />
               <element ref="REF02" id="127" usage="X" name="Reference Identification" />
             </segment>
             <loop ref="HL-N1" repeat="200" name="Party Identification">
@@ -174,35 +174,35 @@
                 <element ref="HL04" id="736" usage="O" name="Hierarchical Child Code" />
               </segment>
               <segment ref="REF" usage="O" repeat="&gt;1" name="Reference Information">
-                <element ref="REF01" id="128" usage="M" name="Reference Identification Qualifier" values="IA" />
+                <element ref="REF01" id="128" usage="M" name="Reference Identification Qualifier" values="KK" />
                 <element ref="REF02" id="127" usage="X" name="Reference Identification" />
               </segment>
               <segment ref="MAN" usage="O" repeat="&gt;1" name="Marks and Numbers Information">
                 <element ref="MAN01" id="88" usage="M" name="Marks and Numbers Qualifier" values="GM,SI" />
                 <element ref="MAN02" id="87" usage="M" name="Marks and Numbers" />
-                <element ref="MAN03" id="87" usage="M" name="Marks and Numbers" />
-                <element ref="MAN04" id="88" usage="M" name="Marks and Numbers Qualifier" />
-                <element ref="MAN05" id="87" usage="M" name="Marks and Numbers" />
-                <element ref="MAN06" id="87" usage="M" name="Marks and Numbers" />
+                <element ref="MAN03" id="87" usage="O" name="Marks and Numbers" />
+                <element ref="MAN04" id="88" usage="X" name="Marks and Numbers Qualifier" />
+                <element ref="MAN05" id="87" usage="X" name="Marks and Numbers" />
+                <element ref="MAN06" id="87" usage="O" name="Marks and Numbers" />
               </segment>
               <segment ref="PAL" usage="O" repeat="1" name="Pallet Type and Load Characteristics">
-                <element ref="PAL01" id="883"  usage="M" name="Pallet Type Code" />
-                <element ref="PAL02" id="884"  usage="M" name="Pallet Tiers" />
-                <element ref="PAL03" id="885"  usage="M" name="Pallet Blocks" />
-                <element ref="PAL04" id="356"  usage="M" name="Pack" />
-                <element ref="PAL05" id="395"  usage="M" name="Unit Weight" />
-                <element ref="PAL06" id="355"  usage="M" name="Unit or Basis for Measurement Code" />
-                <element ref="PAL07" id="82"   usage="M" name="Length" />
-                <element ref="PAL08" id="189"  usage="M" name="Width" />
-                <element ref="PAL09" id="65"   usage="M" name="Height" />
-                <element ref="PAL10" id="355"  usage="M" name="Unit or Basis for Measurement Code" />
-                <element ref="PAL11" id="384"  usage="M" name="Gross Weight per Pack" />
-                <element ref="PAL12" id="355"  usage="M" name="Unit or Basis for Measurement Code" />
-                <element ref="PAL13" id="385"  usage="M" name="Gross Volume per Pack" />
-                <element ref="PAL14" id="355"  usage="M" name="Unit or Basis for Measurement Code" />
-                <element ref="PAL15" id="399"  usage="M" name="Pallet Exchange Code" />
-                <element ref="PAL16" id="810"  usage="M" name="Inner Pack" />
-                <element ref="PAL17" id="1699" usage="M" name="Pallet Structure Code" />
+                <element ref="PAL01" id="883"  usage="O" name="Pallet Type Code" values="1,2,3,4,5,6,7" />
+                <element ref="PAL02" id="884"  usage="O" name="Pallet Tiers" />
+                <element ref="PAL03" id="885"  usage="O" name="Pallet Blocks" />
+                <element ref="PAL04" id="356"  usage="O" name="Pack" />
+                <element ref="PAL05" id="395"  usage="X" name="Unit Weight" />
+                <element ref="PAL06" id="355"  usage="X" name="Unit or Basis for Measurement Code" />
+                <element ref="PAL07" id="82"   usage="X" name="Length" />
+                <element ref="PAL08" id="189"  usage="X" name="Width" />
+                <element ref="PAL09" id="65"   usage="X" name="Height" />
+                <element ref="PAL10" id="355"  usage="X" name="Unit or Basis for Measurement Code" />
+                <element ref="PAL11" id="384"  usage="X" name="Gross Weight per Pack" />
+                <element ref="PAL12" id="355"  usage="X" name="Unit or Basis for Measurement Code" />
+                <element ref="PAL13" id="385"  usage="X" name="Gross Volume per Pack" />
+                <element ref="PAL14" id="355"  usage="X" name="Unit or Basis for Measurement Code" />
+                <element ref="PAL15" id="399"  usage="O" name="Pallet Exchange Code" />
+                <element ref="PAL16" id="810"  usage="O" name="Inner Pack" />
+                <element ref="PAL17" id="1699" usage="O" name="Pallet Structure Code" />
               </segment>
               <loop ref="HL_PACK_LOOP" repeat="200000" name="Hierarchical Level Pack">
                 <segment ref="HL" usage="M" repeat="1" name="Hirachical Level Pack">
@@ -228,13 +228,13 @@
                   </segment>
                   <segment ref="LIN" usage="O" repeat="1" name="Item Identification">
                     <element ref="LIN01" id="350" usage="O" name="Assigned Identification" />
-                    <element ref="LIN02" id="235" usage="M" name="Product/Service ID Qualifier" />
+                    <element ref="LIN02" id="235" usage="M" name="Product/Service ID Qualifier" values="EN,UP" />
                     <element ref="LIN03" id="234" usage="M" name="Product/Service ID" />
-                    <element ref="LIN04" id="235" usage="X" name="Product/Service ID Qualifier" />
+                    <element ref="LIN04" id="235" usage="X" name="Product/Service ID Qualifier" values="IN" />
                     <element ref="LIN05" id="234" usage="X" name="Product/Service ID" />
-                    <element ref="LIN06" id="235" usage="X" name="Product/Service ID Qualifier" />
+                    <element ref="LIN06" id="235" usage="X" name="Product/Service ID Qualifier" values="VN" />
                     <element ref="LIN07" id="234" usage="X" name="Product/Service ID" />
-                    <element ref="LIN08" id="235" usage="X" name="Product/Service ID Qualifier" />
+                    <element ref="LIN08" id="235" usage="X" name="Product/Service ID Qualifier" values="UK" />
                     <element ref="LIN09" id="234" usage="X" name="Product/Service ID" />
                     <element ref="LIN10" id="235" usage="X" name="Product/Service ID Qualifier" />
                     <element ref="LIN11" id="234" usage="X" name="Product/Service ID" />
