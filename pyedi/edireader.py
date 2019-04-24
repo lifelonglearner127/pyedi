@@ -4,6 +4,9 @@ from .edisegment import EDISegment
 from .ediexceptions import EDIFileNotFoundError, InterchangeControlError
 
 
+logger = logging.getLogger('pyedi')
+
+
 class EDIReader:
     """
     Read edi file and validate it against xml based map file
@@ -12,14 +15,19 @@ class EDIReader:
     ISA_LEN = 106
     BUF_SIZE = 8 * 1024
 
-    def __init__(self, file_name):
+    def __init__(self, file_name, transaction, version):
         """
         Initialize the edi reader
 
         @param file_name: path to edi file
         @type file_name: string
+        @param transaction: edi transaction
+        @type transaction: string
+        @param file_name: edi transaction version
+        @type file_name: string
         """
         self.fd = None
+        
         try:
             self.fd = open(file_name, 'r')
             line = self.fd.read(EDIReader.ISA_LEN)
@@ -44,7 +52,9 @@ class EDIReader:
             )
             self.buffer = line
             self.buffer += self.fd.read(EDIReader.BUF_SIZE)
-            self.validator = EDIValidator('transaction/856.5010.xml')
+            self.validator = EDIValidator(
+                'transaction/{}.{}.xml'.format(transaction, version)
+            )
 
         except OSError:
             raise EDIFileNotFoundError('File Not Found: {}'.format(file_name))
@@ -73,15 +83,13 @@ class EDIReader:
         """
         Validate transaction
         """
-        valid = False
-
         for segment in self:
-            logging.error('Parsing segment: {}'.format(
+            logger.info('Parsing segment: {}'.format(
                 segment.to_string()
             ))
-            valid = self.validator.match_segment(segment)
 
-            if not valid:
-                break
+            if not self.validator.match_segment(segment):
+                logger.error('Above segment does not match')
+                return False
 
-        return valid
+        return True

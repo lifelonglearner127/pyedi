@@ -35,6 +35,11 @@ class EDISegmentError(TransactionError):
     pass
 
 
+class EDISegmentNotExist(EDISegmentError):
+    """Class for EDISegmentError"""
+    pass
+
+
 class EDIElementValueError(EDISegmentError):
     """Class for EDIElementValue"""
     pass
