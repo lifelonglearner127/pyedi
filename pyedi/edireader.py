@@ -74,7 +74,6 @@ class EDIReader:
         Validate transaction
         """
         valid = False
-        logger = logging.getLogger('pyedi')
 
         for segment in self:
             logging.error('Parsing segment: {}'.format(

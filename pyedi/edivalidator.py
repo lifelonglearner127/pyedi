@@ -86,9 +86,6 @@ class EDIValidator:
                 parent_node.nodeName == "loop" and
                 parent_node.firstChild.isSameNode(spec_segment)
             ):
-
-                self.reset_has_occurred(parent_node)
-
                 if parent_node.hasAttribute("has_occurred"):
                     parent_node.setAttribute(
                         "has_occurred",
@@ -192,61 +189,36 @@ class EDIValidator:
             if self.next_node.nodeName == "transaction":
                 break
 
-            elif self.next_node.nodeName == "loop":
+            else:
                 if direction == "down":
-                    if (
-                      not self.next_node.hasAttribute("has_occurred") or
-                      int(self.next_node.getAttribute("has_occurred")) <
-                      int(self.next_node.getAttribute("repeat"))
-                    ):
-                        node = self.next_node.firstChild
-                        self.segment_queue.append(node)
-                        if (
-                            node.getAttribute("usage") == "M" and
-                            (
-                                not node.hasAttribute("has_occurred") or
-                                node.getAttribute("has_occurred") == 0
-                            )
-                        ):
-                            break
+                    segment = self.next_node.firstChild \
+                        if self.next_node.nodeName == 'loop' \
+                        else self.next_node
 
-                    if self.next_node.nextSibling is not None:
-                        direction = "down"
-                        self.next_node = self.next_node.nextSibling
-                    else:
-                        direction = "up"
-                        self.next_node = self.next_node.parentNode
-                else:
                     if (
-                        self.next_node.getAttribute("repeat") == ">1" or
+                        self.next_node.getAttribute("repeat") == '>1' or
+                        not self.next_node.getAttribute("has_occurred") or
                         int(self.next_node.getAttribute("has_occurred")) <
                         int(self.next_node.getAttribute("repeat"))
                     ):
+                        self.segment_queue.append(segment)
+
+                    if (
+                        segment.getAttribute('usage') == 'M' and
+                        (
+                            not segment.getAttribute('has_occurred') or
+                            segment.getAttribute('has_occurred') == 0
+                        )
+                    ):
+                        break
+
+                elif direction == "up" and self.next_node.nodeName == 'loop':
+                    if (
+                        self.next_node.getAttribute("repeat") == ">1" or
+                        int(self.next_node.getAttribute('has_occurred')) <
+                        int(self.next_node.getAttribute('repeat'))
+                    ):
                         self.segment_queue.append(self.next_node.firstChild)
-                    if self.next_node.nextSibling is not None:
-                        direction = "down"
-                        self.next_node = self.next_node.nextSibling
-                    else:
-                        direction = "up"
-                        self.next_node = self.next_node.parentNode
-
-            elif self.next_node.nodeName == "segment":
-                if (
-                    self.next_node.getAttribute("repeat") == '>1' or
-                    not self.next_node.hasAttribute("has_occurred") or
-                    int(self.next_node.getAttribute("has_occurred")) <
-                    int(self.next_node.getAttribute("repeat"))
-                ):
-                    self.segment_queue.append(self.next_node)
-
-                if (
-                    self.next_node.getAttribute("usage") == "M" and
-                    (
-                        not self.next_node.hasAttribute("has_occurred") or
-                        self.next_node.getAttribute("has_occurred") == 0
-                    )
-                ):
-                    break
 
                 if self.next_node.nextSibling is not None:
                     direction = "down"
