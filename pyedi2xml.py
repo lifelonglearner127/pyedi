@@ -27,11 +27,13 @@ if __name__ == '__main__':
 
     try:
         edi_to_xml = EDI2XML(
-            args['input'], args['output'], 
+            args['input'], args['output'],
             args['transaction'], args['version']
         )
-        result = edi_to_xml.convert()
+        (result, err_log) = edi_to_xml.convert()
         if result is not None:
             logger.info("Successfully Parsed")
+        else:
+            logger.info(err_log)
     except Exception as err:
         logger.error(err)

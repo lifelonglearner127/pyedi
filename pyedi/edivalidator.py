@@ -237,6 +237,11 @@ class EDIValidator:
             )
 
         # check if segment has valid element
+        err_str = '{}-{}, '.format(
+            edi_segment.get_segment_id(),
+            spec_segment.getAttribute('name'),
+        )
+        index = 0
         for (element, spec_element)\
                 in zip(edi_segment.elements, spec_segment.childNodes):
 
@@ -245,15 +250,12 @@ class EDIValidator:
                 element == ''
             ):
                 continue
-            err_str = 'Error occurred while parsing {}-{}\n'.format(
-                edi_segment.get_segment_id(),
-                spec_element.getAttribute('ref'),
-            )
 
             try:
                 spec_dataele = self.dataele[spec_element.getAttribute('id')]
             except KeyError:
-                err_str += 'Element id should be {}, but it does not exist' \
+                err_str += spec_element.getAttribute('ref') + \
+                    ' element id is {}, but it does not exist' \
                     ' in the package'.format(spec_element.getAttribute('id'))
                 raise EDIElementNotExist(err_str)
 
@@ -262,7 +264,8 @@ class EDIValidator:
                 if spec_element.hasAttribute('values') else None
             if possible_values is not None:
                 if element not in possible_values.split(','):
-                    err_str += 'Element value should be one of them - {}, ' \
+                    err_str += spec_element.getAttribute('ref') + \
+                        ' element value should be one of them - {}, ' \
                         'but its value is {}'.format(
                             possible_values,
                             element
@@ -274,7 +277,8 @@ class EDIValidator:
                 len(element) < int(spec_dataele['min_length']) or
                 len(element) > int(spec_dataele['max_length'])
             ):
-                err_str += 'Element should be between {} and {} in length, ' \
+                err_str += spec_element.getAttribute('ref') + \
+                    ' element should be between {} and {} in length, ' \
                     'but its length is {}'.format(
                         spec_dataele['min_length'],
                         spec_dataele['max_length'],
@@ -301,7 +305,8 @@ class EDIValidator:
                 type_str = "Time"
 
             if type_error:
-                err_str += 'Element should have {} data type, ' \
+                err_str += spec_element.getAttribute('ref') + \
+                    ' element should have {} data type, ' \
                     'but its type is {}'.format(
                         type_str,
                         type_str

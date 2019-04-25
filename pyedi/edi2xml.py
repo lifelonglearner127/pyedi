@@ -58,7 +58,6 @@ class EDI2XML:
             self.validator = EDIValidator(
                 'transaction/{}.{}.xml'.format(transaction, version)
             )
-
         except OSError:
             raise EDIFileNotFoundError('File Not Found: {}'.format(input_file))
 
@@ -93,43 +92,41 @@ class EDI2XML:
                 segment.to_string()
             ))
 
-            (valid, segments) = self.validator.match_segment(segment)
+            try:
+                (valid, segments) = self.validator.match_segment(segment)
 
-            if not valid:
-                logger.error(
-                    'Found segment: {}. This segment might be incorrect'
-                    ' or a mandatory segment is missing '.format(
-                        segment.get_segment_id()
-                    )
-                )
+                if not valid:
+                    err_str = 'Found segment: {}. This segment might be ' \
+                        'incorrect or a mandatory segment is missing '.format(
+                            segment.get_segment_id()
+                        )
 
-                logger.error(
-                    'Mandatory segments is {} - {}'.format(
-                        segments[0].getAttribute('ref'),
-                        segments[0].getAttribute('name')
-                    )
-                )
-                err_str = 'Other possible segment are '
+                    err_str += '\nMandatory segments is {} - {}'.format(
+                            segments[0].getAttribute('ref'),
+                            segments[0].getAttribute('name')
+                        )
 
-                for possible_seg in segments[1:]:
-                    err_str += '{}-{}, '.format(
-                        possible_seg.getAttribute('ref'),
-                        possible_seg.getAttribute('name')
-                    )
-                logger.error(err_str)
-                return None
+                    if len(segments) > 1:
+                        err_str += '\nOther possible segment are '
+
+                    for possible_seg in segments[1:]:
+                        err_str += '{}-{}, '.format(
+                            possible_seg.getAttribute('ref'),
+                            possible_seg.getAttribute('name')
+                        )
+
+                    return (None, err_str)
+            except Exception as err:
+                return (None, str(err))
 
         # check if edi document has segment pairs
         close_tags = self.validator.get_close_tags()
         for ((start_tag, close_tag)) in close_tags:
-            logger.error(
-                '{} should end with {} trailer tag, but not found'.
-                format(start_tag, close_tag)
-            )
-            valid = False
-            return None
-        
+            err_str = '{} should end with {} trailer tag, ' \
+                'but not found'.format(start_tag, close_tag)
+            return (None, err_str)
+
         xml_file = open(self.output_file, "w", encoding="utf-8")
         self.validator.data_document.writexml(xml_file, "\n", "\t")
         xml_file.close()
-        return self.validator.data_document
+        return (self.validator.data_document, None)
