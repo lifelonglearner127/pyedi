@@ -175,54 +175,76 @@ class EDIValidator:
 
         match = False
         for spec_segment in self.segment_queue:
-            if self.match_edi_segment(edi_segment, spec_segment):
-                match = True
-                break
+            (match, err_str) = self.match_edi_segment(
+                edi_segment, spec_segment
+            )
 
-        if match:
-            self.next_node = spec_segment
-            self.write_data_segment(edi_segment, spec_segment)
-
-            # set or increase or reset has_occurred count
-            parent_node = spec_segment.parentNode
-            if (
-                parent_node.nodeName == "loop" and
-                parent_node.firstChild.isSameNode(spec_segment)
-            ):
-                self.reset_has_occurred(spec_segment.parentNode)
-                if parent_node.hasAttribute("has_occurred"):
-                    parent_node.setAttribute(
-                        "has_occurred",
-                        int(parent_node.getAttribute("has_occurred")) + 1
-                    )
+            if match:
+                if err_str is not None:
+                    return (False, err_str)
                 else:
-                    parent_node.setAttribute("has_occurred", 1)
+                    self.next_node = spec_segment
+                    self.write_data_segment(edi_segment, spec_segment)
 
-            if spec_segment.hasAttribute('has_occurred'):
-                spec_segment.setAttribute(
-                    "has_occurred",
-                    int(spec_segment.getAttribute("has_occurred")) + 1
-                )
-            else:
-                spec_segment.setAttribute("has_occurred", 1)
+                    # set or increase or reset has_occurred count
+                    parent_node = spec_segment.parentNode
+                    if (
+                        parent_node.nodeName == "loop" and
+                        parent_node.firstChild.isSameNode(spec_segment)
+                    ):
+                        self.reset_has_occurred(spec_segment.parentNode)
+                        if parent_node.hasAttribute("has_occurred"):
+                            parent_node.setAttribute(
+                                "has_occurred",
+                                int(parent_node.getAttribute("has_occurred")) + 1
+                            )
+                        else:
+                            parent_node.setAttribute("has_occurred", 1)
 
-            self.build_segment_queue()
-            return (True, [spec_segment])
+                    if spec_segment.hasAttribute('has_occurred'):
+                        spec_segment.setAttribute(
+                            "has_occurred",
+                            int(spec_segment.getAttribute("has_occurred")) + 1
+                        )
+                    else:
+                        spec_segment.setAttribute("has_occurred", 1)
 
-        return (False, self.segment_queue[-1:] + self.segment_queue[:-1])
+                    self.build_segment_queue()
+                    return (True, None)
+
+        err_str = 'Found segment: {}. This segment might be ' \
+            'incorrect or a mandatory segment is missing '.format(
+                edi_segment.get_segment_id()
+            )
+
+        err_str += '\nMandatory segments is {} - {}'.format(
+            self.segment_queue[-1].getAttribute('ref'),
+            self.segment_queue[-1].getAttribute('name')
+        )
+
+        if len(self.segment_queue) > 1:
+            err_str += '\nOther possible segment are '
+
+        for possible_seg in self.segment_queue[:-1]:
+            err_str += '{}-{}, '.format(
+                possible_seg.getAttribute('ref'),
+                possible_seg.getAttribute('name')
+            )
+
+        return (False, err_str)
 
     def match_edi_segment(self, edi_segment, spec_segment):
         """
         Check if edi segment matches segment laid out in the xml
         """
         if edi_segment.get_segment_id() != spec_segment.getAttribute('ref'):
-            return False
+            return (False, None)
 
         if edi_segment.get_segment_id() == 'HL':
             hl03_value = edi_segment.get_element_by_index(2)
             hl03_values = spec_segment.childNodes[2].getAttribute('values')
             if hl03_value not in hl03_values:
-                return False
+                return (False, None)
 
         # check if this segment is close tag or it has close tag
         edi_segment_id = edi_segment.get_segment_id()
@@ -257,7 +279,7 @@ class EDIValidator:
                 err_str += spec_element.getAttribute('ref') + \
                     ' element id is {}, but it does not exist' \
                     ' in the package'.format(spec_element.getAttribute('id'))
-                raise EDIElementNotExist(err_str)
+                return (True, err_str)
 
             # Check Values
             possible_values = spec_element.getAttribute('values') \
@@ -270,7 +292,7 @@ class EDIValidator:
                             possible_values,
                             element
                         )
-                    raise EDIElementValueError(err_str)
+                    return (True, err_str)
 
             # Check length
             if (
@@ -284,7 +306,7 @@ class EDIValidator:
                         spec_dataele['max_length'],
                         len(element)
                     )
-                raise EDIElementLengthError(err_str)
+                return (True, err_str)
 
             # Check data type
             type_error = False
@@ -311,8 +333,8 @@ class EDIValidator:
                         type_str,
                         type_str
                     )
-                raise EDIElementTypeError(err_str)
-        return True
+                return (True, err_str)
+        return (True, None)
 
     def build_segment_queue(self):
         """

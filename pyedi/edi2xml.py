@@ -92,32 +92,10 @@ class EDI2XML:
                 segment.to_string()
             ))
 
-            try:
-                (valid, segments) = self.validator.match_segment(segment)
+            (valid, err_str) = self.validator.match_segment(segment)
 
-                if not valid:
-                    err_str = 'Found segment: {}. This segment might be ' \
-                        'incorrect or a mandatory segment is missing '.format(
-                            segment.get_segment_id()
-                        )
-
-                    err_str += '\nMandatory segments is {} - {}'.format(
-                            segments[0].getAttribute('ref'),
-                            segments[0].getAttribute('name')
-                        )
-
-                    if len(segments) > 1:
-                        err_str += '\nOther possible segment are '
-
-                    for possible_seg in segments[1:]:
-                        err_str += '{}-{}, '.format(
-                            possible_seg.getAttribute('ref'),
-                            possible_seg.getAttribute('name')
-                        )
-
-                    return (None, err_str)
-            except Exception as err:
-                return (None, str(err))
+            if not valid:
+                return (None, err_str)
 
         # check if edi document has segment pairs
         close_tags = self.validator.get_close_tags()
