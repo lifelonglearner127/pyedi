@@ -192,9 +192,9 @@ class EDIValidator:
                 spec_segment.setAttribute("has_occurred", 1)
 
             self.build_segment_queue()
-            return True
+            return (True, edi_segment.get_segment_id())
 
-        return False
+        return (False, self.segment_queue[-1].getAttribute('ref'))
 
     def match_edi_segment(self, edi_segment, spec_segment):
         """
@@ -217,7 +217,9 @@ class EDIValidator:
                 break
 
         if spec_segment.hasAttribute('closetag'):
-            self.close_tags.insert(0, (edi_segment_id, spec_segment.getAttribute('closetag')))
+            self.close_tags.insert(
+                0, (edi_segment_id, spec_segment.getAttribute('closetag'))
+            )
 
         # check if segment has valid element
         for (element, spec_element)\

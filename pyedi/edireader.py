@@ -91,8 +91,14 @@ class EDIReader:
                 segment.to_string()
             ))
 
-            if not self.validator.match_segment(segment):
-                logger.error('Above segment does not match')
+            (valid, segment_id) = self.validator.match_segment(segment)
+
+            if not valid:
+                logger.error(
+                    'Next possible segment might be {} '
+                    'but found segment: {}'.
+                    format(segment_id, segment.get_segment_id())
+                )
                 return False
 
         # check if edi document has segment pairs
@@ -103,5 +109,5 @@ class EDIReader:
                 format(start_tag, close_tag)
             )
             valid = False
-        
+
         return valid

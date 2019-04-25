@@ -33,7 +33,5 @@ if __name__ == '__main__':
             logger.info("Successfully Parsed")
             xml_file = open(args['output'], "w", encoding="utf-8")
             edi_reader.validator.data_document.writexml(xml_file, "\n", "\t")
-        else:
-            logger.info("Failed to parse")
     except Exception as err:
         logger.error(err)
