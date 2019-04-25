@@ -1,0 +1,601 @@
+<?xml version="1.0" ?>
+<transaction name="Advance Ship Notice" ref="856">
+	<loop name="Interchange Control Header Loop" ref="ISA_LOOP">
+		<segment name="Interchange Control Header" ref="ISA">
+			<element ref="ISA00" value="00"/>
+			<element ref="ISA01" value="          "/>
+			<element ref="ISA02" value="00"/>
+			<element ref="ISA03" value="          "/>
+			<element ref="ISA04" value="08"/>
+			<element ref="ISA05" value="925485US00     "/>
+			<element ref="ISA06" value="ZZ"/>
+			<element ref="ISA07" value="123404P9       "/>
+			<element ref="ISA08" value="032012"/>
+			<element ref="ISA09" value="1522"/>
+			<element ref="ISA10" value=":"/>
+			<element ref="ISA11" value="00501"/>
+			<element ref="ISA12" value="850002222"/>
+			<element ref="ISA13" value="0"/>
+			<element ref="ISA14" value="P"/>
+			<element ref="ISA15" value="&gt;"/>
+		</segment>
+		<loop name="Functional Group Header Loop" ref="GS_LOOP">
+			<segment name="Functional Group Header" ref="GS">
+				<element ref="GS00" value="SH"/>
+				<element ref="GS01" value="925485US00"/>
+				<element ref="GS02" value="123404P9"/>
+				<element ref="GS03" value="20120320"/>
+				<element ref="GS04" value="1418"/>
+				<element ref="GS05" value="850002222"/>
+				<element ref="GS06" value="X"/>
+				<element ref="GS07" value="005010"/>
+			</segment>
+			<loop name="Transaction Set Header Loop" ref="ST_LOOP">
+				<segment name="Transaction Set Header" ref="ST">
+					<element ref="ST00" value="856"/>
+					<element ref="ST01" value="000001065"/>
+				</segment>
+				<segment name="Beginning Segment for Ship Notice" ref="BSN">
+					<element ref="BSN00" value="00"/>
+					<element ref="BSN01" value="0000839"/>
+					<element ref="BSN02" value="20070410"/>
+					<element ref="BSN03" value="2231"/>
+					<element ref="BSN04" value="0001"/>
+				</segment>
+				<loop name="Hierarchical Level Shipment" ref="HL_SHIPMENT_LOOP">
+					<segment name="Hierachical Level Shipment" ref="HL">
+						<element ref="HL00" value="1"/>
+						<element ref="HL01" value=""/>
+						<element ref="HL02" value="S"/>
+					</segment>
+					<segment name="Carrier Details Quantity and Weight" ref="TD1">
+						<element ref="TD100" value="CTN25"/>
+						<element ref="TD101" value="1"/>
+					</segment>
+					<segment name="Reference Information" ref="REF">
+						<element ref="REF00" value="UCB"/>
+						<element ref="REF01" value="815118000000000839"/>
+					</segment>
+					<segment name="Date/Time Reference" ref="DTM">
+						<element ref="DTM00" value="011"/>
+						<element ref="DTM01" value="20070410"/>
+					</segment>
+					<segment name="F.O.B.Related Instructions" ref="FOB">
+						<element ref="FOB00" value="PP"/>
+					</segment>
+					<loop name="Party Identification" ref="HL-N1">
+						<segment name="Party Identification" ref="N1">
+							<element ref="N100" value="ST"/>
+							<element ref="N101" value="WAL-MART STORES, INC"/>
+							<element ref="N102" value="UL"/>
+							<element ref="N103" value="0078742030333"/>
+						</segment>
+						<segment name="Party Identification" ref="N1">
+							<element ref="N100" value="SF"/>
+							<element ref="N101" value="Walmart.com"/>
+						</segment>
+					</loop>
+					<loop name="Hierarchical Level Order" ref="HL_ORDER_LOOP">
+						<segment name="Hierachical Level Order" ref="HL">
+							<element ref="HL00" value="2"/>
+							<element ref="HL01" value="1"/>
+							<element ref="HL02" value="O"/>
+						</segment>
+						<segment name="Purchase Order Reference" ref="PRF">
+							<element ref="PRF00" value="0708121018"/>
+							<element ref="PRF01" value=""/>
+							<element ref="PRF02" value=""/>
+							<element ref="PRF03" value="20070410"/>
+						</segment>
+						<segment name="Reference Information" ref="REF">
+							<element ref="REF00" value="IA"/>
+							<element ref="REF01" value="413356050"/>
+						</segment>
+						<segment name="Reference Information" ref="REF">
+							<element ref="REF00" value="IV"/>
+							<element ref="REF01" value="708121018"/>
+						</segment>
+						<segment name="Reference Information" ref="REF">
+							<element ref="REF00" value="DP"/>
+							<element ref="REF01" value="00005"/>
+						</segment>
+						<segment name="Reference Information" ref="REF">
+							<element ref="REF00" value="MR"/>
+							<element ref="REF01" value="0073"/>
+						</segment>
+						<loop name="Party Identification" ref="HL-N1">
+							<segment name="Party Identification" ref="N1">
+								<element ref="N100" value="BY"/>
+								<element ref="N101" value="WAL-MART STORES, INC."/>
+								<element ref="N102" value="UL"/>
+								<element ref="N103" value="0078742000992"/>
+							</segment>
+						</loop>
+						<loop name="Hierarchical Level Tare" ref="HL_SHIPPING_TARE_LOOP">
+							<segment name="Hierachical Level Order" ref="HL">
+								<element ref="HL00" value="3"/>
+								<element ref="HL01" value="2"/>
+								<element ref="HL02" value="T"/>
+							</segment>
+							<segment name="Reference Information" ref="REF">
+								<element ref="REF00" value="KK"/>
+								<element ref="REF01" value="0078742029610"/>
+							</segment>
+							<segment name="Marks and Numbers Information" ref="MAN">
+								<element ref="MAN00" value="GM"/>
+								<element ref="MAN01" value="00008151180200149194"/>
+							</segment>
+							<segment name="Pallet Type and Load Characteristics" ref="PAL">
+								<element ref="PAL00" value="1"/>
+								<element ref="PAL01" value="1"/>
+								<element ref="PAL02" value="1"/>
+							</segment>
+							<loop name="Hierarchical Level Pack" ref="HL_PACK_LOOP">
+								<segment name="Hirachical Level Pack" ref="HL">
+									<element ref="HL00" value="4"/>
+									<element ref="HL01" value="3"/>
+									<element ref="HL02" value="P"/>
+								</segment>
+								<segment name="Marks and Numbers Information" ref="MAN">
+									<element ref="MAN00" value="GM"/>
+									<element ref="MAN01" value="00008151180272809606"/>
+								</segment>
+								<loop name="Hierarchical Level Item" ref="HL_ITEM_LOOP">
+									<segment name="Hirachical Level Item" ref="HL">
+										<element ref="HL00" value="5"/>
+										<element ref="HL01" value="4"/>
+										<element ref="HL02" value="I"/>
+									</segment>
+									<segment name="Item Identification" ref="LIN">
+										<element ref="LIN00" value=""/>
+										<element ref="LIN01" value="UP"/>
+										<element ref="LIN02" value="016017011847"/>
+										<element ref="LIN03" value="UK"/>
+										<element ref="LIN04" value="00160170118476"/>
+									</segment>
+									<segment name="Item Detail Shipment" ref="SN1">
+										<element ref="SN100" value=""/>
+										<element ref="SN101" value="1"/>
+										<element ref="SN102" value="EA"/>
+									</segment>
+								</loop>
+							</loop>
+							<loop name="Hierarchical Level Pack" ref="HL_PACK_LOOP">
+								<segment name="Hirachical Level Pack" ref="HL">
+									<element ref="HL00" value="6"/>
+									<element ref="HL01" value="3"/>
+									<element ref="HL02" value="P"/>
+								</segment>
+								<segment name="Marks and Numbers Information" ref="MAN">
+									<element ref="MAN00" value="GM"/>
+									<element ref="MAN01" value="00008151180272814822"/>
+								</segment>
+								<loop name="Hierarchical Level Item" ref="HL_ITEM_LOOP">
+									<segment name="Hirachical Level Item" ref="HL">
+										<element ref="HL00" value="7"/>
+										<element ref="HL01" value="6"/>
+										<element ref="HL02" value="I"/>
+									</segment>
+									<segment name="Item Identification" ref="LIN">
+										<element ref="LIN00" value=""/>
+										<element ref="LIN01" value="UP"/>
+										<element ref="LIN02" value="017999039171"/>
+										<element ref="LIN03" value="UK"/>
+										<element ref="LIN04" value="00179990391716"/>
+									</segment>
+									<segment name="Item Detail Shipment" ref="SN1">
+										<element ref="SN100" value=""/>
+										<element ref="SN101" value="1"/>
+										<element ref="SN102" value="EA"/>
+									</segment>
+								</loop>
+							</loop>
+							<loop name="Hierarchical Level Pack" ref="HL_PACK_LOOP">
+								<segment name="Hirachical Level Pack" ref="HL">
+									<element ref="HL00" value="8"/>
+									<element ref="HL01" value="3"/>
+									<element ref="HL02" value="P"/>
+								</segment>
+								<segment name="Marks and Numbers Information" ref="MAN">
+									<element ref="MAN00" value="GM"/>
+									<element ref="MAN01" value="00008151180272809583"/>
+								</segment>
+								<loop name="Hierarchical Level Item" ref="HL_ITEM_LOOP">
+									<segment name="Hirachical Level Item" ref="HL">
+										<element ref="HL00" value="9"/>
+										<element ref="HL01" value="8"/>
+										<element ref="HL02" value="I"/>
+									</segment>
+									<segment name="Item Identification" ref="LIN">
+										<element ref="LIN00" value=""/>
+										<element ref="LIN01" value="UP"/>
+										<element ref="LIN02" value="017999039171"/>
+										<element ref="LIN03" value="UK"/>
+										<element ref="LIN04" value="00179990391716"/>
+									</segment>
+									<segment name="Item Detail Shipment" ref="SN1">
+										<element ref="SN100" value=""/>
+										<element ref="SN101" value="1"/>
+										<element ref="SN102" value="EA"/>
+									</segment>
+								</loop>
+							</loop>
+							<loop name="Hierarchical Level Pack" ref="HL_PACK_LOOP">
+								<segment name="Hirachical Level Pack" ref="HL">
+									<element ref="HL00" value="10"/>
+									<element ref="HL01" value="3"/>
+									<element ref="HL02" value="P"/>
+								</segment>
+								<segment name="Marks and Numbers Information" ref="MAN">
+									<element ref="MAN00" value="GM"/>
+									<element ref="MAN01" value="00008151180272809590"/>
+								</segment>
+								<loop name="Hierarchical Level Item" ref="HL_ITEM_LOOP">
+									<segment name="Hirachical Level Item" ref="HL">
+										<element ref="HL00" value="11"/>
+										<element ref="HL01" value="10"/>
+										<element ref="HL02" value="I"/>
+									</segment>
+									<segment name="Item Identification" ref="LIN">
+										<element ref="LIN00" value=""/>
+										<element ref="LIN01" value="UP"/>
+										<element ref="LIN02" value="015272720846"/>
+										<element ref="LIN03" value="UK"/>
+										<element ref="LIN04" value="00152727208464"/>
+									</segment>
+									<segment name="Item Detail Shipment" ref="SN1">
+										<element ref="SN100" value=""/>
+										<element ref="SN101" value="1"/>
+										<element ref="SN102" value="EA"/>
+									</segment>
+								</loop>
+							</loop>
+							<loop name="Hierarchical Level Pack" ref="HL_PACK_LOOP">
+								<segment name="Hirachical Level Pack" ref="HL">
+									<element ref="HL00" value="12"/>
+									<element ref="HL01" value="3"/>
+									<element ref="HL02" value="P"/>
+								</segment>
+								<segment name="Marks and Numbers Information" ref="MAN">
+									<element ref="MAN00" value="GM"/>
+									<element ref="MAN01" value="00008151180272793486"/>
+								</segment>
+								<loop name="Hierarchical Level Item" ref="HL_ITEM_LOOP">
+									<segment name="Hirachical Level Item" ref="HL">
+										<element ref="HL00" value="13"/>
+										<element ref="HL01" value="12"/>
+										<element ref="HL02" value="I"/>
+									</segment>
+									<segment name="Item Identification" ref="LIN">
+										<element ref="LIN00" value=""/>
+										<element ref="LIN01" value="UP"/>
+										<element ref="LIN02" value="014982234360"/>
+										<element ref="LIN03" value="UK"/>
+										<element ref="LIN04" value="00149822343602"/>
+									</segment>
+									<segment name="Item Detail Shipment" ref="SN1">
+										<element ref="SN100" value=""/>
+										<element ref="SN101" value="1"/>
+										<element ref="SN102" value="EA"/>
+									</segment>
+								</loop>
+							</loop>
+						</loop>
+					</loop>
+					<loop name="Hierarchical Level Order" ref="HL_ORDER_LOOP">
+						<segment name="Hierachical Level Order" ref="HL">
+							<element ref="HL00" value="14"/>
+							<element ref="HL01" value="1"/>
+							<element ref="HL02" value="O"/>
+						</segment>
+						<segment name="Purchase Order Reference" ref="PRF">
+							<element ref="PRF00" value="0542956356"/>
+							<element ref="PRF01" value=""/>
+							<element ref="PRF02" value=""/>
+							<element ref="PRF03" value="20070410"/>
+						</segment>
+						<segment name="Reference Information" ref="REF">
+							<element ref="REF00" value="IA"/>
+							<element ref="REF01" value="413356050"/>
+						</segment>
+						<segment name="Reference Information" ref="REF">
+							<element ref="REF00" value="IV"/>
+							<element ref="REF01" value="542956356"/>
+						</segment>
+						<segment name="Reference Information" ref="REF">
+							<element ref="REF00" value="DP"/>
+							<element ref="REF01" value="0005"/>
+						</segment>
+						<segment name="Reference Information" ref="REF">
+							<element ref="REF00" value="MR"/>
+							<element ref="REF01" value="0073"/>
+						</segment>
+						<loop name="Party Identification" ref="HL-N1">
+							<segment name="Party Identification" ref="N1">
+								<element ref="N100" value="BY"/>
+								<element ref="N101" value="WAL-MART STORES, INC."/>
+								<element ref="N102" value="UL"/>
+								<element ref="N103" value="0078742019901"/>
+							</segment>
+						</loop>
+						<loop name="Hierarchical Level Tare" ref="HL_SHIPPING_TARE_LOOP">
+							<segment name="Hierachical Level Order" ref="HL">
+								<element ref="HL00" value="15"/>
+								<element ref="HL01" value="14"/>
+								<element ref="HL02" value="T"/>
+							</segment>
+							<segment name="Reference Information" ref="REF">
+								<element ref="REF00" value="KK"/>
+								<element ref="REF01" value="0078742030067"/>
+							</segment>
+							<segment name="Marks and Numbers Information" ref="MAN">
+								<element ref="MAN00" value="GM"/>
+								<element ref="MAN01" value="00008151180200149187"/>
+							</segment>
+							<segment name="Pallet Type and Load Characteristics" ref="PAL">
+								<element ref="PAL00" value="1"/>
+								<element ref="PAL01" value="1"/>
+								<element ref="PAL02" value="1"/>
+							</segment>
+							<loop name="Hierarchical Level Pack" ref="HL_PACK_LOOP">
+								<segment name="Hirachical Level Pack" ref="HL">
+									<element ref="HL00" value="16"/>
+									<element ref="HL01" value="15"/>
+									<element ref="HL02" value="P"/>
+								</segment>
+								<segment name="Marks and Numbers Information" ref="MAN">
+									<element ref="MAN00" value="GM"/>
+									<element ref="MAN01" value="00008151180272809552"/>
+								</segment>
+								<loop name="Hierarchical Level Item" ref="HL_ITEM_LOOP">
+									<segment name="Hirachical Level Item" ref="HL">
+										<element ref="HL00" value="17"/>
+										<element ref="HL01" value="16"/>
+										<element ref="HL02" value="I"/>
+									</segment>
+									<segment name="Item Identification" ref="LIN">
+										<element ref="LIN00" value=""/>
+										<element ref="LIN01" value="UP"/>
+										<element ref="LIN02" value="017999039171"/>
+										<element ref="LIN03" value="UK"/>
+										<element ref="LIN04" value="00179990391716"/>
+									</segment>
+									<segment name="Item Detail Shipment" ref="SN1">
+										<element ref="SN100" value=""/>
+										<element ref="SN101" value="1"/>
+										<element ref="SN102" value="EA"/>
+									</segment>
+								</loop>
+							</loop>
+							<loop name="Hierarchical Level Pack" ref="HL_PACK_LOOP">
+								<segment name="Hirachical Level Pack" ref="HL">
+									<element ref="HL00" value="18"/>
+									<element ref="HL01" value="15"/>
+									<element ref="HL02" value="P"/>
+								</segment>
+								<segment name="Marks and Numbers Information" ref="MAN">
+									<element ref="MAN00" value="GM"/>
+									<element ref="MAN01" value="00008151180272809545"/>
+								</segment>
+								<loop name="Hierarchical Level Item" ref="HL_ITEM_LOOP">
+									<segment name="Hirachical Level Item" ref="HL">
+										<element ref="HL00" value="19"/>
+										<element ref="HL01" value="18"/>
+										<element ref="HL02" value="I"/>
+									</segment>
+									<segment name="Item Identification" ref="LIN">
+										<element ref="LIN00" value=""/>
+										<element ref="LIN01" value="UP"/>
+										<element ref="LIN02" value="014982234360"/>
+										<element ref="LIN03" value="UK"/>
+										<element ref="LIN04" value="00149822343602"/>
+									</segment>
+									<segment name="Item Detail Shipment" ref="SN1">
+										<element ref="SN100" value=""/>
+										<element ref="SN101" value="1"/>
+										<element ref="SN102" value="EA"/>
+									</segment>
+								</loop>
+							</loop>
+							<loop name="Hierarchical Level Pack" ref="HL_PACK_LOOP">
+								<segment name="Hirachical Level Pack" ref="HL">
+									<element ref="HL00" value="20"/>
+									<element ref="HL01" value="15"/>
+									<element ref="HL02" value="P"/>
+								</segment>
+								<segment name="Marks and Numbers Information" ref="MAN">
+									<element ref="MAN00" value="GM"/>
+									<element ref="MAN01" value="00008151180272812095"/>
+								</segment>
+								<loop name="Hierarchical Level Item" ref="HL_ITEM_LOOP">
+									<segment name="Hirachical Level Item" ref="HL">
+										<element ref="HL00" value="21"/>
+										<element ref="HL01" value="20"/>
+										<element ref="HL02" value="I"/>
+									</segment>
+									<segment name="Item Identification" ref="LIN">
+										<element ref="LIN00" value=""/>
+										<element ref="LIN01" value="UP"/>
+										<element ref="LIN02" value="016017011847"/>
+										<element ref="LIN03" value="UK"/>
+										<element ref="LIN04" value="00160170118476"/>
+									</segment>
+									<segment name="Item Detail Shipment" ref="SN1">
+										<element ref="SN100" value=""/>
+										<element ref="SN101" value="1"/>
+										<element ref="SN102" value="EA"/>
+									</segment>
+								</loop>
+							</loop>
+							<loop name="Hierarchical Level Pack" ref="HL_PACK_LOOP">
+								<segment name="Hirachical Level Pack" ref="HL">
+									<element ref="HL00" value="22"/>
+									<element ref="HL01" value="15"/>
+									<element ref="HL02" value="P"/>
+								</segment>
+								<segment name="Marks and Numbers Information" ref="MAN">
+									<element ref="MAN00" value="GM"/>
+									<element ref="MAN01" value="00008151180272809576"/>
+								</segment>
+								<loop name="Hierarchical Level Item" ref="HL_ITEM_LOOP">
+									<segment name="Hirachical Level Item" ref="HL">
+										<element ref="HL00" value="23"/>
+										<element ref="HL01" value="22"/>
+										<element ref="HL02" value="I"/>
+									</segment>
+									<segment name="Item Identification" ref="LIN">
+										<element ref="LIN00" value=""/>
+										<element ref="LIN01" value="UP"/>
+										<element ref="LIN02" value="015272720846"/>
+										<element ref="LIN03" value="UK"/>
+										<element ref="LIN04" value="00152727208464"/>
+									</segment>
+									<segment name="Item Detail Shipment" ref="SN1">
+										<element ref="SN100" value=""/>
+										<element ref="SN101" value="1"/>
+										<element ref="SN102" value="EA"/>
+									</segment>
+								</loop>
+							</loop>
+							<loop name="Hierarchical Level Pack" ref="HL_PACK_LOOP">
+								<segment name="Hirachical Level Pack" ref="HL">
+									<element ref="HL00" value="24"/>
+									<element ref="HL01" value="15"/>
+									<element ref="HL02" value="P"/>
+								</segment>
+								<segment name="Marks and Numbers Information" ref="MAN">
+									<element ref="MAN00" value="GM"/>
+									<element ref="MAN01" value="00008151180272812118"/>
+								</segment>
+								<loop name="Hierarchical Level Item" ref="HL_ITEM_LOOP">
+									<segment name="Hirachical Level Item" ref="HL">
+										<element ref="HL00" value="25"/>
+										<element ref="HL01" value="24"/>
+										<element ref="HL02" value="I"/>
+									</segment>
+									<segment name="Item Identification" ref="LIN">
+										<element ref="LIN00" value=""/>
+										<element ref="LIN01" value="UP"/>
+										<element ref="LIN02" value="017999039171"/>
+										<element ref="LIN03" value="UK"/>
+										<element ref="LIN04" value="00179990391716"/>
+									</segment>
+									<segment name="Item Detail Shipment" ref="SN1">
+										<element ref="SN100" value=""/>
+										<element ref="SN101" value="1"/>
+										<element ref="SN102" value="EA"/>
+									</segment>
+								</loop>
+							</loop>
+							<loop name="Hierarchical Level Pack" ref="HL_PACK_LOOP">
+								<segment name="Hirachical Level Pack" ref="HL">
+									<element ref="HL00" value="26"/>
+									<element ref="HL01" value="15"/>
+									<element ref="HL02" value="P"/>
+								</segment>
+								<segment name="Marks and Numbers Information" ref="MAN">
+									<element ref="MAN00" value="GM"/>
+									<element ref="MAN01" value="00008151180272809569"/>
+								</segment>
+								<loop name="Hierarchical Level Item" ref="HL_ITEM_LOOP">
+									<segment name="Hirachical Level Item" ref="HL">
+										<element ref="HL00" value="27"/>
+										<element ref="HL01" value="26"/>
+										<element ref="HL02" value="I"/>
+									</segment>
+									<segment name="Item Identification" ref="LIN">
+										<element ref="LIN00" value=""/>
+										<element ref="LIN01" value="UP"/>
+										<element ref="LIN02" value="016017011847"/>
+										<element ref="LIN03" value="UK"/>
+										<element ref="LIN04" value="00160170118476"/>
+									</segment>
+									<segment name="Item Detail Shipment" ref="SN1">
+										<element ref="SN100" value=""/>
+										<element ref="SN101" value="1"/>
+										<element ref="SN102" value="EA"/>
+									</segment>
+								</loop>
+							</loop>
+							<loop name="Hierarchical Level Pack" ref="HL_PACK_LOOP">
+								<segment name="Hirachical Level Pack" ref="HL">
+									<element ref="HL00" value="28"/>
+									<element ref="HL01" value="15"/>
+									<element ref="HL02" value="P"/>
+								</segment>
+								<segment name="Marks and Numbers Information" ref="MAN">
+									<element ref="MAN00" value="GM"/>
+									<element ref="MAN01" value="00008151180272812101"/>
+								</segment>
+								<loop name="Hierarchical Level Item" ref="HL_ITEM_LOOP">
+									<segment name="Hirachical Level Item" ref="HL">
+										<element ref="HL00" value="29"/>
+										<element ref="HL01" value="28"/>
+										<element ref="HL02" value="I"/>
+									</segment>
+									<segment name="Item Identification" ref="LIN">
+										<element ref="LIN00" value=""/>
+										<element ref="LIN01" value="UP"/>
+										<element ref="LIN02" value="017999039171"/>
+										<element ref="LIN03" value="UK"/>
+										<element ref="LIN04" value="00179990391716"/>
+									</segment>
+									<segment name="Item Detail Shipment" ref="SN1">
+										<element ref="SN100" value=""/>
+										<element ref="SN101" value="1"/>
+										<element ref="SN102" value="EA"/>
+									</segment>
+								</loop>
+							</loop>
+							<loop name="Hierarchical Level Pack" ref="HL_PACK_LOOP">
+								<segment name="Hirachical Level Pack" ref="HL">
+									<element ref="HL00" value="30"/>
+									<element ref="HL01" value="15"/>
+									<element ref="HL02" value="P"/>
+								</segment>
+								<segment name="Marks and Numbers Information" ref="MAN">
+									<element ref="MAN00" value="GM"/>
+									<element ref="MAN01" value="00008151180272812125"/>
+								</segment>
+								<loop name="Hierarchical Level Item" ref="HL_ITEM_LOOP">
+									<segment name="Hirachical Level Item" ref="HL">
+										<element ref="HL00" value="31"/>
+										<element ref="HL01" value="30"/>
+										<element ref="HL02" value="I"/>
+									</segment>
+									<segment name="Item Identification" ref="LIN">
+										<element ref="LIN00" value=""/>
+										<element ref="LIN01" value="UP"/>
+										<element ref="LIN02" value="017999039171"/>
+										<element ref="LIN03" value="UK"/>
+										<element ref="LIN04" value="00179990391716"/>
+									</segment>
+									<segment name="Item Detail Shipment" ref="SN1">
+										<element ref="SN100" value=""/>
+										<element ref="SN101" value="1"/>
+										<element ref="SN102" value="EA"/>
+									</segment>
+								</loop>
+							</loop>
+						</loop>
+					</loop>
+				</loop>
+				<segment name="Transaction Totals" ref="CTT">
+					<element ref="CTT00" value="31"/>
+				</segment>
+				<segment name="Transaction Set Trailer" ref="SE">
+					<element ref="SE00" value="98"/>
+					<element ref="SE01" value="000001065"/>
+				</segment>
+			</loop>
+			<segment name="Functional Group Trailer" ref="GE">
+				<element ref="GE00" value="1"/>
+				<element ref="GE01" value="850002222"/>
+			</segment>
+		</loop>
+		<segment name="Interchange Control Trailer" ref="IEA">
+			<element ref="IEA00" value="1"/>
+			<element ref="IEA01" value="850002222"/>
+		</segment>
+	</loop>
+</transaction>

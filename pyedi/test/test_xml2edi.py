@@ -1,15 +1,15 @@
 import os
-from pyedi.edi2xml import EDI2XML
+from pyedi.xml2edi import XML2EDI
 
 
-class TestEDI2XML:
+class TestXML2EDI:
     def test_valid_856_edi(self):
         input_file = os.path.join(
             os.path.dirname(__file__),
-            'documents/856/valid.txt'
+            'documents/856/xml/valid.xml'
         )
-        edi_to_xml = EDI2XML(
-            input_file, 'output_valid.xml', 856, 5010
+        edi_to_xml = XML2EDI(
+            input_file, 'output_valid.txt', 856, 5010
         )
         (result, err_log) = edi_to_xml.convert()
         assert result is not None and err_log is None
@@ -17,10 +17,10 @@ class TestEDI2XML:
     def test_invalid_start_end_tag(self):
         input_file = os.path.join(
             os.path.dirname(__file__),
-            'documents/856/invalid_start_end_tag.txt'
+            'documents/856/xml/invalid_start_end_tag.xml'
         )
-        edi_to_xml = EDI2XML(
-            input_file, 'output_valid.xml', 856, 5010
+        edi_to_xml = XML2EDI(
+            input_file, 'output_valid.txt', 856, 5010
         )
         (result, err_log) = edi_to_xml.convert()
         assert result is None and err_log is not None
@@ -29,10 +29,10 @@ class TestEDI2XML:
     def test_invalid_segment(self):
         input_file = os.path.join(
             os.path.dirname(__file__),
-            'documents/856/invalid_segment.txt'
+            'documents/856/xml/invalid_segment.xml'
         )
-        edi_to_xml = EDI2XML(
-            input_file, 'output_valid.xml', 856, 5010
+        edi_to_xml = XML2EDI(
+            input_file, 'output_valid.txt', 856, 5010
         )
         (result, err_log) = edi_to_xml.convert()
         assert result is None and err_log is not None
@@ -46,10 +46,10 @@ class TestEDI2XML:
     def test_invalid_element_length(self):
         input_file = os.path.join(
             os.path.dirname(__file__),
-            'documents/856/invalid_element_length.txt'
+            'documents/856/xml/invalid_element_length.xml'
         )
-        edi_to_xml = EDI2XML(
-            input_file, 'output_valid.xml', 856, 5010
+        edi_to_xml = XML2EDI(
+            input_file, 'output_valid.txt', 856, 5010
         )
         (result, err_log) = edi_to_xml.convert()
         assert result is None and err_log is not None
@@ -62,10 +62,10 @@ class TestEDI2XML:
     def test_invalid_element_value(self):
         input_file = os.path.join(
             os.path.dirname(__file__),
-            'documents/856/invalid_element_value.txt'
+            'documents/856/xml/invalid_element_value.xml'
         )
-        edi_to_xml = EDI2XML(
-            input_file, 'output_valid.xml', 856, 5010
+        edi_to_xml = XML2EDI(
+            input_file, 'output_valid.txt', 856, 5010
         )
         (result, err_log) = edi_to_xml.convert()
         assert result is None and err_log is not None
@@ -78,10 +78,10 @@ class TestEDI2XML:
     def test_invalid_element_type(self):
         input_file = os.path.join(
             os.path.dirname(__file__),
-            'documents/856/invalid_element_value.txt'
+            'documents/856/xml/invalid_element_value.xml'
         )
-        edi_to_xml = EDI2XML(
-            input_file, 'output_valid.xml', 856, 5010
+        edi_to_xml = XML2EDI(
+            input_file, 'output_valid.txt', 856, 5010
         )
         (result, err_log) = edi_to_xml.convert()
         assert result is None and err_log is not None
