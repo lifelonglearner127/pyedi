@@ -149,6 +149,10 @@ class EDIValidator:
             new_edi_segment_node.appendChild(new_edi_element_node)
 
     def match_segment(self, edi_segment):
+        """
+        Check if edi segment matches the rules laid out in the specElement.
+        """
+
         match = False
         for spec_segment in self.segment_queue:
             if self.match_edi_segment(edi_segment, spec_segment):
@@ -159,6 +163,7 @@ class EDIValidator:
             self.next_node = spec_segment
             self.write_data_segment(edi_segment, spec_segment)
 
+            # set or increase or reset has_occurred count
             parent_node = spec_segment.parentNode
             if (
                 parent_node.nodeName == "loop" and
@@ -187,6 +192,9 @@ class EDIValidator:
         return False
 
     def match_edi_segment(self, edi_segment, spec_segment):
+        """
+        Check if edi segment matches segment laid out in the xml
+        """
         if edi_segment.get_segment_id() != spec_segment.getAttribute('ref'):
             return False
 
@@ -269,6 +277,9 @@ class EDIValidator:
         return True
 
     def build_segment_queue(self):
+        """
+        build candidates segments list that might be matched with edi segment
+        """
         self.segment_queue = []
         direction = "down"
 
