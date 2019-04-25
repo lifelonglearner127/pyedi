@@ -9,6 +9,7 @@
 ```
 from pyedi.edi2xml import EDI2XML
 edi_to_xml = EDI2XML(iput_file, output_file, transaction, version)
+(result, err_log) = edi_to_xml.convert()
 ```
 
 Parameter Description:
