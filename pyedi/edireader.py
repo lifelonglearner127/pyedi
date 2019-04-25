@@ -95,7 +95,7 @@ class EDIReader:
 
             if not valid:
                 logger.error(
-                    'Found segment: {}. This segment might be incorrect' \
+                    'Found segment: {}. This segment might be incorrect'
                     ' or a mandatory segment is missing '.format(
                         segment.get_segment_id()
                     )

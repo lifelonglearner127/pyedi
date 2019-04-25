@@ -104,35 +104,48 @@ class EDIValidator:
         """
 
         # get this edi segment lineage
-        spec_match_lineage = self.get_spec_lineage(spec_segment)
+        edi_match_lineage = self.get_spec_lineage(spec_segment)
 
         i = 0
         lineage_mismatch = False \
-            if spec_match_lineage == self.last_match_lineage \
+            if edi_match_lineage == self.last_match_lineage \
             else True
 
         # find out where the lineage of
         # this edisegment and the last edisegment diverge
-        for (spec_leaf, last_match_leaf) in \
-                zip(spec_match_lineage, self.last_match_lineage):
+        for (edi_match_leaf, last_match_leaf) in \
+                zip(edi_match_lineage, self.last_match_lineage):
 
-            if not spec_leaf.isSameNode(last_match_leaf):
+            if not edi_match_leaf.isSameNode(last_match_leaf):
                 lineage_mismatch = True
                 break
             i = i + 1
 
+        if (
+            len(edi_match_lineage) < len(self.last_match_lineage) and
+            not edi_segment.get_segment_id() in ['SE', 'GE', 'IEA', 'CTT']
+        ):
+            i = i - 1
+
         if lineage_mismatch:
             spec_match_data_lineage = self.last_match_data_lineage[:i]
 
-            for leaf in spec_match_lineage[i:]:
+            for (index, leaf) in enumerate(edi_match_lineage[i:]):
                 new_node = self.data_document.createElement(leaf.nodeName)
                 new_node.setAttribute('ref', leaf.getAttribute('ref'))
                 new_node.setAttribute('name', leaf.getAttribute('name'))
+                if index + i - 1 > 0:
+                    spec_match_data_lineage[-1].appendChild(new_node)
+                else:
+                    if new_node.tagName != 'transaction':
+                        self.data_document_element.appendChild(new_node)
+
                 spec_match_data_lineage.append(new_node)
 
+        # update last match for next round
+        self.last_match_lineage = edi_match_lineage
+        if lineage_mismatch:
             self.last_match_data_lineage = spec_match_data_lineage
-
-        self.last_match_lineage = spec_match_lineage
 
         new_edi_segment_node = self.data_document.createElement('segment')
         new_edi_segment_node.setAttribute(
@@ -149,6 +162,8 @@ class EDIValidator:
             )
             new_edi_element_node.setAttribute('value', element)
             new_edi_segment_node.appendChild(new_edi_element_node)
+
+        self.last_match_data_lineage[-1].appendChild(new_edi_segment_node)
 
     def get_close_tags(self):
         return self.close_tags
