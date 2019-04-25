@@ -27,7 +27,7 @@ class EDIReader:
         @type file_name: string
         """
         self.fd = None
-        
+
         try:
             self.fd = open(file_name, 'r')
             line = self.fd.read(EDIReader.ISA_LEN)

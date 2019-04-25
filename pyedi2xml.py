@@ -24,7 +24,7 @@ if __name__ == '__main__':
     logger.setLevel(logging.INFO)
 
     logger.info('Started Parsing the EDI Standard')
-    
+
     try:
         edi_reader = EDIReader(
             args['file'], args['transaction'], args['version']

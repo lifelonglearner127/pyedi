@@ -15,7 +15,7 @@ class EDIValidator:
         """
         Initialize the edi validator
         """
-        
+
         try:
             # Load xml file
             fd = resource_stream(__name__, 'map/{}'.format(map_file))
@@ -38,12 +38,16 @@ class EDIValidator:
                     'min_length': element.getAttribute('min_length'),
                     'max_length': element.getAttribute('max_length')
                 }
-            
+
             impl = getDOMImplementation()
             self.data_document = impl.createDocument(None, 'transaction', None)
             self.data_document_element = self.data_document.documentElement
-            self.data_document_element.setAttribute('ref', self.spec.documentElement.getAttribute('ref'))
-            self.data_document_element.setAttribute('name', self.spec.documentElement.getAttribute('name'))
+            self.data_document_element.setAttribute(
+                'ref', self.spec.documentElement.getAttribute('ref')
+            )
+            self.data_document_element.setAttribute(
+                'name', self.spec.documentElement.getAttribute('name')
+            )
             self.last_match_lineage = []
             self.last_match_data_lineage = []
 
@@ -56,6 +60,7 @@ class EDIValidator:
         """
         remove whitespace nodes
         """
+
         remove_list = []
         for child in node.childNodes:
             if child.nodeType == node.TEXT_NODE and \
@@ -74,6 +79,10 @@ class EDIValidator:
             element.setAttribute('has_occurred', 0)
 
     def get_spec_lineage(self, spec_segment):
+        """
+        get the lineage of the segment
+        """
+
         lineage = []
         while spec_segment.parentNode.nodeType != Node.DOCUMENT_NODE:
             lineage.append(spec_segment.parentNode)
@@ -83,7 +92,61 @@ class EDIValidator:
         return lineage
 
     def write_data_segment(self, edi_segment, spec_segment):
-        pass
+        """
+        write segment to xml document
+
+        before writing edi segment,
+        we need to compare lineage between this segment and previous segment
+        if lineage matches, extend current XML data branch
+        if not, go back and create a new one somewhere
+        """
+
+        # get this edi segment lineage
+        spec_match_lineage = self.get_spec_lineage(spec_segment)
+
+        i = 0
+        lineage_mismatch = False \
+            if spec_match_lineage == self.last_match_lineage \
+            else True
+
+        # find out where the lineage of
+        # this edisegment and the last edisegment diverge
+        for (spec_leaf, last_match_leaf) in \
+                zip(spec_match_lineage, self.last_match_lineage):
+
+            if not spec_leaf.isSameNode(last_match_leaf):
+                lineage_mismatch = True
+                break
+            i = i + 1
+
+        if lineage_mismatch:
+            spec_match_data_lineage = self.last_match_data_lineage[:i]
+
+            for leaf in spec_match_lineage[i:]:
+                new_node = self.data_document.createElement(leaf.nodeName)
+                new_node.setAttribute('ref', leaf.getAttribute('ref'))
+                new_node.setAttribute('name', leaf.getAttribute('name'))
+                spec_match_data_lineage.append(new_node)
+
+            self.last_match_data_lineage = spec_match_data_lineage
+
+        self.last_match_lineage = spec_match_lineage
+
+        new_edi_segment_node = self.data_document.createElement('segment')
+        new_edi_segment_node.setAttribute(
+            'ref', spec_segment.getAttribute('ref')
+        )
+        new_edi_segment_node.setAttribute(
+            'name', spec_segment.getAttribute('name')
+        )
+
+        for (index, element) in enumerate(edi_segment.elements):
+            new_edi_element_node = self.data_document.createElement('element')
+            new_edi_element_node.setAttribute(
+                'ref', spec_segment.getAttribute('ref') + format(index, '#02')
+            )
+            new_edi_element_node.setAttribute('value', element)
+            new_edi_segment_node.appendChild(new_edi_element_node)
 
     def match_segment(self, edi_segment):
         match = False

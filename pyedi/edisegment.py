@@ -35,7 +35,7 @@ class EDISegment:
     def get_element_by_ref(self, ref):
         """
         Return element (value, index) tuple by ref
-        
+
         @param ref: reference to element for example, GS01
         @type ref: string
         """
