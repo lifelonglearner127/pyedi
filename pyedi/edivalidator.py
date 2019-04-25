@@ -192,9 +192,9 @@ class EDIValidator:
                 spec_segment.setAttribute("has_occurred", 1)
 
             self.build_segment_queue()
-            return (True, edi_segment.get_segment_id())
+            return (True, [spec_segment])
 
-        return (False, self.segment_queue[-1].getAttribute('ref'))
+        return (False, self.segment_queue[-1:] + self.segment_queue[:-1])
 
     def match_edi_segment(self, edi_segment, spec_segment):
         """

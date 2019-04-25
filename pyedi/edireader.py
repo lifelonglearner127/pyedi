@@ -91,14 +91,30 @@ class EDIReader:
                 segment.to_string()
             ))
 
-            (valid, segment_id) = self.validator.match_segment(segment)
+            (valid, segments) = self.validator.match_segment(segment)
 
             if not valid:
                 logger.error(
-                    'Next possible segment might be {} '
-                    'but found segment: {}'.
-                    format(segment_id, segment.get_segment_id())
+                    'Found segment: {}. This segment might be incorrect' \
+                    ' or a mandatory segment is missing '.format(
+                        segment.get_segment_id()
+                    )
                 )
+
+                logger.error(
+                    'Mandatory segments is {} - {}'.format(
+                        segments[0].getAttribute('ref'),
+                        segments[0].getAttribute('name')
+                    )
+                )
+                err_str = 'Other possible segment are '
+
+                for possible_seg in segments[1:]:
+                    err_str += '{}-{}, '.format(
+                        possible_seg.getAttribute('ref'),
+                        possible_seg.getAttribute('name')
+                    )
+                logger.error(err_str)
                 return False
 
         # check if edi document has segment pairs
