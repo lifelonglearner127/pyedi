@@ -1,4 +1,4 @@
-from xml.dom.minidom import parse
+from xml.dom.minidom import parse, getDOMImplementation, Node
 from pkg_resources import resource_stream
 from .ediexceptions import (
     EDIFileNotFoundError, EDIElementLengthError,
@@ -15,35 +15,42 @@ class EDIValidator:
         """
         Initialize the edi validator
         """
-        self.dataele = {}
-
+        
         try:
             # Load xml file
             fd = resource_stream(__name__, 'map/{}'.format(map_file))
             self.spec = parse(fd)
-            self.remove_whitespace_nodes(self.spec, True)
             fd.close()
+            self.remove_whitespace_nodes(self.spec, True)
+            self.next_node = self.spec.documentElement.firstChild
+            self.build_segment_queue()
 
             # Load data elements from xml files
             fd = resource_stream(__name__, 'map/data_ele.xml')
             element_spec = parse(fd)
-            self.remove_whitespace_nodes(element_spec, True)
             fd.close()
+            self.remove_whitespace_nodes(element_spec, True)
 
+            self.dataele = {}
             for element in element_spec.documentElement.childNodes:
                 self.dataele[element.getAttribute('id')] = {
                     'type': element.getAttribute('type'),
                     'min_length': element.getAttribute('min_length'),
                     'max_length': element.getAttribute('max_length')
                 }
+            
+            impl = getDOMImplementation()
+            self.data_document = impl.createDocument(None, 'transaction', None)
+            self.data_document_element = self.data_document.documentElement
+            self.data_document_element.setAttribute('ref', self.spec.documentElement.getAttribute('ref'))
+            self.data_document_element.setAttribute('name', self.spec.documentElement.getAttribute('name'))
+            self.last_match_lineage = []
+            self.last_match_data_lineage = []
 
         except OSError:
             raise EDIFileNotFoundError(
                 'Element file or map file is missing in the package'
             )
-
-        self.next_node = self.spec.documentElement.firstChild
-        self.build_segment_queue()
 
     def remove_whitespace_nodes(self,  node, unlink=False):
         """
@@ -66,6 +73,18 @@ class EDIValidator:
         for element in nodes:
             element.setAttribute('has_occurred', 0)
 
+    def get_spec_lineage(self, spec_segment):
+        lineage = []
+        while spec_segment.parentNode.nodeType != Node.DOCUMENT_NODE:
+            lineage.append(spec_segment.parentNode)
+            spec_segment = spec_segment.parentNode
+
+        lineage.reverse()
+        return lineage
+
+    def write_data_segment(self, edi_segment, spec_segment):
+        pass
+
     def match_segment(self, edi_segment):
         match = False
         for spec_segment in self.segment_queue:
@@ -75,6 +94,7 @@ class EDIValidator:
 
         if match:
             self.next_node = spec_segment
+            self.write_data_segment(edi_segment, spec_segment)
 
             parent_node = spec_segment.parentNode
             if (

@@ -7,6 +7,8 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('-f', '--file', required=True,
                     help="Path to edi file")
+    ap.add_argument('-o', '--output', default="856_output.xml",
+                    help="Path to output file")
     ap.add_argument('-t', '--transaction', required=True,
                     help="Specify EDI Transaction(eg, 856)")
     ap.add_argument('-v', '--version', required=True,
@@ -29,5 +31,9 @@ if __name__ == '__main__':
         )
         if edi_reader.validate():
             logger.info("Successfully Parsed")
+            xml_file = open(args['output'], "w", encoding="utf-8")
+            edi_reader.validator.data_document.writexml(xml_file, "\n", "\t")
+        else:
+            logger.info("Failed to parse")
     except Exception as err:
         logger.error(err)
