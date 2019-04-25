@@ -11,10 +11,15 @@ from pyedi.edi2xml import EDI2XML
 edi_to_xml = EDI2XML(iput_file, output_file, transaction, version)
 (result, err_log) = edi_to_xml.convert()
 ```
+```
+from pyedi.edi2xml import EDI2XML
+edi_to_xml = EDI2XML(iput_file, output_file, transaction, version)
+(result, err_log) = edi_to_xml.convert()
+```
 
 Parameter Description:
- - `input_file`: path to the EDI document
- - `output_file`: path to the output xml file
+ - `input_file`: path to input file, input file is edi in case of conversion from edi to xml, in case of conversion from xml to edi, input file is xml file
+ - `output_file`: path to the output file
  - `transaction`: EDI transtion set eg, 856, 841
  - `version`: EDI document version eg, 5010, 4010
  > Currently we support only 856 transaction and 5010 version
@@ -30,6 +35,7 @@ Validation check we support:
 ## Examples
 ```
 python pyedi2xml.py --input documents/856/sample_01.txt --output 856_output.xml --transaction 856 --version 5010
+python pyxml2edi.py --input 856_output.xml --output 856_sample.txt --transaction 856 --version 5010
 ```
 ## Project details
 ### Structure of X12 Envelopes
