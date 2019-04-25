@@ -1,9 +1,6 @@
 from xml.dom.minidom import parse, getDOMImplementation, Node
 from pkg_resources import resource_stream
-from .ediexceptions import (
-    EDIFileNotFoundError, EDIElementLengthError,
-    EDIElementTypeError, EDIElementValueError, EDIElementNotExist
-)
+from .ediexceptions import EDIFileNotFoundError, EDIElementNotExist
 
 
 class EDIValidator:
@@ -196,7 +193,9 @@ class EDIValidator:
                         if parent_node.hasAttribute("has_occurred"):
                             parent_node.setAttribute(
                                 "has_occurred",
-                                int(parent_node.getAttribute("has_occurred")) + 1
+                                int(
+                                    parent_node.getAttribute("has_occurred")
+                                ) + 1
                             )
                         else:
                             parent_node.setAttribute("has_occurred", 1)
@@ -279,7 +278,7 @@ class EDIValidator:
                 err_str += spec_element.getAttribute('ref') + \
                     ' element id is {}, but it does not exist' \
                     ' in the package'.format(spec_element.getAttribute('id'))
-                return (True, err_str)
+                raise EDIElementNotExist(err_str)
 
             # Check Values
             possible_values = spec_element.getAttribute('values') \
