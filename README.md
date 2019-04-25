@@ -7,13 +7,13 @@
     - [How it works](#how-it-works)
 ## Usage
 ```
-from pyedi.edireader import EDIReader
-edi_reader = EDIReader(file_name, transaction, version)
-edi_reader.validate()
+from pyedi.edi2xml import EDI2XML
+edi_to_xml = EDI2XML(iput_file, output_file, transaction, version)
 ```
 
 Parameter Description:
- - `file_name`: path to the EDI document
+ - `input_file`: path to the EDI document
+ - `output_file`: path to the output xml file
  - `transaction`: EDI transtion set eg, 856, 841
  - `version`: EDI document version eg, 5010, 4010
  > Currently we support only 856 transaction and 5010 version
@@ -28,7 +28,7 @@ Validation check we support:
 
 ## Examples
 ```
-python pyedi2xml.py --file documents/856/sample_01.txt --transaction 856 --version 5010
+python pyedi2xml.py --input documents/856/sample_01.txt --output 856_output.xml --transaction 856 --version 5010
 ```
 ## Project details
 ### Structure of X12 Envelopes

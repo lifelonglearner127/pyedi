@@ -1,6 +1,8 @@
 import pytest
-from pyedi.edireader import EDIReader
-class TestEDIReader:
+from pyedi.edi2xml import EDI2XML
+
+
+class TestEDI2XML:
     def test_valid_856_edi(self):
         pass
 

@@ -7,30 +7,33 @@ from .ediexceptions import EDIFileNotFoundError, InterchangeControlError
 logger = logging.getLogger('pyedi')
 
 
-class EDIReader:
+class EDI2XML:
     """
-    Read edi file and validate it against xml based map file
+    Convert edi document to xml
     """
 
     ISA_LEN = 106
     BUF_SIZE = 8 * 1024
 
-    def __init__(self, file_name, transaction, version):
+    def __init__(self, input_file, output_file, transaction, version):
         """
         Initialize the edi reader
 
-        @param file_name: path to edi file
-        @type file_name: string
+        @param input_file: path to edi file
+        @type input_file: string
+        @param output_file: path to output xml file
+        @type output_file: string
         @param transaction: edi transaction
         @type transaction: string
-        @param file_name: edi transaction version
-        @type file_name: string
+        @param version: edi transaction version
+        @type version: string
         """
         self.fd = None
+        self.output_file = output_file
 
         try:
-            self.fd = open(file_name, 'r')
-            line = self.fd.read(EDIReader.ISA_LEN)
+            self.fd = open(input_file, 'r')
+            line = self.fd.read(EDI2XML.ISA_LEN)
 
             if line[:3] != 'ISA':
                 raise InterchangeControlError(
@@ -51,13 +54,13 @@ class EDIReader:
                 line[82] if self.icvn == '00501' else None
             )
             self.buffer = line
-            self.buffer += self.fd.read(EDIReader.BUF_SIZE)
+            self.buffer += self.fd.read(EDI2XML.BUF_SIZE)
             self.validator = EDIValidator(
                 'transaction/{}.{}.xml'.format(transaction, version)
             )
 
         except OSError:
-            raise EDIFileNotFoundError('File Not Found: {}'.format(file_name))
+            raise EDIFileNotFoundError('File Not Found: {}'.format(input_file))
 
     def __del__(self):
         if self.fd is not None:
@@ -66,7 +69,7 @@ class EDIReader:
     def __iter__(self):
         while True:
             if self.buffer.find(self.segment_delimiter) == -1:
-                self.buffer += self.fd.read(EDIReader.BUF_SIZE)
+                self.buffer += self.fd.read(EDI2XML.BUF_SIZE)
 
             if self.buffer.find(self.segment_delimiter) == -1:
                 break
@@ -79,12 +82,11 @@ class EDIReader:
 
             yield(EDISegment(line, self.element_delimiter))
 
-    def validate(self):
+    def convert(self):
         """
-        Validate transaction
+        convert transaction
         """
 
-        valid = True
         # check if the segment has valid rule
         for segment in self:
             logger.info('Parsing segment: {}'.format(
@@ -115,7 +117,7 @@ class EDIReader:
                         possible_seg.getAttribute('name')
                     )
                 logger.error(err_str)
-                return False
+                return None
 
         # check if edi document has segment pairs
         close_tags = self.validator.get_close_tags()
@@ -125,5 +127,9 @@ class EDIReader:
                 format(start_tag, close_tag)
             )
             valid = False
-
-        return valid
+            return None
+        
+        xml_file = open(self.output_file, "w", encoding="utf-8")
+        self.validator.data_document.writexml(xml_file, "\n", "\t")
+        xml_file.close()
+        return self.validator.data_document

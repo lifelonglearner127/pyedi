@@ -1,11 +1,11 @@
 import argparse
 import logging
-from pyedi.edireader import EDIReader
+from pyedi.edi2xml import EDI2XML
 
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
-    ap.add_argument('-f', '--file', required=True,
+    ap.add_argument('-i', '--input', required=True,
                     help="Path to edi file")
     ap.add_argument('-o', '--output', default="856_output.xml",
                     help="Path to output file")
@@ -26,12 +26,12 @@ if __name__ == '__main__':
     logger.info('Started Parsing the EDI Standard')
 
     try:
-        edi_reader = EDIReader(
-            args['file'], args['transaction'], args['version']
+        edi_to_xml = EDI2XML(
+            args['input'], args['output'], 
+            args['transaction'], args['version']
         )
-        if edi_reader.validate():
+        result = edi_to_xml.convert()
+        if result is not None:
             logger.info("Successfully Parsed")
-            xml_file = open(args['output'], "w", encoding="utf-8")
-            edi_reader.validator.data_document.writexml(xml_file, "\n", "\t")
     except Exception as err:
         logger.error(err)
