@@ -39,6 +39,8 @@ class EDIValidator:
                     'max_length': element.getAttribute('max_length')
                 }
 
+            self.close_tags = []
+
             impl = getDOMImplementation()
             self.data_document = impl.createDocument(None, 'transaction', None)
             self.data_document_element = self.data_document.documentElement
@@ -148,6 +150,9 @@ class EDIValidator:
             new_edi_element_node.setAttribute('value', element)
             new_edi_segment_node.appendChild(new_edi_element_node)
 
+    def get_close_tags(self):
+        return self.close_tags
+
     def match_segment(self, edi_segment):
         """
         Check if edi segment matches the rules laid out in the specElement.
@@ -204,6 +209,17 @@ class EDIValidator:
             if hl03_value not in hl03_values:
                 return False
 
+        # check if this segment is close tag or it has close tag
+        edi_segment_id = edi_segment.get_segment_id()
+        for (index, close_tag) in enumerate(self.close_tags):
+            if close_tag[1] == edi_segment_id:
+                self.close_tags.pop(index)
+                break
+
+        if spec_segment.hasAttribute('closetag'):
+            self.close_tags.insert(0, (edi_segment_id, spec_segment.getAttribute('closetag')))
+
+        # check if segment has valid element
         for (element, spec_element)\
                 in zip(edi_segment.elements, spec_segment.childNodes):
 

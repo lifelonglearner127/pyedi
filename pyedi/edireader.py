@@ -83,6 +83,9 @@ class EDIReader:
         """
         Validate transaction
         """
+
+        valid = True
+        # check if the segment has valid rule
         for segment in self:
             logger.info('Parsing segment: {}'.format(
                 segment.to_string()
@@ -92,4 +95,13 @@ class EDIReader:
                 logger.error('Above segment does not match')
                 return False
 
-        return True
+        # check if edi document has segment pairs
+        close_tags = self.validator.get_close_tags()
+        for ((start_tag, close_tag)) in close_tags:
+            logger.error(
+                '{} should end with {} trailer tag, but not found'.
+                format(start_tag, close_tag)
+            )
+            valid = False
+        
+        return valid
