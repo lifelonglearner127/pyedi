@@ -11,7 +11,9 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "args": [
-                "-f", "856Sample.txt"
+                "-i", "856_output.xml",
+                "-t", "856",
+                "-v", "5010"
             ]
         }
         
